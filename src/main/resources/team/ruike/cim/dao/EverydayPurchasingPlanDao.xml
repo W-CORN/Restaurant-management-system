@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.EverydayPurchasingPlanDao">
+    <sql id="modelCondition">
+        <if test="everydayPurchasingPlanId!=null and everydayPurchasingPlanId>0">
+            and everyday_purchasing_plan_id=#{everydayPurchasingPlanId}
+        </if>
+        <if test="everydayPurchasingPlanNo!=null and everydayPurchasingPlanNo!=''">
+            and everyday_purchasing_plan_no=#{everydayPurchasingPlanNo}
+        </if>
+        <if test="everydayPurchasingPlanDate!=null">
+            and everyday_purchasing_plan_date=#{everydayPurchasingPlanDate}
+        </if>
+    </sql>
+
+
+    <sql id="modelConditionP">
+        <if test="everydayPurchasingPlan.everydayPurchasingPlanId!=null and everydayPurchasingPlan.everydayPurchasingPlanId>0">
+            and everyday_purchasing_plan_id=#{everydayPurchasingPlan.everydayPurchasingPlanId}
+        </if>
+        <if test="everydayPurchasingPlan.everydayPurchasingPlanNo!=null and everydayPurchasingPlan.everydayPurchasingPlanNo!=''">
+            and everyday_purchasing_plan_no=#{everydayPurchasingPlan.everydayPurchasingPlanNo}
+        </if>
+        <if test="everydayPurchasingPlan.everydayPurchasingPlanDate!=null">
+            and everyday_purchasing_plan_date=#{everydayPurchasingPlan.everydayPurchasingPlanDate}
+        </if>
+    </sql>
+
+
+    <resultMap id="selectMap" type="EverydayPurchasingPlan">
+        <result property="everydayPurchasingPlanId" column="everyday_purchasing_plan_id"/>
+        <result property="everydayPurchasingPlanNo" column="everyday_purchasing_plan_no"/>
+        <result property="everydayPurchasingPlanDate" column="everyday_purchasing_plan_date"/>
+        <result property="status" column="status"/>
+        <collection property="everydayPurchasingPlanTerms" column="everyday_purchasing_plan_id" select="team.ruike.cim.dao.EverydayPurchasingPlanTermDao.selectByeverydayPurchasingPlanId"/>
+    </resultMap>
+
+
+    <insert id="add" parameterType="everydayPurchasingPlan">
+        insert into everyday_purchasing_plan
+        values(
+        <trim suffixOverrides=",">
+            #{everydayPurchasingPlanId},
+            #{everydayPurchasingPlanNo},
+            #{everydayPurchasingPlanDate},
+            #{status},
+        </trim>
+        )
+    </insert>
+
+    <update id="update" parameterType="everydayPurchasingPlan">
+        update everyday_purchasing_plan
+        <set>
+            everyday_purchasing_plan_id=#{everydayPurchasingPlanId},
+            everyday_purchasing_plan_no=#{everydayPurchasingPlanNo},
+            everyday_purchasing_plan_date=#{everydayPurchasingPlanDate},
+            status=#{status},
+        </set>
+        where status=0
+        and everyday_purchasing_plan_id=#{everydayPurchasingPlanId}
+    </update>
+
+    <select id="select" resultMap="selectMap">
+        select * from everyday_purchasing_plan
+        where status=0
+        <include refid="modelConditionP"/>
+    </select>
+
+    <select id="selectCount" resultType="int" parameterType="everydayPurchasingPlan">
+        select count(1) from everyday_purchasing_plan
+        where status=0
+        <include refid="modelCondition"/>
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="selectMap">
+    select * from everyday_purchasing_plan
+    where status=0
+		and everyday_purchasing_plan_id=#{everydayPurchasingPlanId}
+    </select>
+
+    <select id="getNumberByDate" resultMap="selectMap">
+        SELECT * FROM everyday_purchasing_plan WHERE everyday_purchasing_plan_date=#{date}
+    </select>
+</mapper>

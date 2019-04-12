@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.SupplierContractDao">
+    <resultMap id="supplierContractMap" type="supplierContract">
+        <result column="supplier_contract_id" property="supplierContractId"/>
+        <result column="supplier_contract_name" property="supplierContractName"/>
+        <result column="supplier_contract_date" property="supplierContractDate"/>
+        <result column="supplier_contract_image" property="supplierContractImage"/>
+        <result column="status" property="status"/>
+        <association property="supplier" column="supplier_id" select="team.ruike.cim.dao.SupplierDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="supplierContract" useGeneratedKeys="true" keyProperty="supplierContractId">
+        INSERT  INTO supplier_contract VALUES (DEFAULT,#{supplierContractName},
+        #{supplierContractDate},#{supplierContractImage},#{status},#{supplier.supplierId})
+    </insert>
+    <update id="update" parameterType="supplierContract">
+          UPDATE supplier_contract SET
+                supplier_contract_name=#{supplierContractName},
+                supplier_contract_date=#{supplierContractDate},
+                supplier_contract_image=#{supplierContractImage},
+                status=#{status}
+                WHERE
+                supplier_id=#{supplier.supplierId}
+    </update>
+<sql id="sql">
+  SELECT * FROM supplier_contract WHERE status=0
+    <if test="supplierContract.supplierContractId!=null and supplierContract.supplierContractId>0">
+    AND supplier_contract_id=#{supplierContract.supplierContractId}
+    </if>
+    <if test="supplierContract.supplierContractName!=null and supplierContract.supplierContractName!=''">
+        AND supplier_contract_name LIKE  CONCAT('%',#{supplierContract.supplierContractName},'%')
+    </if>
+    <if test="supplierContract.supplierContractDate!=null and supplierContract.supplierContractDate!=''">
+        AND  supplier_contract_date=#{supplierContract.supplierContractDate}
+    </if>
+    <if test="supplierContract.supplierContractImage!=null and supplierContract.supplierContractImage!=''">
+        AND supplier_contract_image#{supplierContract.supplierContractImage}
+    </if>
+    <if test="supplierContract.supplier!=null and supplierContract.supplier.supplierId!=null and supplierContract.supplier.supplierId>0">
+        AND  supplier_id=#{supplierContract.supplier.supplierId}
+    </if>
+
+
+</sql>
+    <select id="select" resultMap="supplierContractMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="supplierContract">
+        SELECT COUNT(1) FROM supplier_contract WHERE status=0
+        <if test="supplierContractId!=null and supplierContractId>0">
+            AND supplier_contract_id=#{supplierContractId}
+        </if>
+        <if test="supplierContractName!=null and supplierContractName!=''">
+            AND supplier_contract_name LIKE  CONCAT('%',#{supplierContractName},'%')
+        </if>
+        <if test="supplierContractDate!=null and supplierContractDate!=''">
+            AND  supplier_contract_date=#{supplierContractDate}
+        </if>
+        <if test="supplierContractImage!=null and supplierContractImage!=''">
+            AND supplier_contract_image#{supplierContractImage}
+        </if>
+        <if test="supplier!=null and supplier.supplierId!=null and supplier.supplierId>0">
+            AND  supplier_id=#{supplier.supplierId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="supplierContractMap">
+        SELECT * FROM supplier_contract WHERE status=0 AND supplier_contract_id=#{supplierContractId}
+    </select>
+</mapper>

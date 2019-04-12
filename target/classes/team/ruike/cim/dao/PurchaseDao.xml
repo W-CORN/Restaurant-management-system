@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.PurchaseDao">
+    <resultMap id="purchaseMap" type="purchase">
+        <result column="purchase_id" property="purchaseId"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <result column="purchase_date" property="purchaseDate"/>
+        <association property="everydayPurchasingPlan" column="everyday_purchasing_plan_id" select="team.ruike.cim.dao.EverydayPurchasingPlanDao.selectById"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="purchaseItems" column="purchase_id" select="team.ruike.cim.dao.PurchaseItemDao.selectByPurchaseId"/>
+    </resultMap>
+    <insert id="add" parameterType="purchase">
+          INSERT INTO purchase VALUES (DEFAULT ,#{everydayPurchasingPlan.everydayPurchasingPlanId},#{remarks},0,#{purchaseDate},#{user.userId})
+    </insert>
+    <update id="update" parameterType="purchase">
+            UPDATE purchase SET
+                everyday_purchasing_plan_id=#{everydayPurchasingPlan.everydayPurchasingPlanId},
+                remarks=#{remarks},
+                status=#{status},
+                purchase_date=#{purchaseDate},
+                user_id=#{user.userId}
+                WHERE purchase_id=#{purchaseId}
+    </update>
+    <sql id="sql">
+        SELECT * FROM purchase WHERE status=0
+        <if test="purchase.purchaseId!=null and purchase.purchaseId>0">
+            AND   purchase_id=#{purchase.purchaseId}
+        </if>
+        <if test="purchase.everydayPurchasingPlan!=null and purchase.everydayPurchasingPlan.everydayPurchasingPlanId>0">
+            AND everyday_purchasing_plan_id=#{purchase.everydayPurchasingPlan.everydayPurchasingPlanId}
+        </if>
+        <if test="purchase.remarks!=null and purchase.remarks!=''">
+            AND  remarks=#{purchase.remarks}
+        </if>
+        <if test="purchase.purchaseDate!=null">
+            AND  purchase_date=#{purchase.purchaseDate}
+        </if>
+        <if test="purchase.user!=null and purchase.user.userId>0">
+            AND user_id=#{purchase.user.userID}
+        </if>
+    </sql>
+    <select id="select" resultMap="purchaseMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="purchase">
+        SELECT COUNT(1) FROM purchase WHERE status=0
+          <if test="purchaseId!=null and purchaseId>0">
+              AND   purchase_id=#{purchaseId}
+          </if>
+        <if test="everydayPurchasingPlan!=null and everydayPurchasingPlan.everydayPurchasingPlanId>0">
+            AND everyday_purchasing_plan_id=#{everydayPurchasingPlan.everydayPurchasingPlanId}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND  remarks=#{remarks}
+        </if>
+        <if test="purchaseDate!=null">
+            AND  purchase_date=#{purchaseDate}
+        </if>
+        <if test="user!=null and user.userId>0">
+           AND user_id=#{user.userID}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="purchaseMap">
+        SELECT * FROM purchase WHERE status=0 AND   purchase_id=#{purchaseId}
+    </select>
+    <select id="getpurchaseNo" resultType="int">
+        SELECT purchase_id FROM purchase WHERE purchase_date=#{dates}
+    </select>
+</mapper>

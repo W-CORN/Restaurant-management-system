@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductWarehouseRegionDao">
+    <insert id="add" parameterType="productWarehouseRegion" useGeneratedKeys="true" keyProperty="productWarehouseRegionId">
+        INSERT INTO product_warehouse_region VALUES(DEFAULT,#{productWarehouseRegionNo}
+        ,#{menuType.menuTypeId},#{remarks},0,#{productWarehouse.productWarehouseId})
+    </insert>
+    <update id="update" parameterType="productWarehouseRegion">
+        UPDATE product_warehouse_region
+         SET  product_warehouse_region_no=#{productWarehouseRegionNo},
+         menu_type_id=#{menuType.menuTypeId},
+         remarks=#{remarks},
+         status=#{status},
+         product_warehouse_id=#{productWarehouse.productWarehouseId}
+          WHERE product_warehouse_region_id=#{productWarehouseRegionId}
+    </update>
+    <resultMap id="productWarehouseRegionMap" type="productWarehouseRegion">
+        <result column="product_warehouse_region_id" property="productWarehouseRegionId"/>
+        <result column="product_warehouse_region_no" property="productWarehouseRegionNo"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <association property="menuType" column="menu_type_id" select="team.ruike.cim.dao.MenuTypeDao.selectById"/>
+        <association property="productWarehouse" column="product_warehouse_id"
+                     select="team.ruike.cim.dao.ProductWarehouseDao.selectById"/>
+    </resultMap>
+    <select id="select" resultMap="productWarehouseRegionMap">
+        SELECT * FROM product_warehouse_region
+        WHERE status=0
+        <if test="productWarehouseRegion.productWarehouseRegionId!=null and productWarehouseRegion.productWarehouseRegionId>0">
+            AND product_warehouse_region_id=#{productWarehouseRegion.productWarehouseRegionId}
+        </if>
+        <if test="productWarehouseRegion.productWarehouseRegionNo!=null and productWarehouseRegion.productWarehouseRegionNo>0">
+            AND product_warehouse_region_no like CONCAT('%',#{productWarehouseRegion.productWarehouseRegionNo},'%')
+        </if>
+        <if test="productWarehouseRegion.remarks!=null and productWarehouseRegion.remarks!=''">
+            AND remarks like CONCAT('%',#{productWarehouseRegion.remarks},'%')
+        </if>
+        <if test="productWarehouseRegion.menuType!=null  and productWarehouseRegion.menuType.menuTypeId>0">
+            AND menu_type_id=#{productWarehouseRegion.menuType.menuTypeId}
+        </if>
+        <if test="productWarehouseRegion.productWarehouse!=null and  productWarehouseRegion.productWarehouse.productWarehouseId>0">
+            AND product_warehouse_id=#{productWarehouseRegion.productWarehouse.productWarehouseId}
+        </if>
+         limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(1) FROM product_warehouse_region
+        WHERE status=0
+        <if test="productWarehouseRegion.productWarehouseRegionId!=null and productWarehouseRegion.productWarehouseRegionId>0">
+            AND product_warehouse_region_id=#{productWarehouseRegion.productWarehouseRegionId}
+        </if>
+        <if test="productWarehouseRegion.productWarehouseRegionNo!=null and productWarehouseRegion.productWarehouseRegionNo>0">
+            AND product_warehouse_region_no like CONCAT('%',#{productWarehouseRegion.productWarehouseRegionNo},'%')
+        </if>
+        <if test="productWarehouseRegion.remarks!=null and productWarehouseRegion.remarks!=''">
+            AND remarks like CONCAT('%',#{productWarehouseRegion.remarks},'%')
+        </if>
+        <if test="productWarehouseRegion.menuType!=null and productWarehouseRegion.menuType.menuTypeId>0">
+            AND menu_type_id=#{productWarehouseRegion.menuType.menuTypeId}
+        </if>
+        <if test="productWarehouseRegion.productWarehouse!=null and productWarehouseRegion.productWarehouse.productWarehouseId>0">
+            AND product_warehouse_id=#{productWarehouseRegion.productWarehouse.productWarehouseId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productWarehouseRegionMap">
+        SELECT * FROM product_warehouse_region
+        WHERE status=0 AND product_warehouse_region_id=#{productWarehouseRegionId}
+    </select>
+    <select id="selectByproductWarehouseId" parameterType="int" resultMap="productWarehouseRegionMap">
+        SELECT * FROM product_warehouse_region WHERE `status`=0 AND product_warehouse_id=#{productWarehouse.productWarehouseId}
+    </select>
+</mapper>

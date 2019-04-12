@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.EquipmentDao">
+
+
+
+    <sql id="modelCondition">
+        <if test="equipmentId!=null">
+            and equipment_id=#{equipmentId}
+        </if>
+        <if test="productionLine!=null  and productionLine.productionLineId>0">
+            and production_line_id=#{productionLine.productionLineId}
+        </if>
+        <if test="working!=null  and working.workingId>0">
+            and working_id=#{working.workingId}
+        </if>
+        <if test="user!=null  and user.userId>0">
+            and user_id=#{user.userId}
+        </if>
+        <if test="startDate!=null">
+            and start_date=#{startDate}
+        </if>
+        <if test="equipmentType!=null  and equipmentType.equipmentTypeId>0">
+            and equipment_type_id=#{equipmentType.equipmentTypeId}
+        </if>
+        <if test="maintenanceCycle!=null and maintenanceCycle>0">
+            and maintenance_cycle=#{maintenanceCycle}
+        </if>
+        <if test="inspectionCycle!=null and inspectionCycle>0">
+            and inspection_cycle=#{inspectionCycle}
+        </if>
+        <if test="equipmentName!=null and equipmentName!=''">
+            and equipment_name LIKE  CONCAT('%',#{equipmentName},'%')
+        </if>
+    </sql>
+
+    <sql id="modelConditionP">
+        <if test="equipment.equipmentId!=null">
+            and equipment_id=#{equipment.equipmentId}
+        </if>
+        <if test="equipment.productionLine!=null  and equipment.productionLine.productionLineId>0">
+            and production_line_id=#{equipment.productionLine.productionLineId}
+        </if>
+        <if test="equipment.working!=null  and equipment.working.workingId>0">
+            and working_id=#{equipment.working.workingId}
+        </if>
+        <if test="equipment.user!=null and equipment.user.userId>0">
+            and user_id=#{equipment.user.userId}
+        </if>
+        <if test="equipment.startDate!=null">
+            and start_date=#{equipment.startDate}
+        </if>
+        <if test="equipment.equipmentType!=null  and equipment.equipmentType.equipmentTypeId>0">
+            and equipment_type_id=#{equipment.equipmentType.equipmentTypeId}
+        </if>
+        <if test="equipment.maintenanceCycle!=null">
+            and maintenance_cycle=#{equipment.maintenanceCycle}
+        </if>
+        <if test="equipment.inspectionCycle!=null and equipment.inspectionCycle>0">
+            and inspection_cycle=#{equipment.inspectionCycle}
+        </if>
+        <if test="equipment.equipmentName!=null and equipment.equipmentName!=''">
+            and equipment_name LIKE  CONCAT('%',#{equipment.equipmentName},'%')
+        </if>
+    </sql>
+
+
+
+    <resultMap id="selectMap" type="Equipment">
+        <result property="equipmentId" column="equipment_id"/>
+        <result property="startDate" column="start_date"/>
+        <result property="maintenanceCycle" column="maintenance_cycle"/>
+        <result property="inspectionCycle" column="inspection_cycle"/>
+        <result property="equipmentName" column="equipment_name"/>
+        <result property="status" column="status"/>
+        <association property="productionLine" column="production_line_id" select="team.ruike.cim.dao.ProductionLineDao.selectById"/>
+        <association property="working" column="working_id" select="team.ruike.cim.dao.WorkingDao.selectById"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <association property="equipmentType" column="equipment_type_id" select="team.ruike.cim.dao.EquipmentTypeDao.selectById"/>
+    </resultMap>
+
+
+    <insert id="add" parameterType="equipment">
+        insert into equipment
+        values(
+        <trim suffixOverrides=",">
+            default,
+            #{productionLine.productionLineId},
+            #{working.workingId},
+            #{user.userId},
+            NOW(),
+            1,
+            #{maintenanceCycle},
+            #{inspectionCycle},
+            #{equipmentName},
+            #{status},
+        </trim>
+        )
+    </insert>
+
+
+    <update id="update" parameterType="equipment">
+        update equipment
+        <set>
+            production_line_id=#{productionLine.productionLineId},
+            working_id=#{working.workingId},
+            user_id=#{user.userId},
+            equipment_type_id=#{equipmentType.equipmentTypeId},
+            maintenance_cycle=#{maintenanceCycle},
+            inspection_cycle=#{inspectionCycle},
+            equipment_name=#{equipmentName},
+            status=#{status}
+        </set>
+        where equipment_id=#{equipmentId}
+    </update>
+
+
+
+    <select id="select" resultMap="selectMap">
+      select * from equipment
+      where status=0
+        <include refid="modelConditionP"/>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="int" parameterType="equipment">
+        select count(1) from equipment
+        where status=0
+        <include refid="modelCondition"/>
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="selectMap">
+      select * from equipment where equipment_id=#{equipmentId}
+    </select>
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductWarehouseOutRegisterDao">
+    <resultMap id="productWarehouseOutRegisterMap" type="productWarehouseOutRegister">
+        <result column="product_warehouse_out_register_id" property="productWarehouseOutRegisterId"/>
+        <result column="product_warehouse_out_register_end_date" property="productWarehouseOutRegisterEndDate"/>
+        <result column="status" property="status"/>
+        <association column="user" property="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="productWarehouseOutRegisterId" column="product_warehouse_out_register_id" select="team.ruike.cim.dao.ProductWarehouseOutRegisterItemDao.selectBYProductWarehouseOutRegisterId"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM product_warehouse_out_register WHERE `status`=0
+        <if test="productWarehouseOutRegister.productWarehouseOutRegisterId!=null and productWarehouseOutRegister.productWarehouseOutRegisterId>0">
+            AND product_warehouse_out_register_id=#{productWarehouseOutRegister.productWarehouseOutRegisterId}
+        </if>
+        <if test="productWarehouseOutRegister.productWarehouseOutRegisterEndDate!=null">
+            AND product_warehouse_out_register_end_date=#{productWarehouseOutRegister.productWarehouseOutRegisterEndDate}
+        </if>
+        <if test="productWarehouseOutRegister.user!=null and productWarehouseOutRegister.user.userId!=null and productWarehouseOutRegister.user.userId>0">
+            AND user_id=#{productWarehouseOutRegister.user.userId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM product_warehouse_out_register WHERE `status`=0
+        <if test="productWarehouseOutRegisterId!=null and productWarehouseOutRegisterId>0">
+            AND product_warehouse_out_register_id=#{productWarehouseOutRegisterId}
+        </if>
+        <if test="productWarehouseOutRegisterEndDate!=null">
+            AND product_warehouse_out_register_end_date=#{productWarehouseOutRegisterEndDate}
+        </if>
+        <if test="user!=null and user.userId!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="productWarehouseOutRegister">
+            INSERT into product_warehouse_out_register VALUES(DEFAULT,
+            #{productWarehouseOutRegisterEndDate},
+            #{user.userId},
+            0);
+    </insert>
+    <update id="update" parameterType="productWarehouseOutRegister">
+            UPDATE product_warehouse_out_register set product_warehouse_out_register_end_date=#{productWarehouseOutRegisterEndDate},
+            user_id=#{user.userId},
+            `status`=#{status}
+            WHERE product_warehouse_out_register_id=#{productWarehouseOutRegisterId}
+    </update>
+    <select id="select" resultMap="productWarehouseOutRegisterMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productWarehouseOutRegister">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productWarehouseOutRegisterMap">
+        SELECT *  FROM product_warehouse_out_register WHERE `status`=0 and  product_warehouse_out_register_id=#{productWarehouseOutRegisterId}
+    </select>
+</mapper>

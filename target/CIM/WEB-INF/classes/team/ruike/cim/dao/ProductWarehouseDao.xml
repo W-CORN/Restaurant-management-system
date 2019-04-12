@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductWarehouseDao">
+    <resultMap id="productWarehouseMap" type="productWarehouse">
+        <result column="product_warehouse_id" property="productWarehouseId"/>
+        <result column="product_warehouse_name" property="productWarehouseName"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <association column="user_id" property="user" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="productWarehouseRegionList" column="product_warehouse_id"
+                    select="team.ruike.cim.dao.ProductWarehouseRegionDao.selectByproductWarehouseId"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM product_warehouse WHERE `status`=0
+        <if test="productWarehouse.productWarehouseId!=null and productWarehouse.productWarehouseId>0">
+            AND product_warehouse_id=#{productWarehouse.productWarehouseId}
+        </if>
+        <if test="productWarehouse.productWarehouseName!=null and productWarehouse.productWarehouseName!=''">
+            AND product_warehouse_name like CONCAT('%',#{productWarehouse.productWarehouseName},'%')
+        </if>
+        <if test="productWarehouse.user!=null and productWarehouse.user.userId>0">
+            AND user_id=#{productWarehouse.user.userId}
+        </if>
+        <if test="productWarehouse.remarks!=null and productWarehouse.remarks!=''">
+            AND remarks=#{productWarehouse.remarks}
+        </if>
+    </sql>
+    <sql id="sql">
+        SELECT * FROM product_warehouse WHERE `status`=0
+        <if test="productWarehouseId!=null and productWarehouseId>0">
+            AND product_warehouse_id=#{productWarehouseId}
+        </if>
+        <if test="productWarehouseName!=null and productWarehouseName!=''">
+            AND product_warehouse_name like CONCAT('%',#{productWarehouseName},'%')
+        </if>
+        <if test="user!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+    </sql>
+    <insert id="add" parameterType="productWarehouse" useGeneratedKeys="true" keyProperty="productWarehouseId">
+        INSERT INTO product_warehouse VALUES (DEFAULT,
+                                              #{productWarehouseName},
+                                              #{remarks},
+                                              0, #{user.userId});
+    </insert>
+    <update id="update" parameterType="productWarehouse">
+        UPDATE product_warehouse
+        SET product_warehouse_name = #{productWarehouseName},
+            remarks                = #{remarks},
+            `status`               = #{status},
+            user_id                = #{user.userid}
+        WHERE product_warehouse_id = #{productWarehouseId}
+    </update>
+    <select id="select" resultMap="productWarehouseMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productWarehouse">
+        SELECT COUNT(1) FROM (<include refid="sql"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productWarehouseMap">
+        SELECT *
+        FROM product_warehouse
+        WHERE `status` = 0 AND product_warehouse_id = #{productWarehouseId}
+    </select>
+</mapper>

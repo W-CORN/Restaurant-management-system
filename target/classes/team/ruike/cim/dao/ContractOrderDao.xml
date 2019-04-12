@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ContractOrderDao">
+    <resultMap id="contractOrderMap" type="contractOrder">
+        <result column="contract_order_id" property="contractOrderId"/>
+        <result column="contract_order_no" property="contractOrderNo"/>
+        <result column="contract_order_end_date" property="contractOrderEndDate"/>
+        <result column="contract_order_state" property="contractOrderState"/>
+        <result column="contract_order_start_date" property="contractOrderStartDate"/>
+        <result column="contract_order_remarks" property="contractOrderRemarks"/>
+        <result column="status" property="status"/>
+        <association column="order_contract_id" property="orderContract" select="team.ruike.cim.dao.OrderContractDao.selectById"/>
+        <association column="user_id" property="user" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="contractOrderTerms" column="contract_order_id" select="team.ruike.cim.dao.ContractOrderTermDao.selectBYContractOrderId"/>
+
+    </resultMap>
+
+    <sql id="sqlh">
+        SELECT * from contract_order WHERE `status`=0
+        <if test="contractOrder.contractOrderNo!=null and contractOrder.contractOrderNo>0">
+            and contract_order_no=#{contractOrder.contractOrderNo}
+        </if>
+        <if test="contractOrder.contractOrderEndDate!=null">
+            and contract_order_end_date=#{contractOrder.contractOrderEndDate}
+        </if>
+        <if test="contractOrder.contractOrderState!=null and contractOrder.contractOrderState>=0">
+            and contract_order_state=#{contractOrder.contractOrderState}
+        </if>
+        <if test="contractOrder.contractOrderStartDate!=null">
+            and contract_order_start_date >= #{contractOrder.contractOrderStartDate}  and contract_order_start_date &lt; date_sub(#{contractOrder.contractOrderStartDate},interval -1 day)
+        </if>
+
+        <if test="contractOrder.user!=null and contractOrder.user.userId!=null and contractOrder.user.userId>0">
+            and user_id=#{contractOrder.user.userId}
+        </if>
+        <if test="contractOrder.contractOrderRemarks!=null and contractOrder.contractOrderRemarks!=''">
+            and contract_order_remarks=#{contractOrder.contractOrderRemarks}
+        </if>
+        <if test="contractOrder.orderContract!=null and contractOrder.orderContract.orderContractId!=null and contractOrder.orderContract.orderContractId>0">
+        and order_contract_id=#{contractOrder.orderContract.orderContractId}
+        </if>
+        <if test="contractOrder.orderContract!=null and contractOrder.orderContract.orderContractName!=null and contractOrder.orderContract.orderContractName!=''">
+            and order_contract_id in (SELECT order_contract_id FROM order_contract WHERE order_contract_name like  CONCAT('%',#{contractOrder.orderContract.orderContractName},'%'))
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * from contract_order WHERE `status`=0
+        <if test="contractOrderNo!=null and contractOrderNo>0">
+            and contract_order_no=#{contractOrderNo}
+        </if>
+        <if test="contractOrderEndDate!=null">
+            and contract_order_end_date=#{contractOrderEndDate}
+        </if>
+        <if test="contractOrderState!=null and contractOrderState>=0">
+            and contract_order_state=#{contractOrderState}
+        </if>
+        <if test="contractOrderStartDate!=null">
+            and contract_order_start_date >= #{contractOrderStartDate}  and contract_order_start_date &lt; date_sub(#{contractOrderStartDate},interval -1 day)
+        </if>
+        <if test="orderContract!=null and orderContract.orderContractId!=null and orderContract.orderContractId>0">
+            and order_contract_id=#{orderContract.orderContractId}
+        </if>
+        <if test="user!=null and user.userId!=null and user.userId>0">
+            and user_id=#{user.userId}
+        </if>
+        <if test="contractOrderRemarks!=null and contractOrderRemarks!=''">
+            and contract_order_remarks=#{contractOrderRemarks}
+        </if>
+        <if test="orderContract!=null and orderContract.orderContractName!=null and orderContract.orderContractName!=''">
+            and order_contract_id in (SELECT order_contract_id FROM order_contract WHERE order_contract_name like CONCAT('%',#{orderContract.orderContractName},'%'))
+        </if>
+    </sql>
+
+    <insert id="add"  useGeneratedKeys="true" keyProperty="contractOrderId" parameterType="contractOrder">
+        INSERT into contract_order VALUES(DEFAULT,#{contractOrderNo},#{contractOrderEndDate},0,now(),#{orderContract.orderContractId},#{user.userId},#{contractOrderRemarks},0);
+    </insert>
+    <update id="update" parameterType="contractOrder">
+        UPDATE contract_order set contract_order_no=#{contractOrderNo},
+        contract_order_end_date=#{contractOrderEndDate},
+        contract_order_state=#{contractOrderState},
+        contract_order_start_date=#{contractOrderStartDate},
+        order_contract_id=#{orderContract.orderContractId},
+        user_id=#{user.userId},
+        contract_order_remarks=#{contractOrderRemarks},
+        status=#{status}
+        WHERE contract_order_id=#{contractOrderId}
+    </update>
+
+    <select id="select" resultMap="contractOrderMap">
+        SELECT * from (<include refid="sqlh"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="contractOrder">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="contractOrderMap">
+        SELECT * from contract_order WHERE `status`=0 and contract_order_id=#{contractOrderId}
+    </select>
+
+
+    <select id="selectContractOrderByContractId" parameterType="int" resultMap="contractOrderMap">
+        SELECT * from contract_order WHERE `status`=0 and order_contract_id=#{orderContractId}
+    </select>
+</mapper>

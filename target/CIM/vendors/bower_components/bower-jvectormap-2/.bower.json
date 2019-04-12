@@ -1,0 +1,24 @@
+{
+  "name": "bower-jvectormap-2",
+  "authors": [
+    "Kirill Lebedev <echo.bjornd@gmail.com>"
+  ],
+  "description": "jQuery interactive vector maps",
+  "main": "jquery-jvectormap-2.0.0.min.js",
+  "keywords": [
+    "jquery",
+    "vector",
+    "maps"
+  ],
+  "license": "MIT",
+  "homepage": "http://jvectormap.com/",
+  "_release": "405835a5a3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "405835a5a3ae87f90c4a83b65241c0a60600f8f8"
+  },
+  "_source": "https://github.com/semeyon/bower-jvectormap-2.git",
+  "_target": "*",
+  "_originalSource": "bower-jvectormap-2"
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductionStandardDao">
+    <resultMap id="productionStandardMap" type="productionStandard">
+        <result column="production_standard_id" property="productionStandardId"/>
+        <result column="production_batch" property="productionBatch"/>
+        <result column="standard_a_type" property="standardAType"/>
+        <result column="standard_a_name" property="standardAName"/>
+        <result column="standard_b_type" property="standardBType"/>
+        <result column="standard_b_name" property="standardBName"/>
+        <result column="standard_c_type" property="standardCType"/>
+        <result column="standard_c_name" property="standardCName"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM production_standard where `status`=0
+        <if test="productionStandard.productionStandardId!=null and productionStandard.productionStandardId>0">
+            AND production_standard_id=#{productionStandard.productionStandardId}
+        </if>
+        <if test="productionStandard.productionBatch!=null and productionStandard.productionBatch!=''">
+            AND production_batch=#{productionStandard.productionBatch}
+        </if>
+        <if test="productionStandard.standardAType!=null and productionStandard.standardAType>0">
+            AND standard_a_type=#{productionStandard.standardAType}
+        </if>
+        <if test="productionStandard.standardAName!=null and productionStandard.standardAName!=''">
+            AND  standard_a_name=#{productionStandard.standardAName}
+        </if>
+        <if test="productionStandard.standardBType!=null and productionStandard.standardBType>0">
+            AND  standard_b_type=#{productionStandard.standardBType}
+        </if>
+        <if test="productionStandard.standardBName!=null and productionStandard.standardBName!=''">
+            AND  standard_b_name=#{productionStandard.standardBName}
+        </if>
+        <if test="productionStandard.standardCType!=null and productionStandard.standardCType>0">
+            AND  standard_c_type=#{productionStandard.standardCType}
+        </if>
+        <if test="productionStandard.standardCName!=null and productionStandard.standardCName!=''">
+            AND  standard_c_name=#{productionStandard.standardCName}
+        </if>
+        <if test="productionStandard.remarks!=null and productionStandard.remarks!=''">
+            AND  remarks=#{productionStandard.remarks}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM production_standard where `status`=0
+        <if test="productionStandardId!=null and productionStandardId>0">
+            AND production_standard_id=#{productionStandardId}
+        </if>
+        <if test="productionBatch!=null and productionBatch!=''">
+            AND production_batch=#{productionBatch}
+        </if>
+        <if test="standardAType!=null and standardAType>0">
+            AND standard_a_type=#{standardAType}
+        </if>
+        <if test="standardAName!=null and standardAName!=''">
+            AND  standard_a_name=#{standardAName}
+        </if>
+        <if test="standardBType!=null and standardBType>0">
+            AND  standard_b_type=#{standardBType}
+        </if>
+        <if test="standardBName!=null and standardBName!=''">
+            AND  standard_b_name=#{standardBName}
+        </if>
+        <if test="standardCType!=null and standardCType>0">
+            AND  standard_c_type=#{standardCType}
+        </if>
+        <if test="standardCName!=null and standardCName!=''">
+            AND  standard_c_name=#{standardCName}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND  remarks=#{remarks}
+        </if>
+    </sql>
+    <insert id="add" parameterType="productionStandard">
+            INSERT into production_standard VALUES(DEFAULT,
+            #{productionBatch},
+            #{standardAType},
+            #{standardAName},
+            #{standardBType},
+            #{standardBName},
+            #{standardCType},
+            #{standardCName},
+            #{remarks},
+            0);
+    </insert>
+    <update id="update" parameterType="productionStandard">
+            UPDATE production_standard set production_batch=#{productionBatch},
+            standard_a_type=#{standardAType},
+            standard_a_name=#{standardAName},
+            standard_b_type=#{standardBType},
+            standard_b_name=#{standardBName},
+            standard_c_type=#{standardCType},
+            standard_c_name=#{standardCName},
+            remarks=#{remarks},
+            `status`=#{status}
+            where production_standard_id=#{productionStandardId}
+    </update>
+    <select id="select" resultMap="productionStandardMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productionStandard">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productionStandardMap">
+            SELECT * FROM production_standard where `status`=0 and production_standard_id=#{productionStandardId}
+    </select>
+</mapper>

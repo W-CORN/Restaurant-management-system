@@ -1,0 +1,23 @@
+{
+  "name": "owl.carousel",
+  "version": "2.1.6",
+  "main": [
+    "dist/owl.carousel.js",
+    "dist/assets/owl.carousel.css"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "jquery": ">= 1.8.3"
+  },
+  "homepage": "https://github.com/smashingboxes/OwlCarousel2",
+  "_release": "2.1.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.6",
+    "commit": "046ae82b8917b53ac195fb390de380e99e1e9888"
+  },
+  "_source": "https://github.com/smashingboxes/OwlCarousel2.git",
+  "_target": "^2.1.6",
+  "_originalSource": "OwlCarousel2",
+  "_direct": true
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.RoleDao">
+
+    <resultMap id="roleMap" type="role">
+        <result column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="status" property="status"/>
+        <collection property="functions" column="role_id" select="team.ruike.cim.dao.FunctionDao.selectByroleId"/>
+        <collection property="jurisdictions" column="role_id" select="team.ruike.cim.dao.JurisdictionDao.selectByroleId"/>
+    </resultMap>
+    <insert id="add" parameterType="role">
+        INSERT INTO role VALUES (DEFAULT ,#{roleName},0)
+    </insert>
+    <update id="update" parameterType="role">
+        UPDATE role SET
+        role_name=#{roleName},
+        status=#{status}
+        WHERE role_id=#{roleId}
+
+    </update>
+    <sql id="sql">
+        SELECT * FROM role WHERE status=0
+        <if test="role.roleId!=null and role.roleId>0">
+            AND role_id=#{role.roleId}
+        </if>
+        <if test="role.roleName!=null and role.roleName!=''">
+            AND role_name LIKE  CONCAT('%',#{role.roleName},'%')
+        </if>
+    </sql>
+    <select id="select" resultMap="roleMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="role">
+
+        SELECT COUNT(1) FROM role WHERE status=0
+        <if test="roleId!=null and roleId>0">
+            AND role_id=#{roleId}
+        </if>
+        <if test="roleName!=null and roleName!=''">
+            AND role_name LIKE  CONCAT('%',#{roleName},'%')
+        </if>
+
+    </select>
+    <select id="selectById" parameterType="int" resultMap="roleMap">
+        SELECT * FROM role WHERE status=0
+            AND role_id=#{roleId}
+    </select>
+    <select id="selectByUserId" parameterType="int" resultMap="roleMap">
+        SELECT * FROM role WHERE status=0 AND role_id in(SELECT role_id FROM user_role WHERE user_id=#{userId})
+    </select>
+</mapper>

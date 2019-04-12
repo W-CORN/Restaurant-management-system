@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ContractProductionPlanItemDao">
+    <resultMap id="contractProductionPlanItemMap" type="contractProductionPlanItem">
+        <result column="contract_production_plan_item_id" property="contractProductionPlanItemId"/>
+        <result column="menu_number" property="menuNumber"/>
+        <result column="status" property="status"/>
+        <result column="contract_production_plan_id" property="contractProductionPlanId"/>
+        <association column="contract_order_term_id" property="contractOrderTerm" select="team.ruike.cim.dao.ContractOrderTermDao.selectById"/>
+        <association column="menu_id" property="menu" select="team.ruike.cim.dao.MenuDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * from contract_production_plan_item where `status`=0
+        <if test="contractProductionPlanItem.contractProductionPlanItemId!=null and contractProductionPlanItem.contractProductionPlanItemId>0">
+            AND contract_production_plan_item_id=#{contractProductionPlanItem.contractProductionPlanItemId}
+        </if>
+        <if test="contractProductionPlanItem.menuNumber!=null and contractProductionPlanItem.menuNumber>0">
+            AND menu_number=#{contractProductionPlanItem.menuNumber}
+        </if>
+        <if test="contractProductionPlanItem.menu!=null and contractProductionPlanItem.menu.menuId!=null and contractProductionPlanItem.menu.menuId>0">
+            AND menu_id=#{contractProductionPlanItem.menu.menuId}
+        </if>
+        <if test="contractProductionPlanItem.contractProductionPlanId!=null and contractProductionPlanItem.contractProductionPlanId>0">
+            AND contract_production_plan_id=#{contractProductionPlanItem.contractProductionPlanId}
+        </if>
+        <if test="contractProductionPlanItem.contractOrderTerm!=null and contractProductionPlanItem.contractOrderTerm.contractOrderTermId!=null and contractProductionPlanItem.contractOrderTerm.contractOrderTermId>0">
+            AND contract_order_term_id=#{contractProductionPlanItem.contractOrderTerm.contractOrderTermId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * from contract_production_plan_item where `status`=0
+        <if test="contractProductionPlanItemId!=null and contractProductionPlanItemId>0">
+            AND contract_production_plan_item_id=#{contractProductionPlanItemId}
+        </if>
+        <if test="menuNumber!=null and menuNumber>0">
+            AND menu_number=#{menuNumber}
+        </if>
+        <if test="menu!=null and menu.menuId!=null and menu.menuId>0">
+            AND menu_id=#{menu.menuId}
+        </if>
+        <if test="contractProductionPlanId!=null and contractProductionPlanId>0">
+            AND contract_production_plan_id=#{contractProductionPlanId}
+        </if>
+        <if test="contractOrderTerm!=null and contractOrderTerm.contractOrderTermId!=null and contractOrderTerm.contractOrderTermId>0">
+            AND contract_order_term_id=#{contractOrderTermId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="contractProductionPlanItem">
+            INSERT into contract_production_plan_item VALUES(DEFAULT,
+            #{menu.menuId},
+            #{menuNumber},
+            #{contractProductionPlanId},
+            0,#{contractOrderTerm.contractOrderTermId});
+    </insert>
+    <update id="update" parameterType="contractProductionPlanItem">
+            UPDATE contract_production_plan_item set menu_id=#{menu.menuId},
+            menu_number=#{menuNumber},
+            contract_production_plan_id=#{contractProductionPlanId},contract_order_term_id=#{contractOrderTerm.contractOrderTermId},
+            status=#{status}
+            WHERE contract_production_plan_item_id=#{contractProductionPlanItemId}
+    </update>
+
+    <select id="select" resultMap="contractProductionPlanItemMap">
+            SELECT * from (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="contractProductionPlanItem">
+            SELECT COUNT(1) from (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="contractProductionPlanItemMap">
+            SELECT * FROM contract_production_plan_item WHERE `status`=0 and  contract_production_plan_item_id=#{contractProductionPlanItemId}
+    </select>
+    <select id="selectBYContractProductionPlanId" resultMap="contractProductionPlanItemMap">
+            SELECT  * FROM  contract_production_plan_item WHERE `status`=0 AND  contract_production_plan_id=#{contractProductionPlanId}
+    </select>
+</mapper>

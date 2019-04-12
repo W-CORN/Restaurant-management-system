@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MaterielDao">
+
+    <resultMap id="materielMap" type="materiel">
+        <result column="materiel_id" property="materielId"/>
+        <result column="materiel_name" property="materielName"/>
+        <result column="materiel_yield" property="materielYield"/>
+        <result column="materiel__shelf_life" property="materielShelfLife"/>
+        <result column="materiel_min_warning" property="materielMinWarning"/>
+        <result column="materiel_remarks" property="materielRemarks"/>
+        <result column="status" property="status"/>
+        <association property="materielTypeLevelB" column="materiel_type_level_b_id" select="team.ruike.cim.dao.MaterielTypeLevelBDao.selectById"/>
+        <association property="materielUnit" column="materiel_unit_id" select="team.ruike.cim.dao.MaterielUnitDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="materiel">
+        INSERT  INTO materiel VALUES (DEFAULT ,#{materielName},#{materielTypeLevelB.materielTypeLevelBId},#{materielUnit.materielUnitId},#{materielYield},
+        #{materielShelfLife},#{materielMinWarning},#{materielRemarks},0)
+    </insert>
+    <update id="update" parameterType="materiel">
+            UPDATE materiel SET
+                materiel_name=#{materielName},
+                materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId},
+                materiel_unit_id=#{materielUnit.materielUnitId},
+                materiel_yield=#{materielYield},
+                materiel__shelf_life=#{materielShelfLife},
+                materiel_min_warning=#{materielMinWarning},
+                materiel_remarks=#{materielRemarks},
+                status=#{status}
+                WHERE materiel_id=#{materielId}
+    </update>
+    <sql id="sql">
+        SELECT * from materiel WHERE status=0
+        <if test="materiel.materielId!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+        <if test="materiel.materielName!=null and materiel.materielName!=''">
+            AND materiel.materiel_name LIKE  CONCAT('%',#{materiel.materielName},'%')
+        </if>
+        <if test="materiel.materielTypeLevelB!=null and materiel.materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{materiel.materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="materiel.materielUnit!=null and materiel.materielUnit.materielUnitId">
+            AND materiel_unit_id =#{materiel.materielUnit.materielUnitId}
+        </if>
+        <if test="materiel.materielYield!=null and materiel.materielYield>0">
+            AND materiel_yield=#{materiel.materielYield}
+        </if>
+        <if test="materiel.materielShelfLife!=null and materiel.materielShelfLife>0">
+            AND materiel__shelf_life=#{materiel.materielShelfLife}
+        </if>
+        <if test="materiel.materielMinWarning!=null and materiel.materielMinWarning>0">
+            AND materiel_min_warning=#{materiel.materielMinWarning}
+        </if>
+        <if test="materiel.materielRemarks!=null and materiel.materielRemarks!=''">
+            AND materiel_remarks=#{materiel.materielRemarks}
+        </if>
+    </sql>
+    <select id="select" resultMap="materielMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="materiel">
+        SELECT COUNT(1) from materiel WHERE status=0
+        <if test="materielId!=null and materielId>0">
+            AND materiel_id=#{materielId}
+        </if>
+        <if test="materielName!=null and materielName!=''">
+            AND materiel_name LIKE  CONCAT('%',#{materielName},'%')
+        </if>
+        <if test="materielTypeLevelB!=null and materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="materielUnit!=null and materielUnit.materielUnitId">
+            AND materiel_unit_id =#{materielUnit.materielUnitId}
+        </if>
+        <if test="materielYield!=null and materielYield>0">
+            AND materiel_yield=#{materielYield}
+        </if>
+        <if test="materielShelfLife!=null and materielShelfLife>0">
+            AND materiel__shelf_life=#{materielShelfLife}
+        </if>
+        <if test="materielMinWarning!=null and materielMinWarning>0">
+            AND materiel_min_warning=#{materielMinWarning}
+        </if>
+        <if test="materielRemarks!=null and materielRemarks!=''">
+            AND materiel_remarks=#{materielRemarks}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="materielMap">
+        SELECT * from materiel WHERE status=0 AND materiel_id=#{materielId}
+    </select>
+    <select id="getMaterielByDate" resultMap="materielMap">
+        SELECT * FROM materiel WHERE materiel_id in (SELECT materiel_id FROM purchase_item WHERE purchase_id in
+        (SELECT purchase_id FROM purchase WHERE purchase_date=#{date}) and materiel_id not in
+        (SELECT materiel_id FROM purchase_standard where `status`=1))
+        and materiel_type_level_b_id=#{materielTypeLevelBId}
+    </select>
+</mapper>

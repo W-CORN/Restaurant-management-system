@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.StagePurchasingPlanTermDao">
+    <resultMap id="stagePurchasingPlanTermMap" type="stagePurchasingPlanTerm">
+        <result column="stage_purchasing_plan_term_id" property="stagePurchasingPlanTermId"/>
+        <result column="materiel_number" property="materielNumber"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="price_float" property="priceFloat"/>
+        <result column="remarks" property="remarks"/>
+        <result column="stage_purchasing_plan_id" property="stagePurchasingPlanId"/>
+        <result column="status" property="status"/>
+        <association column="supplier_id" property="supplier" select="team.ruike.cim.dao.SupplierDao.selectById"/>
+        <association column="materiel_id" property="materiel" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM stage_purchasing_plan_term WHERE `status`=0
+        <if test="stagePurchasingPlanTerm.stagePurchasingPlanTermId!=null and stagePurchasingPlanTerm.stagePurchasingPlanTermId>0">
+            AND stage_purchasing_plan_term_id=#{stagePurchasingPlanTerm.stagePurchasingPlanTermId}
+        </if>
+        <if test="stagePurchasingPlanTerm.materiel!=null and stagePurchasingPlanTerm.materiel.materielId!=null and stagePurchasingPlanTerm.materiel.materielId>0">
+            AND materiel_id=#{stagePurchasingPlanTerm.materiel.materielId}
+        </if>
+        <if test="stagePurchasingPlanTerm.materielNumber!=null and stagePurchasingPlanTerm.materielNumber>0">
+            AND materiel_number=#{stagePurchasingPlanTerm.materielNumber}
+        </if>
+        <if test="stagePurchasingPlanTerm.unitPrice!=null stagePurchasingPlanTerm.unitPrice>0">
+            AND unit_price=#{stagePurchasingPlanTerm.unitPrice}
+        </if>
+        <if test="stagePurchasingPlanTerm.supplier!=null and stagePurchasingPlanTerm.supplier.supplierId!=null and stagePurchasingPlanTerm.supplier.supplierId>0">
+            AND supplier_id=#{stagePurchasingPlanTerm.supplier.supplierId}
+        </if>
+        <if test="stagePurchasingPlanTerm.priceFloat!=null and stagePurchasingPlanTerm.priceFloat>0">
+            AND price_float=#{stagePurchasingPlanTerm.priceFloat}
+        </if>
+        <if test="stagePurchasingPlanTerm.stagePurchasingPlanId!=null and stagePurchasingPlanTerm.stagePurchasingPlanId>0">
+            AND stage_purchasing_plan_id=#{stagePurchasingPlanTerm.stagePurchasingPlanId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM stage_purchasing_plan_term WHERE `status`=0
+        <if test="stagePurchasingPlanTermId!=null and stagePurchasingPlanTermId>0">
+            AND stage_purchasing_plan_term_id=#{stagePurchasingPlanTermId}
+        </if>
+        <if test="materiel!=null and materiel.materielId!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+        <if test="materielNumber!=null and materielNumber>0">
+            AND materiel_number=#{materielNumber}
+        </if>
+        <if test="unitPrice!=null unitPrice>0">
+            AND unit_price=#{unitPrice}
+        </if>
+        <if test="supplier!=null and supplier.supplierId!=null and supplier.supplierId>0">
+            AND supplier_id=#{supplier.supplierId}
+        </if>
+        <if test="priceFloat!=null and priceFloat>0">
+            AND price_float=#{priceFloat}
+        </if>
+        <if test="stagePurchasingPlanId!=null and stagePurchasingPlanId>0">
+            AND stage_purchasing_plan_id=#{stagePurchasingPlanId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="stagePurchasingPlanTerm">
+        INSERT into stage_purchasing_plan_term VALUES(DEFAULT,
+        #{materiel.materielId},
+        #{materielNumber},
+        #{unitPrice},
+        #{supplier.supplierId},
+        #{priceFloat},
+        #{remarks},
+        #{stagePurchasingPlanId},
+        0);
+    </insert>
+    <update id="update" parameterType="stagePurchasingPlanTerm">
+        UPDATE stage_purchasing_plan_term set materiel_id=#{materiel.materielId},
+        materiel_number=#{materielNumber},
+        unit_price=#{unitPrice},
+        supplier_id=#{supplier.supplierId},
+        price_float=#{priceFloat},
+        remarks=#{remarks},
+        stage_purchasing_plan_id=#{stagePurchasingPlanId},
+        `status`=#{status}
+        WHERE stage_purchasing_plan_term_id=#{stagePurchasingPlanTermId}
+    </update>
+    <select id="select" resultMap="stagePurchasingPlanTermMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="stagePurchasingPlanTerm">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="stagePurchasingPlanTermMap">
+        SELECT * FROM stage_purchasing_plan_term WHERE `status`=0 and stage_purchasing_plan_term_id=#{stagePurchasingPlanTermId}
+    </select>
+    <select id="selectBystagePurchasingPlanId" parameterType="int" resultMap="stagePurchasingPlanTermMap">
+          select * from stage_purchasing_plan_term where `status`=0 and stage_purchasing_plan_id=#{stagePurchasingPlanId}
+    </select>
+    <delete id="delStagePurchasingPlanTermBysId">
+        DELETE FROM stage_purchasing_plan_term WHERE stage_purchasing_plan_id=#{stagePurchasingPlanId}
+    </delete>
+</mapper>

@@ -1,0 +1,1723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CIM:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="434fb277-c642-4ea0-8187-6584794a2ac2" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider editor-type-id="MavenHelperPluginDependencyAnalyzer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="541">
+              <caret line="269" column="21" lean-forward="false" selection-start-line="269" selection-start-column="21" selection-end-line="269" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="甄立.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/upload/甄立.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StoreController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/controller/StoreController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-328">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/controller/AdminController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-988">
+              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/spring-applicionContext.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/jdbc.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/PurchaseStandardRecord.java" />
+        <option value="$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/Equipment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/team/ruike/cim/service/PurchaseService.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="F:\develop\maven_repository" />
+        <option name="mavenHome" value="F:/Java/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="F:\Java\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="CIM" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="CIM" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="1.8" />
+    <option name="vmOptions" value="-Dfile.encoding=GB2312" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="290" />
+    <option name="y" value="13" />
+    <option name="width" value="1597" />
+    <option name="height" value="1019" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Gradle</id>
+          </State>
+          <State>
+            <id>Kotlin</id>
+          </State>
+          <State>
+            <id>Maven</id>
+          </State>
+          <State>
+            <id>OSGi</id>
+          </State>
+          <State>
+            <id>Probable bugsGradle</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Ali-Check</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CIM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CIM-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\workspace\GitHub\CIM-master\src\main\resources\team\ruike\cim\dao" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\workspace\GitHub\CIM-master\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="TomeeConfiguration" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_CIM_2" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="57424" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+    </configuration>
+    <configuration default="true" type="TomeeConfiguration" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="LOCAL" value="false" />
+      <deployment />
+      <server-settings>
+        <data>
+          <option name="targets">
+            <list>
+              <WatchedTargetModelImpl>
+                <option name="name" value="CONTEXT_XML" />
+                <name>CONTEXT_XML</name>
+              </WatchedTargetModelImpl>
+              <StagingTargetModelImpl>
+                <option name="name" value="STAGING" />
+                <name>STAGING</name>
+              </StagingTargetModelImpl>
+            </list>
+          </option>
+          <option name="transportHostId" />
+          <host-id />
+        </data>
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="57425" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+    </configuration>
+    <configuration name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.31" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8888/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="CIM:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_CIM" />
+        <option name="HTTP_PORT" value="8888" />
+        <option name="JNDI_PORT" value="1199" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="57421" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.31" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="CIM:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_CIM" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="57421" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="CIM:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="LOCAL" value="false" />
+      <deployment />
+      <server-settings>
+        <data>
+          <option name="targets">
+            <list>
+              <WatchedTargetModelImpl>
+                <option name="name" value="CONTEXT_XML" />
+                <name>CONTEXT_XML</name>
+              </WatchedTargetModelImpl>
+              <StagingTargetModelImpl>
+                <option name="name" value="STAGING" />
+                <name>STAGING</name>
+              </StagingTargetModelImpl>
+            </list>
+          </option>
+          <option name="transportHostId" />
+          <host-id />
+        </data>
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="57422" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="434fb277-c642-4ea0-8187-6584794a2ac2" name="Default" comment="" />
+      <created>1554776519498</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1554776519498</updated>
+      <workItem from="1554776521137" duration="597000" />
+      <workItem from="1554777318632" duration="9749000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="10346000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37662336" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20842217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/logging.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/springMvc-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-applicionContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="15" column="62" lean-forward="false" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+          <folding>
+            <element signature="e#1488#1504#0" expanded="false" />
+            <element signature="e#1542#1555#0" expanded="false" />
+            <element signature="e#1598#1616#0" expanded="false" />
+            <element signature="e#1659#1677#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/util/ArchivesLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/ContractOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/ContractOrderTerm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/ContractProductionDistribution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="3" column="5" lean-forward="false" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/controller/MenuBranchController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/PurchaseStandardRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/pojo/Equipment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/service/PurchaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/service/impl/ChatBranchServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="15" column="1" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="17" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/controller/ContractOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1860">
+          <caret line="79" column="32" lean-forward="false" selection-start-line="79" selection-start-column="32" selection-end-line="79" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/service/impl/ContractProductionPlanServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-900">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/admin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="32" column="25" lean-forward="false" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin/role.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="70" column="21" lean-forward="false" selection-start-line="70" selection-start-column="21" selection-end-line="70" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MAVEN/RuiKe:CIM:V1.0">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>RuiKe:CIM:V1.0</OriginalElement>
+          <nodes>
+            <node x="2139.9169235546537" y="847.0">RuiKe:CIM:1.0-SNAPSHOT</node>
+            <node x="3622.426703647244" y="576.0">org.mybatis:mybatis:jar:3.2.2</node>
+            <node x="2964.3186272018975" y="576.0">javax.servlet:jstl:jar:1.1.2</node>
+            <node x="806.3586226851869" y="576.0">taglibs:standard:jar:1.1.2</node>
+            <node x="1798.8017036472438" y="576.0">javax.servlet:javax.servlet-api:jar:3.1.0</node>
+            <node x="2298.301703647244" y="576.0">junit:junit:jar:4.13-beta-2</node>
+            <node x="2268.301703647244" y="485.0">junit:junit:jar:4.13-beta-2/org.hamcrest:hamcrest-core:jar:1.3</node>
+            <node x="4184.676703647244" y="576.0">commons-fileupload:commons-fileupload:jar:1.3.3</node>
+            <node x="4208.176703647244" y="485.0">commons-fileupload:commons-fileupload:jar:1.3.3/commons-io:commons-io:jar:2.2</node>
+            <node x="1055.3586226851867" y="576.0">commons-io:commons-io:jar:2.5</node>
+            <node x="1697.5517036472438" y="485.0">commons-lang:commons-lang:jar:2.5</node>
+            <node x="3807.676703647244" y="485.0">log4j:log4j:jar:1.2.17</node>
+            <node x="3721.426703647244" y="576.0">org.slf4j:slf4j-log4j12:jar:1.7.9</node>
+            <node x="3707.676703647244" y="485.0">org.slf4j:slf4j-log4j12:jar:1.7.9/org.slf4j:slf4j-api:jar:1.7.9</node>
+            <node x="2381.301703647244" y="576.0">com.alibaba:fastjson:jar:1.2.39</node>
+            <node x="484.1252893518533" y="202.0">aopalliance:aopalliance:jar:1.0</node>
+            <node x="466.75" y="576.0">org.aspectj:aspectjweaver:jar:1.6.9</node>
+            <node x="1946.8017036472438" y="576.0">commons-collections:commons-collections:jar:3.1</node>
+            <node x="2123.801703647244" y="576.0">commons-dbcp:commons-dbcp:jar:1.4</node>
+            <node x="2125.301703647244" y="485.0">commons-dbcp:commons-dbcp:jar:1.4/commons-pool:commons-pool:jar:1.5.4</node>
+            <node x="3474.426703647244" y="576.0">org.apache.commons:commons-lang3:jar:3.1</node>
+            <node x="2771.9169235546537" y="576.0">commons-pool:commons-pool:jar:1.6</node>
+            <node x="237.8267036472439" y="0.0">commons-logging:commons-logging:jar:1.2</node>
+            <node x="2670.9169235546537" y="576.0">net.sf.ehcache:ehcache:jar:1.2.3</node>
+            <node x="2743.301703647244" y="485.0">net.sf.ehcache:ehcache:jar:1.2.3/commons-logging:commons-logging:jar:1.0.4</node>
+            <node x="2566.301703647244" y="485.0">net.sf.ehcache:ehcache:jar:1.2.3/commons-collections:commons-collections:jar:2.1</node>
+            <node x="367.5" y="576.0">javax.transaction:jta:jar:1.1</node>
+            <node x="605.1252893518533" y="313.0">org.springframework:spring-aop:jar:4.2.4.RELEASE</node>
+            <node x="2368.3166666666666" y="202.0">org.springframework:spring-beans:jar:4.2.4.RELEASE</node>
+            <node x="990.9169235546536" y="404.0">org.springframework:spring-context:jar:4.2.4.RELEASE</node>
+            <node x="1734.7183703139108" y="81.0">org.springframework:spring-core:jar:4.2.4.RELEASE</node>
+            <node x="886.4169235546536" y="313.0">org.springframework:spring-expression:jar:4.2.4.RELEASE</node>
+            <node x="2928.5686272018975" y="485.0">org.springframework:spring-jdbc:jar:4.2.4.RELEASE</node>
+            <node x="3034.3186272018975" y="576.0">org.springframework:spring-orm:jar:4.2.4.RELEASE</node>
+            <node x="3071.176703647244" y="404.0">org.springframework:spring-tx:jar:4.2.4.RELEASE</node>
+            <node x="634.6252893518533" y="485.0">org.springframework:spring-web:jar:4.2.4.RELEASE</node>
+            <node x="912.3586226851868" y="576.0">org.springframework:spring-webmvc:jar:4.2.4.RELEASE</node>
+            <node x="0.0" y="576.0">org.mybatis:mybatis-spring:jar:1.3.1</node>
+            <node x="4005.676703647244" y="576.0">mysql:mysql-connector-java:jar:5.0.7</node>
+            <node x="1490.65" y="576.0">net.sf.json-lib:json-lib:jar:jdk15:2.4</node>
+            <node x="1344.3586226851867" y="485.0">net.sf.json-lib:json-lib:jar:jdk15:2.4/commons-beanutils:commons-beanutils:jar:1.8.0</node>
+            <node x="1512.3586226851867" y="485.0">net.sf.json-lib:json-lib:jar:jdk15:2.4/commons-collections:commons-collections:jar:3.2.1</node>
+            <node x="1183.3586226851867" y="485.0">net.sf.json-lib:json-lib:jar:jdk15:2.4/commons-logging:commons-logging:jar:1.1.1</node>
+            <node x="1871.8017036472438" y="485.0">net.sf.ezmorph:ezmorph:jar:1.0.6</node>
+            <node x="1854.3017036472438" y="404.0">net.sf.ezmorph:ezmorph:jar:1.0.6/commons-lang:commons-lang:jar:2.3</node>
+            <node x="198.5" y="576.0">commons-beanutils:commons-beanutils:jar:1.9.3</node>
+            <node x="142.0" y="485.0">commons-beanutils:commons-beanutils:jar:1.9.3/commons-collections:commons-collections:jar:3.2.2</node>
+            <node x="603.75" y="576.0">org.springframework:spring-websocket:jar:4.2.4.RELEASE</node>
+            <node x="2406.301703647244" y="485.0">org.springframework:spring-messaging:jar:4.2.4.RELEASE</node>
+            <node x="3195.176703647244" y="485.0">com.fasterxml.jackson.core:jackson-annotations:jar:2.3.0</node>
+            <node x="1626.65" y="576.0">com.fasterxml.jackson.core:jackson-core:jar:2.3.1</node>
+            <node x="3319.426703647244" y="576.0">com.fasterxml.jackson.core:jackson-databind:jar:2.3.3</node>
+            <node x="3366.176703647244" y="485.0">com.fasterxml.jackson.core:jackson-databind:jar:2.3.3/com.fasterxml.jackson.core:jackson-core:jar:2.3.3</node>
+            <node x="3891.676703647244" y="576.0">javax:javaee-api:jar:8.0</node>
+            <node x="3893.676703647244" y="485.0">javax:javaee-api:jar:8.0/com.sun.mail:javax.mail:jar:1.6.0</node>
+            <node x="3894.176703647244" y="404.0">javax:javaee-api:jar:8.0/com.sun.mail:javax.mail:jar:1.6.0/javax.activation:activation:jar:1.1</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-messaging:jar:4.2.4.RELEASE">
+              <point x="4.243902439024396" y="-15.5" />
+              <point x="2173.1608259936784" y="657.0" />
+              <point x="2475.801703647244" y="657.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="net.sf.json-lib:json-lib:jar:jdk15:2.4" target="net.sf.json-lib:json-lib:jar:jdk15:2.4/commons-collections:commons-collections:jar:3.2.1">
+              <point x="0.0" y="-15.5" />
+              <point x="1548.65" y="536.0" />
+              <point x="1590.8586226851867" y="536.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-core:jar:4.2.4.RELEASE" target="commons-logging:commons-logging:jar:1.2">
+              <point x="0.0" y="-15.5" />
+              <point x="1785.7183703139108" y="56.0" />
+              <point x="355.3267036472439" y="56.0" />
+              <point x="47.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-orm:jar:4.2.4.RELEASE">
+              <point x="12.731707317073187" y="-15.5" />
+              <point x="2181.6486308717267" y="717.0" />
+              <point x="3084.3186272018975" y="717.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-messaging:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="46.33333333333337" y="-15.5" />
+              <point x="2522.1350369805773" y="465.0" />
+              <point x="2504.5252893518536" y="465.0" />
+              <point x="2504.5252893518536" y="172.0" />
+              <point x="1798.4683703139108" y="172.0" />
+              <point x="12.75" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-expression:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="955.9169235546536" y="172.0" />
+              <point x="1772.9683703139108" y="172.0" />
+              <point x="-12.75" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="net.sf.json-lib:json-lib:jar:jdk15:2.4">
+              <point x="-8.487804878048792" y="-15.5" />
+              <point x="2160.429118676605" y="687.0" />
+              <point x="1548.65" y="687.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.aspectj:aspectjweaver:jar:1.6.9">
+              <point x="-19.804878048780438" y="-15.5" />
+              <point x="2149.1120455058735" y="767.0" />
+              <point x="524.75" y="767.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-beans:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="2423.8166666666666" y="182.0" />
+              <point x="1789.9683703139108" y="182.0" />
+              <point x="4.25" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-web:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="12.5" y="-15.5" />
+              <point x="697.1252893518533" y="465.0" />
+              <point x="714.6252893518533" y="465.0" />
+              <point x="714.6252893518533" y="273.0" />
+              <point x="2386.8166666666666" y="273.0" />
+              <point x="-37.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-web:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="-37.5" y="-15.5" />
+              <point x="647.1252893518533" y="465.0" />
+              <point x="594.6252893518533" y="465.0" />
+              <point x="594.6252893518533" y="142.0" />
+              <point x="1747.4683703139108" y="142.0" />
+              <point x="-38.25" y="15.5" />
+            </edge>
+            <edge source="net.sf.ehcache:ehcache:jar:1.2.3" target="net.sf.ehcache:ehcache:jar:1.2.3/commons-logging:commons-logging:jar:1.0.4">
+              <point x="20.25" y="-15.5" />
+              <point x="2731.6669235546537" y="556.0" />
+              <point x="2733.002420586226" y="541.6110865781749" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-websocket:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="-46.0" y="-15.5" />
+              <point x="626.75" y="546.0" />
+              <point x="473.6252893518533" y="546.0" />
+              <point x="473.6252893518533" y="132.0" />
+              <point x="1738.9683703139108" y="132.0" />
+              <point x="-46.75" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="log4j:log4j:jar:1.2.17">
+              <point x="22.63414634146352" y="-15.5" />
+              <point x="2191.551069896117" y="787.0" />
+              <point x="3854.926703647244" y="787.0" />
+              <point x="15.75" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-jdbc:jar:4.2.4.RELEASE" target="org.springframework:spring-tx:jar:4.2.4.RELEASE">
+              <point x="33.666666666666515" y="-15.5" />
+              <point x="3012.7352938685644" y="465.0" />
+              <point x="3085.5100369805778" y="465.0" />
+              <point x="-28.666666666666515" y="15.5" />
+            </edge>
+            <edge source="net.sf.ehcache:ehcache:jar:1.2.3" target="net.sf.ehcache:ehcache:jar:1.2.3/commons-collections:commons-collections:jar:2.1">
+              <point x="-20.25" y="-15.5" />
+              <point x="2691.1669235546537" y="556.0" />
+              <point x="2644.801703647244" y="556.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="junit:junit:jar:4.13-beta-2">
+              <point x="1.414634146341541" y="-15.5" />
+              <point x="2170.3315577009953" y="637.0" />
+              <point x="2327.301703647244" y="637.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-tx:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="-21.5" y="-15.5" />
+              <point x="3092.676703647244" y="384.0" />
+              <point x="3103.8186272018975" y="384.0" />
+              <point x="3103.8186272018975" y="253.0" />
+              <point x="2473.15" y="253.0" />
+              <point x="49.33333333333337" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-collections:commons-collections:jar:3.1">
+              <point x="-1.414634146341541" y="-15.5" />
+              <point x="2167.502289408312" y="637.0" />
+              <point x="2025.3017036472438" y="637.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-jdbc:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="-33.666666666666515" y="-15.5" />
+              <point x="2945.4019605352314" y="465.0" />
+              <point x="2943.5266711833774" y="465.0" />
+              <point x="2943.5266711833774" y="273.0" />
+              <point x="2448.4833333333336" y="273.0" />
+              <point x="24.666666666666742" y="15.5" />
+            </edge>
+            <edge source="javax:javaee-api:jar:8.0/com.sun.mail:javax.mail:jar:1.6.0" target="javax:javaee-api:jar:8.0/com.sun.mail:javax.mail:jar:1.6.0/javax.activation:activation:jar:1.1">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-messaging:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="2475.801703647244" y="465.0" />
+              <point x="2465.968370313911" y="465.0" />
+              <point x="2465.968370313911" y="293.0" />
+              <point x="2423.8166666666666" y="293.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="net.sf.ehcache:ehcache:jar:1.2.3">
+              <point x="7.0731707317072505" y="-15.5" />
+              <point x="2175.990094286361" y="677.0" />
+              <point x="2711.4169235546537" y="677.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:4.2.4.RELEASE" target="org.springframework:spring-web:jar:4.2.4.RELEASE">
+              <point x="-49.200000000000045" y="-15.5" />
+              <point x="924.6586226851867" y="546.0" />
+              <point x="717.9586226851868" y="546.0" />
+              <point x="33.33333333333337" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-messaging:jar:4.2.4.RELEASE" target="org.springframework:spring-context:jar:4.2.4.RELEASE">
+              <point x="-46.33333333333337" y="-15.5" />
+              <point x="2429.468370313911" y="455.0" />
+              <point x="1097.1169235546536" y="455.0" />
+              <point x="47.200000000000045" y="15.5" />
+            </edge>
+            <edge source="org.slf4j:slf4j-log4j12:jar:1.7.9" target="log4j:log4j:jar:1.2.17">
+              <point x="26.25" y="-15.5" />
+              <point x="3800.176703647244" y="556.0" />
+              <point x="3823.426703647244" y="556.0" />
+              <point x="-15.75" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="-24.600000000000023" y="-15.5" />
+              <point x="949.2586226851868" y="536.0" />
+              <point x="832.4169235546535" y="536.0" />
+              <point x="832.4169235546535" y="162.0" />
+              <point x="1764.4683703139108" y="162.0" />
+              <point x="-21.25" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-websocket:jar:4.2.4.RELEASE" target="org.springframework:spring-web:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="672.75" y="556.0" />
+              <point x="684.6252893518533" y="556.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.apache.commons:commons-lang3:jar:3.1">
+              <point x="18.390243902439124" y="-15.5" />
+              <point x="2187.307167457093" y="757.0" />
+              <point x="3538.426703647244" y="757.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.mybatis:mybatis:jar:3.2.2">
+              <point x="19.804878048780438" y="-15.5" />
+              <point x="2188.721801603434" y="767.0" />
+              <point x="3661.926703647244" y="767.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-web:jar:4.2.4.RELEASE">
+              <point x="-18.390243902439124" y="-15.5" />
+              <point x="2150.5266796522146" y="757.0" />
+              <point x="593.25" y="757.0" />
+              <point x="593.25" y="556.0" />
+              <point x="651.2919560185201" y="556.0" />
+              <point x="-33.33333333333326" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.mybatis:mybatis-spring:jar:1.3.1">
+              <point x="-28.29268292682923" y="-15.5" />
+              <point x="2140.6242406278243" y="827.0" />
+              <point x="60.5" y="827.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="com.fasterxml.jackson.core:jackson-databind:jar:2.3.3" target="com.fasterxml.jackson.core:jackson-databind:jar:2.3.3/com.fasterxml.jackson.core:jackson-core:jar:2.3.3">
+              <point x="33.75" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="javax:javaee-api:jar:8.0">
+              <point x="25.463414634146375" y="-15.5" />
+              <point x="2194.3803381888" y="807.0" />
+              <point x="3938.676703647244" y="807.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-context:jar:4.2.4.RELEASE" target="org.springframework:spring-expression:jar:4.2.4.RELEASE">
+              <point x="-14.75" y="-15.5" />
+              <point x="1035.1669235546537" y="364.0" />
+              <point x="1002.250256887987" y="364.0" />
+              <point x="46.33333333333337" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-context:jar:4.2.4.RELEASE" target="org.springframework:spring-aop:jar:4.2.4.RELEASE">
+              <point x="-44.25" y="-15.5" />
+              <point x="1005.6669235546536" y="374.0" />
+              <point x="687.6252893518533" y="374.0" />
+              <point x="33.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.slf4j:slf4j-log4j12:jar:1.7.9">
+              <point x="21.21951219512198" y="-15.5" />
+              <point x="2190.136435749776" y="777.0" />
+              <point x="3773.926703647244" y="777.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-aop:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="654.6252893518533" y="152.0" />
+              <point x="1755.9683703139108" y="152.0" />
+              <point x="-29.75" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-aop:jar:4.2.4.RELEASE" target="aopalliance:aopalliance:jar:1.0">
+              <point x="-33.0" y="-15.5" />
+              <point x="621.6252893518533" y="293.0" />
+              <point x="559.1252893518533" y="293.0" />
+              <point x="25.0" y="15.5" />
+            </edge>
+            <edge source="junit:junit:jar:4.13-beta-2" target="junit:junit:jar:4.13-beta-2/org.hamcrest:hamcrest-core:jar:1.3">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-orm:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="-12.5" y="-15.5" />
+              <point x="3071.8186272018975" y="556.0" />
+              <point x="3060.676703647244" y="556.0" />
+              <point x="3060.676703647244" y="263.0" />
+              <point x="2460.8166666666666" y="263.0" />
+              <point x="37.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="javax.servlet:javax.servlet-api:jar:3.1.0">
+              <point x="-4.243902439024396" y="-15.5" />
+              <point x="2164.673021115629" y="657.0" />
+              <point x="1862.3017036472438" y="657.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-orm:jar:4.2.4.RELEASE" target="org.springframework:spring-tx:jar:4.2.4.RELEASE">
+              <point x="12.5" y="-15.5" />
+              <point x="3096.8186272018975" y="556.0" />
+              <point x="3114.176703647244" y="556.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="taglibs:standard:jar:1.1.2">
+              <point x="-14.146341463414728" y="-15.5" />
+              <point x="2154.770582091239" y="727.0" />
+              <point x="849.3586226851869" y="727.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="commons-beanutils:commons-beanutils:jar:1.9.3" target="commons-beanutils:commons-beanutils:jar:1.9.3/commons-collections:commons-collections:jar:3.2.2">
+              <point x="-37.0" y="-15.5" />
+              <point x="235.5" y="556.0" />
+              <point x="220.5" y="556.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="com.alibaba:fastjson:jar:1.2.39">
+              <point x="2.8292682926828547" y="-15.5" />
+              <point x="2171.7461918473364" y="647.0" />
+              <point x="2420.801703647244" y="647.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-context:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="44.25" y="-15.5" />
+              <point x="1094.1669235546537" y="384.0" />
+              <point x="1107.2085902213203" y="384.0" />
+              <point x="1107.2085902213203" y="283.0" />
+              <point x="2399.15" y="283.0" />
+              <point x="-24.66666666666663" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-jdbc:jar:4.2.4.RELEASE">
+              <point x="9.902439024390333" y="-15.5" />
+              <point x="2178.819362579044" y="697.0" />
+              <point x="2953.8186272018975" y="697.0" />
+              <point x="-25.25" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="24.048780487804834" y="-15.5" />
+              <point x="2192.9657040424586" y="797.0" />
+              <point x="3881.176703647244" y="797.0" />
+              <point x="3881.176703647244" y="132.0" />
+              <point x="1832.4683703139108" y="132.0" />
+              <point x="46.75" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="javax.servlet:jstl:jar:1.1.2">
+              <point x="11.317073170731646" y="-15.5" />
+              <point x="2180.2339967253856" y="707.0" />
+              <point x="2989.3186272018975" y="707.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="commons-beanutils:commons-beanutils:jar:1.9.3" target="commons-logging:commons-logging:jar:1.2">
+              <point x="37.0" y="-15.5" />
+              <point x="309.5" y="56.0" />
+              <point x="308.3267036472439" y="56.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-websocket:jar:4.2.4.RELEASE">
+              <point x="-16.975609756097583" y="-15.5" />
+              <point x="2151.941313798556" y="747.0" />
+              <point x="672.75" y="747.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-webmvc:jar:4.2.4.RELEASE">
+              <point x="-12.731707317073187" y="-15.5" />
+              <point x="2156.185216237581" y="717.0" />
+              <point x="973.8586226851868" y="717.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-fileupload:commons-fileupload:jar:1.3.3">
+              <point x="28.29268292682923" y="-15.5" />
+              <point x="2197.209606481483" y="827.0" />
+              <point x="4261.676703647244" y="827.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="49.200000000000045" y="-15.5" />
+              <point x="1023.0586226851868" y="556.0" />
+              <point x="1119.4169235546537" y="556.0" />
+              <point x="1119.4169235546537" y="293.0" />
+              <point x="2411.4833333333336" y="293.0" />
+              <point x="-12.333333333333371" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="aopalliance:aopalliance:jar:1.0">
+              <point x="-24.048780487804834" y="-15.5" />
+              <point x="2144.868143066849" y="797.0" />
+              <point x="357.0" y="797.0" />
+              <point x="357.0" y="293.0" />
+              <point x="509.1252893518533" y="293.0" />
+              <point x="-25.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="javax.transaction:jta:jar:1.1">
+              <point x="-22.63414634146352" y="-15.5" />
+              <point x="2146.2827772131905" y="787.0" />
+              <point x="391.5" y="787.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="mysql:mysql-connector-java:jar:5.0.7">
+              <point x="26.87804878048769" y="-15.5" />
+              <point x="2195.794972335141" y="817.0" />
+              <point x="4085.176703647244" y="817.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-logging:commons-logging:jar:1.2">
+              <point x="-26.87804878048769" y="-15.5" />
+              <point x="2142.0388747741663" y="817.0" />
+              <point x="131.5" y="817.0" />
+              <point x="131.5" y="56.0" />
+              <point x="261.3267036472439" y="56.0" />
+              <point x="-47.0" y="15.5" />
+            </edge>
+            <edge source="commons-dbcp:commons-dbcp:jar:1.4" target="commons-dbcp:commons-dbcp:jar:1.4/commons-pool:commons-pool:jar:1.5.4">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="net.sf.ezmorph:ezmorph:jar:1.0.6" target="net.sf.ezmorph:ezmorph:jar:1.0.6/commons-lang:commons-lang:jar:2.3">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="commons-fileupload:commons-fileupload:jar:1.3.3" target="commons-fileupload:commons-fileupload:jar:1.3.3/commons-io:commons-io:jar:2.2">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="javax:javaee-api:jar:8.0" target="javax:javaee-api:jar:8.0/com.sun.mail:javax.mail:jar:1.6.0">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-tx:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="21.5" y="-15.5" />
+              <point x="3135.676703647244" y="384.0" />
+              <point x="3114.8186272018975" y="384.0" />
+              <point x="3114.8186272018975" y="152.0" />
+              <point x="1815.4683703139108" y="152.0" />
+              <point x="29.75" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="com.fasterxml.jackson.core:jackson-core:jar:2.3.1">
+              <point x="-7.0731707317072505" y="-15.5" />
+              <point x="2161.8437528229465" y="677.0" />
+              <point x="1681.15" y="677.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="com.fasterxml.jackson.core:jackson-annotations:jar:2.3.0">
+              <point x="15.560975609756042" y="-15.5" />
+              <point x="2184.47789916441" y="737.0" />
+              <point x="3232.926703647244" y="737.0" />
+              <point x="-37.75" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:4.2.4.RELEASE" target="org.springframework:spring-expression:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="973.8586226851868" y="556.0" />
+              <point x="955.9169235546536" y="556.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="net.sf.json-lib:json-lib:jar:jdk15:2.4" target="net.sf.json-lib:json-lib:jar:jdk15:2.4/commons-logging:commons-logging:jar:1.1.1">
+              <point x="-46.40000000000009" y="-15.5" />
+              <point x="1502.25" y="556.0" />
+              <point x="1253.8586226851867" y="556.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-jdbc:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="0.0" y="-15.5" />
+              <point x="2979.0686272018975" y="465.0" />
+              <point x="2967.7352938685644" y="465.0" />
+              <point x="2967.7352938685644" y="162.0" />
+              <point x="1806.9683703139108" y="162.0" />
+              <point x="21.25" y="15.5" />
+            </edge>
+            <edge source="net.sf.json-lib:json-lib:jar:jdk15:2.4" target="commons-lang:commons-lang:jar:2.5">
+              <point x="23.199999999999818" y="-15.5" />
+              <point x="1571.85" y="546.0" />
+              <point x="1727.8017036472438" y="546.0" />
+              <point x="-30.25" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-web:jar:4.2.4.RELEASE" target="org.springframework:spring-context:jar:4.2.4.RELEASE">
+              <point x="37.5" y="-15.5" />
+              <point x="722.1252893518533" y="455.0" />
+              <point x="1002.7169235546536" y="455.0" />
+              <point x="-47.200000000000045" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-websocket:jar:4.2.4.RELEASE" target="org.springframework:spring-context:jar:4.2.4.RELEASE">
+              <point x="46.0" y="-15.5" />
+              <point x="718.75" y="556.0" />
+              <point x="745.1252893518533" y="556.0" />
+              <point x="745.1252893518533" y="465.0" />
+              <point x="1026.3169235546536" y="465.0" />
+              <point x="-23.600000000000023" y="15.5" />
+            </edge>
+            <edge source="net.sf.json-lib:json-lib:jar:jdk15:2.4" target="net.sf.ezmorph:ezmorph:jar:1.0.6">
+              <point x="46.40000000000009" y="-15.5" />
+              <point x="1595.0500000000002" y="556.0" />
+              <point x="1893.3017036472438" y="556.0" />
+              <point x="-21.5" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="com.fasterxml.jackson.core:jackson-databind:jar:2.3.3">
+              <point x="16.975609756097583" y="-15.5" />
+              <point x="2185.8925333107513" y="747.0" />
+              <point x="3386.926703647244" y="747.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.slf4j:slf4j-log4j12:jar:1.7.9" target="org.slf4j:slf4j-log4j12:jar:1.7.9/org.slf4j:slf4j-api:jar:1.7.9">
+              <point x="-26.25" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-context:jar:4.2.4.RELEASE">
+              <point x="-9.902439024390333" y="-15.5" />
+              <point x="2159.0144845302634" y="697.0" />
+              <point x="1172.8586226851867" y="697.0" />
+              <point x="1172.8586226851867" y="465.0" />
+              <point x="1073.5169235546537" y="465.0" />
+              <point x="23.600000000000023" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="net.sf.ezmorph:ezmorph:jar:1.0.6">
+              <point x="-2.8292682926828547" y="-15.5" />
+              <point x="2166.087655261971" y="647.0" />
+              <point x="1936.3017036472438" y="647.0" />
+              <point x="21.5" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-pool:commons-pool:jar:1.6">
+              <point x="8.487804878048792" y="-15.5" />
+              <point x="2177.4047284327025" y="687.0" />
+              <point x="2833.4169235546537" y="687.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:4.2.4.RELEASE" target="org.springframework:spring-context:jar:4.2.4.RELEASE">
+              <point x="24.600000000000023" y="-15.5" />
+              <point x="998.4586226851868" y="546.0" />
+              <point x="1049.9169235546537" y="546.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-beanutils:commons-beanutils:jar:1.9.3">
+              <point x="-25.463414634146375" y="-15.5" />
+              <point x="2143.4535089205074" y="807.0" />
+              <point x="272.5" y="807.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-web:jar:4.2.4.RELEASE" target="org.springframework:spring-aop:jar:4.2.4.RELEASE">
+              <point x="-12.5" y="-15.5" />
+              <point x="672.1252893518533" y="465.0" />
+              <point x="654.6252893518533" y="465.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-tx:jar:4.2.4.RELEASE">
+              <point x="14.146341463414728" y="-15.5" />
+              <point x="2183.0632650180687" y="727.0" />
+              <point x="3184.676703647244" y="727.0" />
+              <point x="3184.676703647244" y="465.0" />
+              <point x="3142.843370313911" y="465.0" />
+              <point x="28.666666666666515" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-dbcp:commons-dbcp:jar:1.4">
+              <point x="0.0" y="-15.5" />
+              <point x="2168.9169235546537" y="627.0" />
+              <point x="2186.801703647244" y="627.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-orm:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="37.5" y="-15.5" />
+              <point x="3121.8186272018975" y="556.0" />
+              <point x="3167.676703647244" y="556.0" />
+              <point x="3167.676703647244" y="142.0" />
+              <point x="1823.9683703139108" y="142.0" />
+              <point x="38.25" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-orm:jar:4.2.4.RELEASE" target="org.springframework:spring-jdbc:jar:4.2.4.RELEASE">
+              <point x="-37.5" y="-15.5" />
+              <point x="3046.8186272018975" y="556.0" />
+              <point x="3004.3186272018975" y="556.0" />
+              <point x="25.25" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-aop:jar:4.2.4.RELEASE">
+              <point x="-21.21951219512198" y="-15.5" />
+              <point x="2147.6974113595315" y="777.0" />
+              <point x="426.0" y="777.0" />
+              <point x="426.0" y="384.0" />
+              <point x="621.6252893518533" y="384.0" />
+              <point x="-33.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-expression:jar:4.2.4.RELEASE">
+              <point x="-15.560975609756042" y="-15.5" />
+              <point x="2153.3559479448977" y="737.0" />
+              <point x="794.4586226851868" y="737.0" />
+              <point x="794.4586226851868" y="384.0" />
+              <point x="909.5835902213203" y="384.0" />
+              <point x="-46.33333333333337" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-io:commons-io:jar:2.5">
+              <point x="-11.317073170731646" y="-15.5" />
+              <point x="2157.599850383922" y="707.0" />
+              <point x="1108.8586226851867" y="707.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="com.fasterxml.jackson.core:jackson-databind:jar:2.3.3" target="com.fasterxml.jackson.core:jackson-annotations:jar:2.3.0">
+              <point x="-33.75" y="-15.5" />
+              <point x="3353.176703647244" y="556.0" />
+              <point x="3308.426703647244" y="556.0" />
+              <point x="37.75" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-aop:jar:4.2.4.RELEASE" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="33.0" y="-15.5" />
+              <point x="687.6252893518533" y="263.0" />
+              <point x="2374.4833333333336" y="263.0" />
+              <point x="-49.33333333333337" y="15.5" />
+            </edge>
+            <edge source="net.sf.json-lib:json-lib:jar:jdk15:2.4" target="net.sf.json-lib:json-lib:jar:jdk15:2.4/commons-beanutils:commons-beanutils:jar:1.8.0">
+              <point x="-23.199999999999818" y="-15.5" />
+              <point x="1525.4500000000003" y="546.0" />
+              <point x="1418.3586226851867" y="546.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="org.springframework:spring-beans:jar:4.2.4.RELEASE">
+              <point x="5.658536585365937" y="-15.5" />
+              <point x="2174.5754601400195" y="667.0" />
+              <point x="2555.801703647244" y="667.0" />
+              <point x="2555.801703647244" y="283.0" />
+              <point x="2436.15" y="283.0" />
+              <point x="12.333333333333371" y="15.5" />
+            </edge>
+            <edge source="org.springframework:spring-context:jar:4.2.4.RELEASE" target="org.springframework:spring-core:jar:4.2.4.RELEASE">
+              <point x="14.75" y="-15.5" />
+              <point x="1064.6669235546537" y="182.0" />
+              <point x="1781.4683703139108" y="182.0" />
+              <point x="-4.25" y="15.5" />
+            </edge>
+            <edge source="RuiKe:CIM:1.0-SNAPSHOT" target="commons-lang:commons-lang:jar:2.5">
+              <point x="-5.658536585365937" y="-15.5" />
+              <point x="2163.258386969288" y="667.0" />
+              <point x="1788.3017036472438" y="667.0" />
+              <point x="30.25" y="15.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.9034733630603143" x="2925.641478556771" y="381.4251240356393" />
+          <SelectedNodes />
+          <Categories />
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/favicon.ico">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/.bowerrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/.jshintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/websocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2391">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/sockjs.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-988">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/team/ruike/cim/controller/StoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-328">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/upload/甄立.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="269" column="21" lean-forward="false" selection-start-line="269" selection-start-column="21" selection-end-line="269" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>CIM:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CIM</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: aopalliance:aopalliance:1.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

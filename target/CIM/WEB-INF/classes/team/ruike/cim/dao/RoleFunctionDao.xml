@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.RoleFunctionDao">
+    <resultMap id="roleFunctions" type="roleFunction">
+        <result column="role_function_id" property="roleFunctionId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="function_id" property="functionId"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM role_function WHERE status=0
+        <if test="roleFunction.roleFunctionId!=null and roleFunction.roleFunctionId>0">
+            AND role_function_id=#{roleFunction.roleFunctionId}
+        </if>
+        <if test="roleFunction.roleId!=null and roleFunction.roleId>0">
+            AND role_id=#{roleFunction.roleId}
+        </if>
+        <if test="roleFunction.functionId!=null and roleFunction.functionId>0">
+            AND function_id=#{roleFunction.functionId}
+        </if>
+        <if test="roleFunction.status!=null and roleFunction.status!=''">
+            AND status=#{roleFunction.status}
+        </if>
+    </sql>
+    <insert id="add" parameterType="roleFunction">
+        INSERT  INTO role_function VALUES (DEFAULT,#{roleId},#{functionId},0)
+    </insert>
+    <update id="update" parameterType="roleFunction">
+       UPDATE  role_function SET  role_id=#{roleId},function_id=#{functionId},status=#{status}
+       WHERE  role_function_id=#{roleFunctionId}
+    </update>
+    <select id="select" resultMap="roleFunctions">
+        SELECT * FROM (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="roleFunction">
+        SELECT count(1) FROM role_function WHERE status=0
+        <if test="roleFunctionId!=null and roleFunctionId>0">
+            AND role_function_id=#{roleFunctionId}
+        </if>
+        <if test="roleId!=null and roleId>0">
+            AND role_id=#{roleId}
+        </if>
+        <if test="functionId!=null and functionId>0">
+            AND function_id=#{functionId}
+        </if>
+        <if test="status!=null and status!=''">
+            AND status=#{status}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="roleFunctions">
+             SELECT * FROM role_function WHERE status=0
+             AND role_function_id=#{roleFunctionId}
+    </select>
+    <delete id="delete">
+        DELETE FROM role_function WHERE role_id=#{roleId}
+    </delete>
+</mapper>

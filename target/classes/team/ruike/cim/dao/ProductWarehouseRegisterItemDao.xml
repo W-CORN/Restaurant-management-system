@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductWarehouseRegisterItemDao">
+    <resultMap id="productWarehouseRegisterItemMap" type="productWarehouseRegisterItem">
+        <result column="product_warehouse_register_item_id" property="productWarehouseRegisterItemId"/>
+        <result column="menu_number" property="menuNumber"/>
+        <result column="status" property="status"/>
+        <association property="productWarehouseRegister" column="product_warehouse_register_id" select="team.ruike.cim.dao.ProductWarehouseRegisterDao.selectById"></association>
+        <association property="menu" column="menu_id" select="team.ruike.cim.dao.MenuDao.selectById"/>
+        <association property="productGoodsShelve" column="product_goods_shelve_id" select="team.ruike.cim.dao.ProductGoodsShelveDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="productWarehouseRegisterItem">
+          INSERT INTO product_warehouse_register_item VALUES (DEFAULT ,#{menu.menuId},#{productGoodsShelve.productGoodsShelveId},#{menuNumber},#{productWarehouseRegister.productWarehouseRegisterId},0)
+    </insert>
+    <update id="update" parameterType="productWarehouseRegisterItem">
+            UPDATE product_warehouse_register_item SET
+                menu_id=#{menu.menuId},
+                product_goods_shelve_id=#{productGoodsShelve.productGoodsShelveId},
+                menu_number=#{menuNumber},
+                product_warehouse_register_id=#{productWarehouseRegister.productWarehouseRegisterId},
+                status=#{status}
+                WHERE product_warehouse_register_item_id=#{productWarehouseRegisterItemId}
+    </update>
+    <sql id="sql">
+        SELECT * FROM product_warehouse_register_item WHERE status=0
+        <if test="productWarehouseRegisterItem.productWarehouseRegisterItemId!=null and productWarehouseRegisterItem.productWarehouseRegisterItemId>0">
+            AND   product_warehouse_register_item_id=#{productWarehouseRegisterItem.productWarehouseRegisterItemId}
+        </if>
+        <if test="productWarehouseRegisterItem.menu!=null and productWarehouseRegisterItem.menu.menuId>0">
+            AND  menu_id=#{productWarehouseRegisterItem.menu.menuId}
+        </if>
+        <if test="productWarehouseRegisterItem.productGoodsShelve!=null and productWarehouseRegisterItem.productGoodsShelve.productGoodsShelveId!=null and productWarehouseRegisterItem.productGoodsShelve.productGoodsShelveId>0">
+            AND product_goods_shelve_id=#{productWarehouseRegisterItem.productGoodsShelve.productGoodsShelveId}
+        </if>
+        <if test="productWarehouseRegisterItem.menuNumber!=null and productWarehouseRegisterItem.menuNumber>0">
+            AND  menu_number=#{productWarehouseRegisterItem.menuNumber}
+        </if>
+        <if test="productWarehouseRegisterItem.productWarehouseRegister!=null and productWarehouseRegisterItem.productWarehouseRegister.productWarehouseRegisterId!=null and productWarehouseRegisterItem.productWarehouseRegister.productWarehouseRegisterId>0">
+            AND product_warehouse_register_id=#{productWarehouseRegister.productWarehouseRegisterId}
+        </if>
+    </sql>
+    <select id="select" resultMap="productWarehouseRegisterItemMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productWarehouseRegisterItem">
+        SELECT COUNT(1) FROM product_warehouse_register_item WHERE status=0
+        <if test="productWarehouseRegisterItemId!=null and productWarehouseRegisterItemId>0">
+            AND   product_warehouse_register_item_id=#{productWarehouseRegisterItemId}
+        </if>
+        <if test="menu!=null and menu.menuId>0">
+            AND  menu_id=#{menu.menuId}
+        </if>
+        <if test="productGoodsShelve!=null and productGoodsShelve.productGoodsShelveId!=null and productGoodsShelve.productGoodsShelveId>0">
+            AND product_goods_shelve_id=#{productGoodsShelve.productGoodsShelveId}
+        </if>
+        <if test="menuNumber!=null and menuNumber>0">
+            AND  menu_number=#{menuNumber}
+        </if>
+        <if test="productWarehouseRegister!=null and productWarehouseRegister.productWarehouseRegisterId!=null and productWarehouseRegister.productWarehouseRegisterId>0">
+            AND product_warehouse_register_id=#{productWarehouseRegister.productWarehouseRegisterId}
+        </if>
+
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productWarehouseRegisterItemMap">
+        SELECT * FROM product_warehouse_register_item WHERE status=0
+        <if test="productWarehouseRegisterItemId!=null and productWarehouseRegisterItemId>0">
+            AND   product_warehouse_register_item_id=#{productWarehouseRegisterItemId}
+        </if>
+    </select>
+
+    <select id="selectByProductWarehouseRegisterId" parameterType="int" resultMap="productWarehouseRegisterItemMap">
+        SELECT * FROM product_warehouse_register_item WHERE status=0 and product_warehouse_register_id=#{productWarehouseRegister.productWarehouseRegisterId}
+    </select>
+
+    <select id="selectByWarehouseId" resultMap="productWarehouseRegisterItemMap">
+        SELECT * from product_warehouse_register_item WHERE product_goods_shelve_id IN
+        (SELECT product_goods_shelve_id FROM product_goods_shelve where product_warehouse_region_id IN
+        (SELECT product_warehouse_region_id FROM product_warehouse_region WHERE product_warehouse_id=#{productWarehouseRegisterItem.productGoodsShelve.productWarehouseRegion.productWarehouse.productWarehouseId}))
+    </select>
+</mapper>

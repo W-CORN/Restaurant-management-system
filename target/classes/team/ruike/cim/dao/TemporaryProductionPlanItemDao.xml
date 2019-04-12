@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TemporaryProductionPlanItemDao">
+    <resultMap id="temporaryProductionPlanItemMap" type="temporaryProductionPlanItem">
+        <result column="temporary_production_plan_item_id" property="temporaryProductionPlanItemId"/>
+        <result column="menu_number" property="menuNumber"/>
+        <result column="temporary_production_plan_id" property="temporaryProductionPlanId"/>
+        <result column="status" property="status"/>
+        <association property="menu.menuId" column="menu_id" select="team.ruike.cim.dao.MenuDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="temporaryProductionPlanItem">
+        INSERT INTO temporary_production_plan_item VALUES (DEFAULT ,#{menu.menuId},#{menuNumber},#{temporaryProductionPlanId},0)
+    </insert>
+    <update id="update" parameterType="temporaryProductionPlanItem">
+             UPDATE temporary_production_plan_item SET
+                    menu_id=#{menu.menuId},
+                    menu_number=#{menuNumber},
+                    temporary_production_plan_id=#{temporaryProductionPlanId},
+                    status=#{status}
+                    WHERE temporary_production_plan_item_id=#{temporaryProductionPlanItemId}
+    </update>
+    <sql id="sql">
+        SELECT * FROM temporary_production_plan_item WHERE status=0
+        <if test="temporaryProductionPlanItem.temporaryProductionPlanItemId!=null and temporaryProductionPlanItem.temporaryProductionPlanItemId>0">
+            AND temporary_production_plan_item_id=#{temporaryProductionPlanItem.temporaryProductionPlanItemId}
+        </if>
+        <if test="temporaryProductionPlanItem.menu!=null and temporaryProductionPlanItem.menu.menuId>0">
+            AND menu_id=#{temporaryProductionPlanItem.menu.menuId}
+        </if>
+        <if test="temporaryProductionPlanItem.menuNumber!=null and temporaryProductionPlanItem.menuNumber>0">
+            AND menu_number=#{temporaryProductionPlanItem.menuNumber}
+        </if>
+        <if test="temporaryProductionPlanItem.temporaryProductionPlanId!=null and temporaryProductionPlanItem.temporaryProductionPlanId>0">
+            AND temporary_production_plan_id=#{temporaryProductionPlanItem.temporaryProductionPlanId}
+        </if>
+    </sql>
+    <select id="select" resultMap="temporaryProductionPlanItemMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="temporaryProductionPlanItem">
+      SELECT COUNT (1)FROM temporary_production_plan_item WHERE status=0
+        <if test="temporaryProductionPlanItemId!=null and temporaryProductionPlanItemId>0">
+           AND temporary_production_plan_item_id=#{temporaryProductionPlanItemId}
+         </if>
+        <if test="menu!=null and menu.menuId>0">
+            AND menu_id=#{menu.menuId}
+        </if>
+        <if test="menuNumber!=null and menuNumber>0">
+            AND menu_number=#{menuNumber}
+        </if>
+        <if test="temporaryProductionPlanId!=null and temporaryProductionPlanId>0">
+            AND temporary_production_plan_id=#{temporaryProductionPlanId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="temporaryProductionPlanItemMap">
+        SELECT * FROM temporary_production_plan_item WHERE status=0
+        <if test="temporaryProductionPlanItemId!=null and temporaryProductionPlanItemId>0">
+            AND temporary_production_plan_item_id=#{temporaryProductionPlanItemId}
+        </if>
+    </select>
+</mapper>

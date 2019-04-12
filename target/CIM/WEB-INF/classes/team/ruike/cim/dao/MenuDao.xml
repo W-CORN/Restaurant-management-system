@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MenuDao">
+    <resultMap id="menus" type="menu">
+        <result column="menu_id" property="menuId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_no" property="menuNo"/>
+        <result column="menu_weight" property="menuWeight"/>
+        <result column="menu_cost" property="menuCost"/>
+        <result column="menu_image" property="menuImage"/>
+        <result column="menu_store_max" property="menuStoreMax"/>
+        <result column="menu_store_min" property="menuStoreMin"/>
+        <result column="menu_shelf_life" property="menuShelfLife"/>
+        <result column="menu_create_date" property="menuCreateDate"/>
+        <result column="menu_release_date" property="menuReleaseDate"/>
+        <result column="status" property="status"/>
+        <result column="menu_remarks" property="menuRemarks"/>
+        <association column="menu_state_id" property="menuState"
+                     select="team.ruike.cim.dao.MenuStateDao.selectById"/>
+        <association property="menuType" column="menu_type_id"
+                     select="team.ruike.cim.dao.MenuTypeDao.selectById"/>
+        <collection property="menuMaterielList" column="menu_id" select="team.ruike.cim.dao.MenuMaterielDao.selectByMenuId"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM menu WHERE status=0
+        <if test="menu.menuId!=null and menu.menuId>0">
+            AND  menu_id=#{menu.menuId}
+        </if>
+        <if test="menu.menuName!=null and menu.menuName!=''">
+            AND  menu_name LIKE CONCAT('%',#{menu.menuName},'%')
+        </if>
+        <if test="menu.menuNo!=null and menu.menuNo!=''">
+            AND menu_no=#{menu.menuNo}
+        </if>
+        <if test="menu.menuWeight!=null and menu.menuWeight>0">
+            AND menu_weight=#{menu.menuWeight}
+        </if>
+        <if test="menu.menuCost!=null and menu.menuCost!=''">
+            AND menu_cost=#{menu.menuCost}
+        </if>
+        <if test="menu.menuImage!=null and menu.menuImage!=''">
+            AND menu_image=#{menu.menuImage}
+        </if>
+        <if test="menu.menuStoreMax!=null and menu.menuStoreMax>0">
+            AND menu_store_max=#{menu.menuStoreMax}
+        </if>
+        <if test="menu.menuStoreMin!=null and menu.menuStoreMin>0">
+            AND menu_store_min=#{menu.menuStoreMin}
+        </if>
+        <if test="menu.menuShelfLife!=null and menu.menuShelfLife>0">
+            AND menu_shelf_life=#{menu.menuShelfLife}
+        </if>
+        <if test="menu.menuCreateDate!=null">
+            AND menu_create_date=#{menu.menuCreateDate}
+        </if>
+        <if test="menu.menuReleaseDate!=null">
+            AND menu_release_date=#{menu.menuReleaseDate}
+        </if>
+        <if test="menu.menuRemarks!=null and menu.menuRemarks!=''">
+            AND menu_remarks=#{menu.menuRemarks}
+        </if>
+        <if test="menu.menuState!=null and menu.menuState.menuStateId!=null and menu.menuState.menuStateId>0">
+            AND menu_state_id=#{menu.menuState.menuStateId}
+        </if>
+        <if test="menu.menuType!=null and menu.menuType.menuTypeId!=null and menu.menuType.menuTypeId>0">
+            AND  menu_type_id=#{menu.menuType.menuTypeId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="menu"  useGeneratedKeys="true" keyProperty="menuId">
+        INSERT  INTO menu VALUES (DEFAULT ,#{menuName},#{menuNo},#{menuType.menuTypeId},#{menuWeight},#{menuCost},#{menuImage},#{menuStoreMax},#{menuStoreMin},#{menuShelfLife},now(),#{menuState.menuStateId},#{menuReleaseDate},0,#{menuRemarks})
+    </insert>
+    <update id="update" parameterType="menu">
+        UPDATE menu SET menu_name=#{menuName},menu_weight=#{menuWeight},menu_cost=#{menuCost},
+        menu_image=#{menuImage},menu_store_max=#{menuStoreMax},menu_store_min=#{menuStoreMin},menu_shelf_life=#{menuShelfLife},menu_release_date=#{menuReleaseDate},menu_state_id=#{menuState.menuStateId},
+        menu_type_id=#{menuType.menuTypeId}
+        WHERE  menu_id=#{menuId}
+    </update>
+
+    <update id="deleteById">
+        UPDATE menu SET status=1
+        WHERE  menu_id=#{menuId}
+    </update>
+
+    <select id="select" resultMap="menus">
+        SELECT * FROM (<include refid="sql"/> ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectByMenuTypeId" resultMap="menus">
+        SELECT * FROM menu WHERE status=0 and menu_type_id=#{menuTypeId}
+    </select>
+
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(1) FROM menu WHERE   status=0
+        <if test="menu.menuId!=null and menu.menuId>0">
+            AND  menu_id=#{menu.menuId}
+        </if>
+        <if test="menu.menuName!=null and menu.menuName!=''">
+            AND  menu_name LIKE CONCAT('%',#{menu.menuName},'%')
+        </if>
+        <if test="menu.menuNo!=null and menu.menuNo!=''">
+            AND menu_no=#{menu.menuNo}
+        </if>
+        <if test="menu.menuWeight!=null and menu.menuWeight>0">
+            AND menu_weight=#{menu.menuWeight}
+        </if>
+        <if test="menu.menuCost!=null and menu.menuCost!=''">
+            AND menu_cost=#{menu.menuCost}
+        </if>
+        <if test="menu.menuImage!=null and menu.menuImage!=''">
+            AND menu_image=#{menu.menuImage}
+        </if>
+        <if test="menu.menuStoreMax!=null and menu.menuStoreMax>0">
+            AND menu_store_max=#{menu.menuStoreMax}
+        </if>
+        <if test="menu.menuStoreMin!=null and menu.menuStoreMin>0">
+            AND menu_store_min=#{menu.menuStoreMin}
+        </if>
+        <if test="menu.menuShelfLife!=null and menu.menuShelfLife>0">
+            AND menu_shelf_life=#{menu.menuShelfLife}
+        </if>
+        <if test="menu.menuCreateDate!=null">
+            AND menu_create_date=#{menu.menuCreateDate}
+        </if>
+        <if test="menu.menuReleaseDate!=null">
+            AND menu_release_date=#{menu.menuReleaseDate}
+        </if>
+        <if test="menu.menuRemarks!=null and menu.menuRemarks!=''">
+            AND menu_remarks=#{menu.menuRemarks}
+        </if>
+        <if test="menu.menuState!=null and menu.menuState.menuStateId!=null and menu.menuState.menuStateId>0">
+            AND menu_state_id=#{menu.menuState.menuStateId}
+        </if>
+        <if test="menu.menuType!=null and menu.menuType.menuTypeId!=null and menu.menuType.menuTypeId>0">
+            AND  menu_type_id=#{menu.menuType.menuTypeId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="menus">
+        SELECT * FROM  menu WHERE   status=0 AND  menu_id=#{menuId}
+    </select>
+
+</mapper>

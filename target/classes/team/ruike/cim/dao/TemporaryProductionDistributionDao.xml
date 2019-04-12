@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TemporaryProductionDistributionDao">
+    <resultMap id="temporaryProductionDistributionMap" type="temporaryProductionDistribution">
+        <result column="temporary_production_distribution_id" property="temporaryProductionDistributionId"/>
+        <result column="people_number" property="peopleNumber"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <result column="next_working_number" property="nextWorkingNumber"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <association property="temporaryProductionPlanItem" column="temporary_production_plan_item_id" select="team.ruike.cim.dao.TemporaryProductionPlanItemDao.selectById"/>
+        <association property="working" column="working_id" select="team.ruike.cim.dao.WorkingDao.selectById"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <association property="productionLine" column="production_line_id" select="team.ruike.cim.dao.ProductionLineDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="temporaryProductionDistribution">
+          INSERT INTO temporary_production_distribution VALUES (DEFAULT ,#{temporaryProductionPlanItem.temporaryProductionPlanItemId},
+          #{working.workingId},#{user.userId},#{peopleNumber},#{productionLine.productionLineId},#{remarks}, 0,#{nextWorkingNumber},#{startDate},#{endDate})
+    </insert>
+    <update id="update" parameterType="temporaryProductionDistribution">
+            UPDATE temporary_production_distribution SET
+                    temporary_production_plan_item_id=#{temporaryProductionPlanItem.temporaryProductionPlanItemId},
+                    working_id=#{working.workingId},
+                    user_id=#{user.userId},
+                    people_number=#{peopleNumber},
+                    production_line_id=#{productionLine.productionLineId},
+                    remarks=#{remarks},
+                    status=#{status},
+                    next_working_number=#{nextWorkingNumber},
+                    start_date=#{startDate},
+                    end_date=#{endDate}
+                    WHERE temporary_production_distribution_id=#{temporaryProductionDistributionId}
+    </update>
+    <sql id="sql">
+        SELECT *  FROM temporary_production_distribution WHERE status=0
+        <if test="temporaryProductionDistribution.temporaryProductionDistributionId!=null and temporaryProductionDistribution.temporaryProductionDistributionId>0">
+            AND temporary_production_distribution_id=#{temporaryProductionDistribution.temporaryProductionDistributionId}
+        </if>
+        <if test="temporaryProductionDistribution.temporaryProductionPlanItem!=null and temporaryProductionDistribution.temporaryProductionPlanItem.temporaryProductionPlanItemId>0">
+            AND temporary_production_plan_item_id=#{temporaryProductionDistribution.temporaryProductionPlanItem.temporaryProductionPlanItemId}
+        </if>
+        <if test="temporaryProductionDistribution.working!=null and temporaryProductionDistribution.working.workingId>0">
+            AND working_id=#{temporaryProductionDistribution.working.workingId}
+        </if>
+        <if test="temporaryProductionDistribution.user!=null and temporaryProductionDistribution.user.userId!=null and temporaryProductionDistribution.user.userId>0">
+            AND user_id=#{temporaryProductionDistribution.user.userId}
+        </if>
+        <if test="temporaryProductionDistribution.peopleNumber!=null and temporaryProductionDistribution.peopleNumber>0">
+            AND people_number=#{temporaryProductionDistribution.peopleNumber}
+        </if>
+        <if test="temporaryProductionDistribution.productionLine!=null and temporaryProductionDistribution.productionLine.productionLineId>0">
+            AND production_line_id=#{temporaryProductionDistribution.productionLine.productionLineId}
+        </if>
+        <if test="temporaryProductionDistribution.remarks!=null and temporaryProductionDistribution.remarks!=''">
+            AND remarks=#{temporaryProductionDistribution.remarks}
+        </if>
+        <if test="temporaryProductionDistribution.nextWorkingNumber!=null and temporaryProductionDistribution.nextWorkingNumber>0">
+            AND next_working_number=#{temporaryProductionDistribution.nextWorkingNumber}
+        </if>
+        <if test="temporaryProductionDistribution.startDate!=null">
+            AND start_date=#{temporaryProductionDistribution.startDate}
+        </if>
+        <if test="temporaryProductionDistribution.endDate!=null">
+            AND end_date=#{temporaryProductionDistribution.endDate}
+        </if>
+    </sql>
+    <select id="select" resultMap="temporaryProductionDistributionMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="temporaryProductionDistribution">
+    SELECT COUNT(1) FROM temporary_production_distribution WHERE status=0
+        <if test="temporaryProductionDistributionId!=null and temporaryProductionDistributionId>0">
+            AND temporary_production_distribution_id=#{temporaryProductionDistributionId}
+        </if>
+        <if test="temporaryProductionPlanItem!=null and temporaryProductionPlanItem.temporaryProductionPlanItemId>0">
+            AND temporary_production_plan_item_id=#{temporaryProductionPlanItem.temporaryProductionPlanItemId}
+        </if>
+        <if test="working!=null and working.workingId>0">
+            AND working_id=#{working.workingId}
+        </if>
+        <if test="user!=null and user.userId!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+        <if test="peopleNumber!=null and peopleNumber>0">
+            AND people_number=#{peopleNumber}
+        </if>
+        <if test="productionLine!=null and productionLine.productionLineId>0">
+            AND production_line_id=#{productionLine.productionLineId}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+        <if test="nextWorkingNumber!=null and nextWorkingNumber>0">
+            AND next_working_number=#{nextWorkingNumber}
+        </if>
+        <if test="startDate!=null">
+            AND start_date=#{startDate}
+        </if>
+        <if test="endDate!=null">
+            AND end_date=#{endDate}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="temporaryProductionDistributionMap">
+        SELECT * FROM temporary_production_distribution WHERE status=0
+            <if test="temporaryProductionDistributionId!=null and temporaryProductionDistributionId>0">
+                AND temporary_production_distribution_id=#{temporaryProductionDistributionId}
+            </if>
+    </select>
+</mapper>

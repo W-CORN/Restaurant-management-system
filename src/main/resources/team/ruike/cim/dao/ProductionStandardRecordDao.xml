@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductionStandardRecordDao">
+    <resultMap id="productionStandardRecordMap" type="productionStandardRecord">
+        <result column="production_standard_record_id" property="productionStandardRecordId"/>
+        <result column="standard_a_score" property="standardAScore"/>
+        <result column="standard_b_score" property="standardBScore"/>
+        <result column="standard_c_score" property="standardCScore"/>
+        <result column="conclusion" property="conclusion"/>
+        <result column="status" property="status"/>
+        <association column="production_standard_id" property="productionStandard" select="team.ruike.cim.dao.ProductionStandardDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM production_standard_record WHERE `status`=0
+        <if test="productionStandardRecord.productionStandardRecordId!=nill and productionStandardRecord.productionStandardRecordId>0">
+            AND production_standard_record_id=#{productionStandardRecord.productionStandardRecordId}
+        </if>
+        <if test="productionStandardRecord.productionStandard!=null and productionStandardRecord.productionStandard.productionStandardId!=nill and productionStandardRecord.productionStandard.productionStandardId>0">
+            AND production_standard_id=#{productionStandardRecord.productionStandard.productionStandardId}
+        </if>
+        <if test="productionStandardRecord.standardAScore!=null and productionStandardRecord.standardAScore>0">
+            AND standard_a_score=#{productionStandardRecord.standardAScore}
+        </if>
+        <if test="productionStandardRecord.standardBScore!=null and productionStandardRecord.standardBScore>0">
+            AND standard_b_score=#{productionStandardRecord.standardBScore}
+        </if>
+        <if test="productionStandardRecord.standardCScore!=null and productionStandardRecord.standardCScore>0">
+            AND standard_c_score=#{productionStandardRecord.standardCScore}
+        </if>
+        <if test="productionStandardRecord.conclusion!=null and productionStandardRecord.conclusion!=''">
+            AND conclusion=#{productionStandardRecord.conclusion}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM production_standard_record WHERE `status`=0
+        <if test="productionStandardRecordId!=nill and productionStandardRecordId>0">
+            AND production_standard_record_id=#{productionStandardRecordId}
+        </if>
+        <if test="productionStandard!=null and productionStandard.productionStandardId!=nill and productionStandard.productionStandardId>0">
+            AND production_standard_id=#{productionStandard.productionStandardId}
+        </if>
+        <if test="standardAScore!=null and standardAScore>0">
+            AND standard_a_score=#{standardAScore}
+        </if>
+        <if test="standardBScore!=null and standardBScore>0">
+            AND standard_b_score=#{standardBScore}
+        </if>
+        <if test="standardCScore!=null and standardCScore>0">
+            AND standard_c_score=#{standardCScore}
+        </if>
+        <if test="conclusion!=null and conclusion!=''">
+            AND conclusion=#{conclusion}
+        </if>
+    </sql>
+    <insert id="add" parameterType="productionStandardRecord">
+            INSERT into production_standard_record VALUES(DEFAULT,
+            #{productionStandard.productionStandardId},
+            #{standardAScore},
+            #{standardBScore},
+            #{standardCScore},
+            #{conclusion},
+            0);
+    </insert>
+    <update id="update" parameterType="productionStandardRecord">
+        UPDATE production_standard_record set production_standard_id=#{productionStandard.productionStandardId},
+        standard_a_score=#{standardAScore},
+        standard_b_score=#{standardBScore},
+        standard_c_score=#{standardCScore},
+        conclusion=#{conclusion},
+        `status`=#{status}
+         WHERE production_standard_record_id=#{productionStandardRecordId}
+    </update>
+    <select id="select" resultMap="productionStandardRecordMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productionStandardRecord">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productionStandardRecordMap">
+        SELECT * from production_standard_record WHERE `status`=0 and  production_standard_record_id=#{productionStandardRecordId}
+    </select>
+</mapper>

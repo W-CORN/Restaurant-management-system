@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TemporaryOrderTermDao">
+
+    <resultMap id="temporaryOrderTermMap" type="temporaryOrderTerm">
+        <result column="temporary_order_term_id" property="temporaryOrderTermId"/>
+        <result column="menu_number" property="menuNumber"/>
+        <result column="complete_number" property="completeNumber"/>
+        <result column="temporary_order_term_state" property="temporaryOrderTermState"/>
+        <result column="product_batch" property="productBatch"/>
+        <result column="status" property="status"/>
+        <association property="menu" column="menu_id" select="team.ruike.cim.dao.MenuDao.selectById"/>
+        <association property="temporaryOrder" column="temporary_order_id" select="team.ruike.cim.dao.TemporaryOrderDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="temporaryOrderTerm">
+        INSERT INTO  temporary_order_term VALUES (DEFAULT ,#{menu.menuId},#{menuNumber},0,0,#{productBatch},#{temporaryOrder.temporaryOrderId},0)
+    </insert>
+    <update id="update" parameterType="temporaryOrderTerm">
+        UPDATE temporary_order_term SET
+            menu_id=#{menu.menuId},
+            menu_number=#{menuNumber},
+            complete_number=#{completeNumber},
+            temporary_order_term_state=#{temporaryOrderTermState},
+            product_batch=#{productBatch},
+            temporary_order_id=#{temporaryOrder.temporaryOrderId},
+            status=#{status}
+    </update>
+    <sql id="sql">
+        SELECT * FROM temporary_order_term WHERE status=0
+        <if test="temporaryOrderTerm.temporaryOrderTermId!=null and temporaryOrderTerm.temporaryOrderTermId>0">
+            AND temporary_order_term_id=#{temporaryOrderTerm.temporaryOrderTermId}
+        </if>
+        <if test="temporaryOrderTerm.menu!=null and temporaryOrderTerm.menu.menuId>0">
+            AND menu_id=#{temporaryOrderTerm.menu.menuId}
+        </if>
+        <if test="menuNumber!=null and temporaryOrderTerm.menuNumber>0">
+            AND menu_number=#{temporaryOrderTerm.menuNumber}
+        </if>
+        <if test="temporaryOrderTerm.completeNumber!=null and temporaryOrderTerm.completeNumber>0">
+            AND complete_number=#{temporaryOrderTerm.completeNumber}
+        </if>
+        <if test="temporaryOrderTerm.temporaryOrderTermState!=null and temporaryOrderTerm.temporaryOrderTermState>0">
+            AND temporary_order_term_state=#{temporaryOrderTerm.temporaryOrderTermState}
+        </if>
+        <if test="temporaryOrderTerm.productBatch!=null and temporaryOrderTerm.productBatch!=''">
+            AND product_batch=#{temporaryOrderTerm.productBatch}
+        </if>
+        <if test="temporaryOrderTerm.temporaryOrder!=null and temporaryOrderTerm.temporaryOrder.temporaryOrderId>0">
+            AND temporary_order_id=#{temporaryOrderTerm.temporaryOrder}
+        </if>
+    </sql>
+    <select id="select" resultMap="temporaryOrderTermMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="temporaryOrderTerm">
+        SELECT COUNT (1)FROM temporary_order_term WHERE status=0
+        <if test="temporaryOrderTermId!=null and temporaryOrderTermId>0">
+            AND temporary_order_term_id=#{temporaryOrderTermId}
+        </if>
+        <if test="menu!=null and menu.menuId>0">
+            AND menu_id=#{menu.menuId}
+        </if>
+        <if test="menuNumber!=null and menuNumber>0">
+            AND menu_number=#{menuNumber}
+        </if>
+        <if test="completeNumber!=null and completeNumber>0">
+            AND complete_number=#{completeNumber}
+        </if>
+        <if test="temporaryOrderTermState!=null and temporaryOrderTermState>0">
+            AND temporary_order_term_state=#{temporaryOrderTermState}
+        </if>
+        <if test="productBatch!=null and productBatch!=''">
+            AND product_batch=#{productBatch}
+        </if>
+        <if test="temporaryOrder!=null and temporaryOrder.temporaryOrderId>0">
+            AND temporary_order_id
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="temporaryOrderTermMap">
+        SELECT * FROM temporary_order_term WHERE status=0
+        <if test="temporaryOrderTermId!=null and temporaryOrderTermId>0">
+            temporary_order_term_id=#{temporaryOrderTermId}
+        </if>
+    </select>
+
+    <select id="selectByTemporaryOrderId" parameterType="int" resultMap="temporaryOrderTermMap">
+        SELECT * FROM temporary_order_term WHERE status=0  AND temporary_order_id=#{temporaryOrderId}
+    </select>
+</mapper>

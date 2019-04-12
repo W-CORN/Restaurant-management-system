@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MenuMaterielDao">
+    <resultMap id="menuMaterielMap" type="menuMateriel">
+        <result column="menu_materiel_id" property="menuMaterielId"/>
+        <result column="menu_id" property="menuId"/>
+        <result column="menu_materiel_type" property="menuMaterielType"/>
+        <result column="status" property="status"/>
+        <association column="materiel_id" property="materiel" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+        <collection property="menuFlow" column="menu_materiel_id" select="team.ruike.cim.dao.MenuFlowDao.selectBYMenuMaterielId"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM menu_materiel WHERE `status`=0
+        <if test="menuMateriel.menuMaterielId!=null and menuMateriel.menuMaterielId>0">
+            AND menu_materiel_id=#{menuMateriel.menuMaterielId}
+        </if>
+        <if test="menuMateriel.menuId!=null and menuMateriel.menuId>0">
+            AND menu_id=#{menuMateriel.menuId}
+        </if>
+        <if test="menuMateriel.menuMaterielType!=null and menuMateriel.menuMaterielType>0">
+            AND menu_materiel_type=#{menuMateriel.menuMaterielType}
+        </if>
+        <if test="menuMateriel.materiel!=null and menuMateriel.materiel.materielId!=null and menuMateriel.materiel.materielId>0">
+            AND materiel_id=#{menuMateriel.materiel.materielId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM menu_materiel WHERE `status`=0
+        <if test="menuMaterielId!=null and menuMaterielId>0">
+            AND menu_materiel_id=#{menuMaterielId}
+        </if>
+        <if test="menuId!=null and menuId>0">
+            AND menu_id=#{menuId}
+        </if>
+        <if test="menuMaterielType!=null and menuMaterielType>0">
+            AND menu_materiel_type=#{menuMaterielType}
+        </if>
+        <if test="materiel!=null and materiel.materielId!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="menuMateriel" useGeneratedKeys="true" keyProperty="menuMaterielId">
+        INSERT into menu_materiel VALUES(DEFAULT,
+        #{menuId},
+        #{materiel.materielId},
+        #{menuMaterielType},
+        0);
+    </insert>
+    <update id="update" parameterType="menuMateriel">
+        UPDATE menu_materiel set menu_id=#{menuId},
+        materiel_id=#{materiel.materielId},
+        menu_materiel_type=#{menuMaterielType},
+        status=#{status}
+        WHERE  menu_materiel_id=#{menuMaterielId}
+    </update>
+
+    <update id="deleteById">
+        UPDATE menu_materiel set status=1
+        WHERE  menu_materiel_id=#{menuMaterielId}
+    </update>
+    <select id="select" resultMap="menuMaterielMap">
+      SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="menuMateriel">
+      SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="menuMaterielMap">
+      SELECT * FROM menu_materiel WHERE `status`=0 and  menu_materiel_id=#{menuMaterielId}
+    </select>
+    <select id="selectByMenuId" parameterType="int" resultMap="menuMaterielMap">
+        SELECT * FROM menu_materiel WHERE status=0
+        AND menu_id=#{menuId}
+    </select>
+</mapper>

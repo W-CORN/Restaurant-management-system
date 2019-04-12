@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TemporaryOrderDao">
+
+    <resultMap id="temporaryOrderMap" type="temporaryOrder">
+        <result column="temporary_order_id" property="temporaryOrderId"/>
+        <result column="temporary_order_no" property="temporaryOrderNo"/>
+        <result column="temporary_order_end_date" property="temporaryOrderEndDate"/>
+        <result column="temporary_order_start_date" property="temporaryOrderStartDate"/>
+        <result column="temporary_order_remarks" property="temporaryOrderRemarks"/>
+        <result column="store_id" property="storeId"/>
+        <result column="status" property="status"/>
+        <association property="temporaryOrderState"  column="temporary_order_state_id"  select="team.ruike.cim.dao.TemporaryOrderStateDao.selectById"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <association property="store" column="store_id" select="team.ruike.cim.dao.StoreDao.selectById"/>
+        <collection property="temporaryOrderTerms" column="temporary_order_id" select="team.ruike.cim.dao.TemporaryOrderTermDao.selectByTemporaryOrderId"/>
+
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="temporaryOrderId" parameterType="temporaryOrder">
+        INSERT  INTO temporary_order VALUES (DEFAULT ,#{temporaryOrderNo},#{temporaryOrderEndDate},#{temporaryOrderState.temporaryOrderStateId},now(),#{temporaryOrderRemarks},#{storeId},#{user.userId},0)
+    </insert>
+    <update id="update" parameterType="temporaryOrder">
+        UPDATE temporary_order SET
+            temporary_order_id=#{temporaryOrderId},
+            temporary_order_end_date=#{temporaryOrderEndDate},
+            temporary_order_state_id=#{temporaryOrderState.temporaryOrderStateId},
+            temporary_order_remarks=#{temporaryOrderRemarks},
+            store_id=#{storeId},
+            user_id=#{user.userId},
+            status=#{status}
+    </update>
+    <sql id="sql">
+        SELECT * FROM temporary_order WHERE status=0
+        <if test="temporaryOrder.temporaryOrderId!=null and temporaryOrder.temporaryOrderId>0">
+            AND temporary_order_id=#{temporaryOrder.temporaryOrderId}
+        </if>
+        <if test="temporaryOrder.temporaryOrderNo!=null and temporaryOrder.temporaryOrderNo!=''">
+            AND temporary_order_no =#{temporaryOrder.temporaryOrderNo}
+        </if>
+        <if test="temporaryOrder.temporaryOrderEndDate!=null">
+            AND temporary_order_end_date =#{temporaryOrder.temporaryOrderEndDate}
+        </if>
+
+        <if test="temporaryOrder.temporaryOrderState!=null and temporaryOrder.temporaryOrderState.temporaryOrderStateId !=null and temporaryOrder.temporaryOrderState.temporaryOrderStateId >0">
+            AND  temporary_order_state_id=#{temporaryOrder.temporaryOrderState.temporaryOrderStateId}
+        </if>
+
+        <if test="temporaryOrder.temporaryOrderStartDate!=null">
+            AND  temporary_order_start_date >= #{temporaryOrder.temporaryOrderStartDate} and  temporary_order_start_date &lt; date_sub(#{temporaryOrder.temporaryOrderStartDate},interval -1 day)
+        </if>
+        <if test="temporaryOrder.temporaryOrderRemarks!=null and temporaryOrder.temporaryOrderRemarks!=''">
+            AND temporary_order_remarks =#{temporaryOrder.temporaryOrderRemarks}
+        </if>
+        <if test="temporaryOrder.storeId!=null and temporaryOrder.storeId>0">
+            AND store_id =#{temporaryOrder.storeId}
+        </if>
+        <if test="temporaryOrder.user!=null and temporaryOrder.user.userId>0">
+            AND  user_id =#{temporaryOrder.user.userId}
+        </if>
+        <if test="temporaryOrder.store!=null and temporaryOrder.store.storeName!='' ">
+            and store_id in (SELECT store_id FROM store WHERE store_name LIKE CONCAT('%',#{temporaryOrder.store.storeName},'%'))
+        </if>
+    </sql>
+
+    <select id="select" resultMap="temporaryOrderMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+
+
+    <select id="selectCount" resultType="int" parameterType="temporaryOrder">
+         SELECT count(1) FROM temporary_order where status=0
+         <if test="temporaryOrderId!=null and temporaryOrderId>0">
+            AND temporary_order_id=#{temporaryOrderId}
+        </if>
+        <if test="temporaryOrderNo!=null and temporaryOrderNo!=''">
+            AND temporary_order_no =#{temporaryOrderNo}
+        </if>
+        <if test="temporaryOrderEndDate!=null">
+
+        </if>
+        <if test="temporaryOrderState!=null and temporaryOrderState.temporaryOrderStateId!=null and temporaryOrderState.temporaryOrderStateId>0">
+            AND  temporary_order_state_id=#{temporaryOrderState.temporaryOrderStateId}
+        </if>
+        <if test="temporaryOrderStartDate!=null">
+            AND  temporary_order_start_date >= #{temporaryOrderStartDate} and  temporary_order_start_date &lt; date_sub(#{temporaryOrderStartDate},interval -1 day)
+        </if>
+        <if test="temporaryOrderRemarks!=null and temporaryOrderRemarks!=''">
+            AND temporary_order_remarks =#{temporaryOrderRemarks}
+        </if>
+        <if test="storeId!=null and storeId>0">
+            AND store_id =#{storeId}
+        </if>
+        <if test="user!=null and user.userId>0">
+            AND  user_id =#{user.userId}
+        </if>
+        <if test="store!=null and store.storeName!='' ">
+            and store_id in (SELECT store_id FROM store WHERE store_name LIKE CONCAT('%',#{store.storeName},'%'))
+        </if>
+    </select>
+
+
+    <select id="selectById" parameterType="int" resultMap="temporaryOrderMap">
+        SELECT * FROM temporary_order where status=0
+            AND temporary_order_id=#{temporaryOrderId}
+    </select>
+
+</mapper>

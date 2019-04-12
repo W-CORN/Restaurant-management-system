@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.WarehouseOutRegisterDao">
+    <resultMap id="warehouseOutRegisters" type="warehouseOutRegister">
+        <result property="warehouseOutRegisterId" column="warehouse_out_register_id"/>
+        <result property="warehouseOutRegisterEndDate" column="warehouse_out_register_end_date"/>
+        <result property="status" column="status"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="warehouseOutRegisterItemList" column="warehouse_out_register_id" select="team.ruike.cim.dao.WarehouseOutRegisterItemDao.selectBywarehouseOutRegisterId"/>
+    </resultMap>
+    <sql id="sql">
+        select * from warehouse_out_register WHERE status=0
+        <if test="warehouseOutRegister.warehouseOutRegister.warehouseOutRegisterId!=null and warehouseOutRegister.warehouseOutRegister.warehouseOutRegisterId>0">
+           AND warehouse_out_register_id=#{warehouseOutRegister.warehouseOutRegisterId}
+        </if>
+        <if test="warehouseOutRegister.warehouseOutRegisterEndDate!=null">
+            AND  warehouse_out_register_end_date=#{warehouseOutRegister.warehouseOutRegisterEndDate}
+        </if>
+        <if test="warehouseOutRegister.user!=null and warehouseOutRegister.user.userId>0">
+            AND  user_id=#{warehouseOutRegister.user.userId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="warehouseOutRegister" useGeneratedKeys="true" keyProperty="warehouseOutRegisterId">
+      INSERT  INTO  warehouse_out_register VALUES(DEFAULT ,#{warehouseOutRegisterEndDate},#{user.userId},0)
+    </insert>
+    <update id="update" parameterType="warehouseOutRegister">
+        UPDATE warehouse_out_register SET  warehouse_out_register_end_date=#{warehouseOutRegisterEndDate},
+        status=#{status},user_id=#{user.userId} WHERE warehouse_out_register_id=#{warehouseOutRegisterId}
+    </update>
+    <select id="select" resultMap="warehouseOutRegisters">
+        SELECT * from (<include refid="sql"/> ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="warehouseOutRegister">
+        select count(1) from  warehouse_out_register WHERE status=0
+        <if test="warehouseOutRegisterId!=null and warehouseOutRegisterId>0">
+            AND  warehouse_out_register_id=#{warehouseOutRegisterId}
+        </if>
+        <if test="warehouseOutRegisterEndDate!=null">
+            AND  warehouse_out_register_end_date=#{warehouseOutRegisterEndDate}
+        </if>
+        <if test="user!=null and user.userId>0">
+            AND  user_id=#{user.userId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="warehouseOutRegisters">
+        select * from  warehouse_out_register WHERE status=0
+            AND  warehouse_out_register_id=#{warehouseOutRegisterId}
+    </select>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ContractProgressDao">
+
+
+
+    <sql id="modelCondition">
+        <if test="contractProgressId!=null and contractProgressId>0">
+            and contract_progress_id=#{contractProgressId}
+        </if>
+        <if test="contractProductionDistribution!=null and contractProductionDistribution.contractProductionDistributionId!=null and contractProductionDistribution.contractProductionDistributionId>0">
+            and contract_production_distribution_id=#{contractProductionDistribution.contractProductionDistributionId}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            and remarks=#{remarks}
+        </if>
+        <if test="startDate!=null">
+            and start_date=#{startDate}
+        </if>
+        <if test="endDate!=null">
+            and end_date=#{endDate}
+        </if>
+    </sql>
+
+
+    <sql id="modelConditionP">
+        <if test="contractProgress.contractProgressId!=null and contractProgress.contractProgressId>0">
+            and contract_progress_id like CONCAT('%',#{contractProgress.contractProgressId},'%')
+        </if>
+        <if test="contractProgress.contractProductionDistribution!=null and contractProgress.contractProductionDistribution.contractProductionDistributionId !=null and contractProgress.contractProductionDistribution.contractProductionDistributionId>0">
+            and contract_production_distribution_id=#{contractProgress.contractProductionDistributionId}
+        </if>
+        <if test="contractProgress.remarks!=null and contractProgress.remarks!=''">
+            and remarks=#{contractProgress.remarks}
+        </if>
+        <if test="contractProgress.startDate!=null">
+            and start_date=#{contractProgress.startDate}
+        </if>
+        <if test="contractProgress.endDate!=null">
+            and end_date=#{contractProgress.endDate}
+        </if>
+    </sql>
+
+
+
+    <resultMap id="selectMap" type="ContractProgress">
+        <result property="contractProgressId" column="contract_progress_id"/>
+        <result property="remarks" column="remarks"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="status" column="status"/>
+        <association property="contractProductionDistribution" column="contract_production_distribution_id" select="team.ruike.cim.dao.ContractProductionDistributionDao.selectById"/>
+    </resultMap>
+    
+
+    <select id="select" resultMap="selectMap">
+        select * from contract_progress
+        where status=0
+        <include refid="modelConditionP"/>
+    </select>
+
+
+
+
+    <select id="selectCount" resultType="int" parameterType="contractProgress">
+        select count(1) from contract_progress
+        where status=0
+        <include refid="modelCondition"/>
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="selectMap">
+        select * from contract_progress
+        where status=0 and contract_progress_id=#{contractProgressId}
+    </select>
+
+
+
+    <insert id="add" parameterType="contractProgress">
+        insert into contract_progress
+        values(
+        <trim suffixOverrides=",">
+            default,
+            #{contractProductionDistributionId},
+            #{remarks},
+            #{startDate},
+            #{endDate},
+            #{status},
+        </trim>
+        )
+    </insert>
+
+    <update id="update" parameterType="contractProgress">
+        update contract_progress
+        <set>
+            contract_progress_id=#{contractProgressId},
+            contract_production_distribution_id=#{contractProductionDistribution.contractProductionDistributionId},
+            remarks=#{remarks},
+            start_date=#{startDate},
+            end_date=#{endDate},
+            status=#{status},
+        </set>
+        where status=0 and contract_progress_id=#{contractProgressId}
+    </update>
+
+
+</mapper>

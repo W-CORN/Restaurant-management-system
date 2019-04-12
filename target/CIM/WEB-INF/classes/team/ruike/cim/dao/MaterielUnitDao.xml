@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MaterielUnitDao">
+    <resultMap id="materielUnits" type="materielUnit">
+        <result column="materiel_unit_id" property="materielUnitId"/>
+        <result column="materiel_unit_name" property="materielUnitName"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM materiel_unit WHERE status=0
+        <if test="materielUnit.materielUnitId!=null and materielUnit.materielUnitId>0">
+            AND materiel_unit_id=#{materielUnit.materiel_unit_id}
+        </if>
+        <if test="materielUnit.materielUnitName!=null and materielUnit.materielUnitName!=''">
+            AND materiel_unit_name LIKE CONCAT('%',#{materielUnit.materiel_unit_name},'%')
+        </if>
+    </sql>
+    <insert id="add" parameterType="materielUnit">
+      INSERT  INTO materiel_unit VALUES (DEFAULT ,#{materielUnitName},0)
+    </insert>
+    <update id="update" parameterType="materielUnit">
+      UPDATE materiel_unit SET materiel_unit_name=#{materielUnitName},status=#{status}
+      WHERE materiel_unit_id=#{materielUnitId}
+    </update>
+    <select id="select" resultMap="materielUnits">
+        SELECT * FROM (<include refid="sql"/> ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="materielUnit">
+        SELECT COUNT(1) FROM materiel_unit WHERE status=0
+        <if test="materielUnitId!=null and materielUnitId>0">
+            AND materiel_unit_id=#{materielUnitId}
+        </if>
+        <if test="materielUnitName!=null and materielUnitName!=''">
+            AND materiel_unit_name LIKE CONCAT('%',#{materielUnitName},'%')
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="materielUnits">
+        SELECT * from materiel_unit WHERE status=0 AND materiel_unit_id=#{materielUnitId}
+    </select>
+</mapper>

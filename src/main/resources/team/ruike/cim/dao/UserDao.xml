@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.UserDao">
+    <resultMap id="users" type="user">
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="status" property="status"/>
+        <collection property="roles" column="user_id" select="team.ruike.cim.dao.RoleDao.selectByUserId"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM `user` WHERE status=0
+        <if test="user.userId!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+        <if test="user.userName!=null and user.userName!=''">
+            AND user_name LIKE CONCAT('%',#{user.userName},'%')
+        </if>
+        <if test="user.password!=null and user.password>0">
+            AND password=#{user.password}
+        </if>
+        <if test="user.userPhone!=null and user.userPhone>0">
+            and user_phone=#{user.userPhone}
+        </if>
+    </sql>
+    <insert id="add" parameterType="user">
+        INSERT  INTO `user` VALUES (DEFAULT ,#{userName},#{password},#{userPhone},0)
+    </insert>
+    <update id="update" parameterType="user">
+        UPDATE  `user` SET  user_name=#{userName},password=#{password},user_phone=#{userPhone},
+        status=#{status} WHERE user_id=#{userId}
+    </update>
+    <select id="select" resultMap="users">
+        SELECT * FROM (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="user">
+        SELECT count(1) FROM `user` WHERE status=0
+        <if test="userId!=null and userId>0">
+            AND user_id=#{userId}
+        </if>
+        <if test="userName!=null and userName!=''">
+            AND user_name LIKE CONCAT('%',#{userName},'%')
+        </if>
+        <if test="password!=null and password>0">
+            AND password=#{password}
+        </if>
+        <if test="userPhone!=null and userPhone>0">
+            and user_phone=#{userPhone}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="users">
+        SELECT * FROM  `user` WHERE status=0
+          AND  user_id=#{userId}
+    </select>
+    <select id="selectByRoleId" parameterType="int" resultMap="users">
+        SELECT * FROM `user` WHERE status=0 AND user_id in (SELECT user_id FROM user_role WHERE status=0 AND role_id=#{roleId})
+    </select>
+</mapper>

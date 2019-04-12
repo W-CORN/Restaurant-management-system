@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TechnologyDao">
+    <resultMap id="technologyMap" type="technology">
+        <result column="technology_id" property="technologyId"/>
+        <result column="technology_name" property="technologyName"/>
+        <result column="status" property="status"/>
+        <association property="working" column="working_id" select="team.ruike.cim.dao.WorkingDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="technology">
+          INSERT INTO technology VALUES (DEFAULT ,#{technologyName},#{working.workingId},0)
+    </insert>
+    <update id="update" parameterType="technology">
+        UPDATE technology SET
+        technology_name=#{technologyName},
+        working_id=#{working.workingId},
+        status=#{status}
+        WHERE technology_id=#{technologyId}
+    </update>
+    <sql id="sql">
+        SELECT * FROM technology WHERE status=0
+        <if test="technology.technologyId!=null and technology.technologyId>0">
+            AND technology_id=#{technology.technologyId}
+        </if>
+        <if test="technology.technologyName!=null and technology.technologyName!=''">
+            AND technology_name LIKE  CONCAT('%',#{technology.technologyName},'%')
+        </if>
+        <if test="technology.working!=null and technology.working.workingId!=null and technology.working.workingId>0">
+            AND working_id=#{technology.working.workingId}
+        </if>
+    </sql>
+    <select id="select" resultMap="technologyMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="technology">
+        SELECT COUNT(1) FROM technology WHERE status=0
+        <if test="technologyId!=null and technologyId>0">
+            AND technology_id=#{technologyId}
+        </if>
+        <if test="technologyName!=null and technologyName!=''">
+            AND technology_name LIKE  CONCAT('%',#{technologyName},'%')
+        </if>
+        <if test="working!=null and working.workingId>0">
+            AND working_id=#{working.workingId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="technologyMap">
+        SELECT * FROM technology WHERE status=0
+            AND technology_id=#{technologyId}
+    </select>
+</mapper>

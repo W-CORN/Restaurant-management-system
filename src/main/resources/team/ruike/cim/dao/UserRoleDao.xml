@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.UserRoleDao">
+    <resultMap id="userRoles" type="userRole">
+        <result property="userRoleId" column="user_role_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM user_role WHERE status=0
+        <if test="userRole.userRoleId!=null and userRole.userRoleId>0">
+            AND user_role_id=#{userRole.userRoleId}
+        </if>
+        <if test="userRole.roleId!=null and userRole.roleId>0">
+            AND role_id=#{userRole.roleId}
+        </if>
+        <if test="userRole.userId!=null and userRole.userId>0">
+            AND user_id=#{userRole.userId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="userRole">
+        INSERT  INTO user_role VALUES (DEFAULT ,#{roleId},#{userId},0)
+    </insert>
+    <update id="update" parameterType="userRole">
+        UPDATE user_role SET  role_id=#{roleId},user_id=#{userId},status=#{status}
+        WHERE  user_role_id=#{userRoleId}
+    </update>
+    <select id="select" resultMap="userRoles">
+        SELECT * FROM (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="userRole">
+        SELECT COUNT(1) FROM user_role WHERE status=0
+        <if test="roleId!=null and roleId>0">
+            AND user_role_id=#{roleId}
+        </if>
+        <if test="roleId!=null and roleId>0">
+            AND role_id=#{roleId}
+        </if>
+        <if test="userId!=null and userId>0">
+            AND user_id=#{userId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="userRoles">
+        SELECT * FROM  user_role WHERE status=0 AND
+            user_role_id=#{roleId}
+    </select>
+</mapper>

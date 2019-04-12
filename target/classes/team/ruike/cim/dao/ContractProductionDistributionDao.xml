@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ContractProductionDistributionDao">
+    <resultMap id="contractProductionDistributionMap" type="contractProductionDistribution">
+        <result column="contract_production_distribution_id" property="contractProductionDistributionId"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="people_number" property="peopleNumber"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <result column="next_working_number" property="nextWorkingNumber"/>
+        <association column="production_line_id" property="productionLine" select="team.ruike.cim.dao.ProductionLineDao.selectById"/>
+        <association column="contract_production_plan_item_id" property="contractProductionPlanItem" select="team.ruike.cim.dao.ContractProductionPlanItemDao.selectById"/>
+        <association column="working_id" property="working" select="team.ruike.cim.dao.WorkingDao.selectById"/>
+        <association column="user_id" property="user" select="team.ruike.cim.dao.UserDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * from contract_production_distribution WHERE `status`=0
+        <if test="contractProductionDistribution.contractProductionDistributionId!=null and contractProductionDistribution.contractProductionDistributionId>0">
+            AND contract_production_distribution_id=#{contractProductionDistribution.contract_production_distribution_id}
+        </if>
+        <if test="contractProductionDistribution.contractProductionPlanItem!=null and contractProductionDistribution.contractProductionPlanItem.contractProductionPlanItemId!=null and contractProductionDistribution.contractProductionPlanItem.contractProductionPlanItemId>0">
+            AND contract_production_plan_item_id=#{contractProductionDistribution.contractProductionPlanItem.contractProductionPlanItemId}
+        </if>
+        <if test="contractProductionDistribution.working!=null and contractProductionDistribution.working.workingId!=null and contractProductionDistribution.working.workingId>0">
+            AND working_id=#{contractProductionDistribution.working.workingId}
+        </if>
+        <if test="contractProductionDistribution.user!=null and contractProductionDistribution.user.userId!=null and contractProductionDistribution.user.userId>0">
+            AND user_id=#{contractProductionDistribution.user.userId}
+        </if>
+        <if test="contractProductionDistribution.startDate!=null">
+            AND start_date=#{contractProductionDistribution.startDate}
+        </if>
+        <if test="contractProductionDistribution.endDate!=null">
+            AND end_date=#{contractProductionDistribution.endDate}
+        </if>
+        <if test="contractProductionDistribution.peopleNumber!=null and contractProductionDistribution.peopleNumber>0">
+            AND people_number=#{contractProductionDistribution.peopleNumber}
+        </if>
+        <if test="contractProductionDistribution.productionLine!=null and contractProductionDistribution.productionLine.productionLineId!=null and contractProductionDistribution.productionLine.productionLineId>0">
+            AND production_line_id=#{contractProductionDistribution.productionLine.productionLineId}
+        </if>
+        <if test="contractProductionDistribution.remarks!=null and contractProductionDistribution.remarks!=''">
+            AND remarks=#{contractProductionDistribution.remarks}
+        </if>
+        <if test="contractProductionDistribution.nextWorkingNumber!=null and contractProductionDistribution.nextWorkingNumber>0">
+            AND next_working_number=#{contractProductionDistribution.nextWorkingNumber}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * from contract_production_distribution WHERE `status`=0
+        <if test="contractProductionDistributionId!=null and contractProductionDistributionId>0">
+            AND contract_production_distribution_id=#{contract_production_distribution_id}
+        </if>
+        <if test="contractProductionPlanItem!=null and contractProductionPlanItem.contractProductionPlanItemId!=null and contractProductionPlanItem.contractProductionPlanItemId>0">
+            AND contract_production_plan_item_id=#{contractProductionPlanItem.contractProductionPlanItemId}
+        </if>
+        <if test="working!=null and working.workingId!=null and working.workingId>0">
+            AND working_id=#{working.workingId}
+        </if>
+        <if test="user!=null and user.userId!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+        <if test="startDate!=null">
+            AND start_date=#{startDate}
+        </if>
+        <if test="endDate!=null">
+            AND end_date=#{endDate}
+        </if>
+        <if test="peopleNumber!=null and peopleNumber>0">
+            AND people_number=#{peopleNumber}
+        </if>
+        <if test="productionLine!=null and productionLine.productionLineId!=null and productionLine.productionLineId>0">
+            AND production_line_id=#{productionLine.productionLineId}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+        <if test="nextWorkingNumber!=null and nextWorkingNumber>0">
+            AND next_working_number=#{nextWorkingNumber}
+        </if>
+    </sql>
+    <insert id="add" parameterType="contractProductionDistribution">
+        INSERT into contract_production_distribution VALUES(DEFAULT,
+        #{contractProductionPlanItem.contractProductionPlanItemId},
+        #{working.workingId},
+        #{user.userId},
+        #{startDate},
+        #{endDate},
+        #{peopleNumber},
+        #{productionLine.productionLineId},
+        #{remarks},
+        0,
+        #{nextWorkingNumber});
+    </insert>
+    <update id="update" parameterType="contractProductionDistribution">
+        UPDATE contract_production_distribution set contract_production_plan_item_id=#{contractProductionPlanItem.contractProductionPlanItemId},
+        working_id=#{working.workingId},
+        user_id=#{user.userId},
+        start_date=#{startDate},
+        end_date=#{endDate},
+        people_number=#{peopleNumber},
+        production_line_id=#{productionLine.productionLineId},
+        remarks=#{remarks},
+        status=#{status},
+        next_working_number=#{nextWorkingNumber}
+        WHERE  contract_production_distribution_id=#{contractProductionDistributionId}
+    </update>
+
+    <select id="select" resultMap="contractProductionDistributionMap">
+        SELECT * from (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="contractProductionDistribution">
+        SELECT COUNT(1) from (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="contractProductionDistributionMap">
+        SELECT * FROM contract_production_distribution WHERE `status`=0 and  contract_production_distribution_id=#{contractProductionDistributionId}
+    </select>
+
+</mapper>

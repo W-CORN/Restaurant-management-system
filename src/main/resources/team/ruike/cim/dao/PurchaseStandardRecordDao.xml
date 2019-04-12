@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.PurchaseStandardRecordDao">
+    <resultMap id="purchaseStandardRecordMap" type="purchaseStandardRecord">
+        <result column="purchase_standard_record_id" property="purchaseStandardRecordId"/>
+        <result column="standard_a_score" property="standardAScore"/>
+        <result column="standard_b_score" property="standardBScore"/>
+        <result column="standard_c_score" property="standardCScore"/>
+        <result column="conclusion" property="conclusion"/>
+        <result column="status" property="status"/>
+        <association column="purchase_id" property="purchase" select="team.ruike.cim.dao.PurchaseDao.selectById"/>
+        <association column="materiel_id" property="materiel" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM purchase_standard_record WHERE `status`=0
+        <if test="purchaseStandardRecord.purchaseStandardRecordId!=null and purchaseStandardRecord.purchaseStandardRecordId>0">
+            AND purchase_standard_record_id=#{purchaseStandardRecord.purchaseStandardRecordId}
+        </if>
+        <if test="purchaseStandardRecord.purchase!=null and purchaseStandardRecord.purchase.purchaseId!=null and purchaseStandardRecord.purchase.purchaseId>0">
+            AND purchase_id=#{purchaseStandardRecord.purchase.purchaseId}
+        </if>
+        <if test="purchaseStandardRecord.materiel!=null and purchaseStandardRecord.materiel.materielId!=null and purchaseStandardRecord.materiel.materielId>0">
+            AND materiel_id=#{purchaseStandardRecord.materiel.materielId}
+        </if>
+        <if test="purchaseStandardRecord.standardAScore!=null and purchaseStandardRecord.standardAScore>0">
+            AND standard_a_score=#{purchaseStandardRecord.standardAScore}
+        </if>
+        <if test="purchaseStandardRecord.standardBScore!=null and purchaseStandardRecord.standardBScore>0">
+            AND  standard_b_score=#{purchaseStandardRecord.standardBScore}
+        </if>
+        <if test="purchaseStandardRecord.standardCScore!=null and purchaseStandardRecord.standardCScore>0">
+            AND  standard_c_score=#{purchaseStandardRecord.standardCScore}
+        </if>
+        <if test="purchaseStandardRecord.conclusion!=null and purchaseStandardRecord.conclusion!=''">
+            AND conclusion=#{purchaseStandardRecord.conclusion}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM purchase_standard_record WHERE `status`=0
+        <if test="purchaseStandardRecordId!=null and purchaseStandardRecordId>0">
+            AND purchase_standard_record_id=#{purchaseStandardRecordId}
+        </if>
+        <if test="purchase!=null and purchase.purchaseId!=null and purchase.purchaseId>0">
+            AND purchase_id=#{purchase.purchaseId}
+        </if>
+        <if test="materiel!=null and materiel.materielId!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+        <if test="standardAScore!=null and standardAScore>0">
+            AND standard_a_score=#{standardAScore}
+        </if>
+        <if test="standardBScore!=null and standardBScore>0">
+            AND  standard_b_score=#{standardBScore}
+        </if>
+        <if test="standardCScore!=null and standardCScore>0">
+            AND  standard_c_score=#{standardCScore}
+        </if>
+        <if test="conclusion!=null and conclusion!=''">
+            AND conclusion=#{conclusion}
+        </if>
+    </sql>
+    <insert id="add" parameterType="purchaseStandardRecord">
+        INSERT into purchase_standard_record VALUES(DEFAULT,
+                                                    #{purchase.purchaseId},
+                                                    #{materiel.materielId},
+                                                    #{standardAScore},
+                                                    #{standardBScore},
+                                                    #{standardCScore},
+                                                    #{conclusion},
+                                                    0)
+    </insert>
+    <update id="update" parameterType="purchaseStandardRecord">
+        UPDATE purchase_standard_record set purchase_id=#{purchase.purchaseId},
+            materiel_id=#{materiel.materielId},
+            standard_a_score=#{standardAScore},
+            standard_b_score=#{standardBScore},
+            standard_c_score=#{standardCScore},
+            conclusion=#{conclusion},
+            `status`=#{status}
+        WHERE purchase_standard_record_id=#{purchaseStandardRecordId}
+    </update>
+    <select id="select" resultMap="purchaseStandardRecordMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="purchaseStandardRecord">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="purchaseStandardRecordMap">
+        SELECT * FROM purchase_standard_record WHERE `status`=0 and purchase_standard_record_id=#{purchaseStandardRecordId}
+    </select>
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.FunctionDao">
+    <resultMap id="functionMap" type="function">
+        <result column="function_id" property="functionId"/>
+        <result column="function_name" property="functionName"/>
+        <result column="function_url" property="functionUrl"/>
+        <result column="jurisdiction_id" property="jurisdictionId"/>
+        <result column="status" property="status"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT  * from function WHERE status=0
+            <if test="function.functionId!=null and function.functionId>0">
+                AND function_id=#{function.functionId}
+            </if>
+            <if test="function.functionName!=null and function.functionName!=''">
+                  AND function_name LIKE  CONCAT('%',#{function.functionName},'%')
+            </if>
+            <if test="function.functionUrl!=null and function.functionUrl!=''">
+                AND function_url=#{function.functionUrl}
+            </if>
+            <if test="function.jurisdictionId!=null and function.jurisdictionId>0">
+              AND jurisdiction_id=#{function.jurisdictionId}
+            </if>
+
+    </sql>
+    <insert id="add" parameterType="function">
+      INSERT  INTO function VALUES (DEFAULT ,#{functionName},#{functionUrl},#{jurisdictionId},0)
+    </insert>
+    <update id="update" parameterType="function">
+          UPDATE function SET
+          function_name=#{functionName},
+          function_url=#{functionUrl},
+          jurisdiction_id=#{jurisdictionId},
+          status=#{status} WHERE function_id=#{functionId}
+    </update>
+
+    <select id="select" resultMap="functionMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="function">
+        SELECT  COUNT(1) from function WHERE status=0
+        <if test="functionId!=null and functionId>0">
+            AND function_id=#{functionId}
+        </if>
+        <if test="functionName!=null and functionName!=''">
+            AND function_name  LIKE  CONCAT('%',#{functionName},'%')
+        </if>
+        <if test="functionUrl!=null and functionUrl!=''">
+            AND function_url=#{functionUrl}
+        </if>
+        <if test="jurisdictionId!=null and jurisdictionId>0">
+            AND jurisdiction_id=#{jurisdictionId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="functionMap">
+        SELECT  * from function WHERE status=0
+        AND function_id=#{functionId}
+    </select>
+    <select id="selectByroleId" parameterType="int" resultMap="functionMap">
+        select * from function where function_id in (SELECT function_id from role_function WHERE role_id=#{roleId})
+    </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TemporaryOrderStateDao">
+    <resultMap id="temporaryOrderStateMap" type="temporaryOrderState">
+        <result column="temporary_order_state_id" property="temporaryOrderStateId"/>
+        <result column="temporary_order_state_name" property="temporaryOrderStateName"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="add" parameterType="temporaryOrderState">
+        INSERT INTO temporary_order_state VALUES (DEFAULT ,#{temporaryOrderStateName},0)
+    </insert>
+
+    <update id="update" parameterType="temporaryOrderState">
+         UPDATE temporary_order_state SET
+            temporary_order_state_id=#{temporaryOrderStateId},
+            temporary_order_state_name=#{temporaryOrderStateName},
+            status=#{status}
+    </update>
+
+    <sql id="sql">
+        SELECT * FROM temporary_order_state WHERE status=0
+        <if test="temporaryOrderState.temporaryOrderStateId!=null and temporaryOrderState.temporaryOrderStateId>0">
+            AND temporary_order_state_id=#{temporaryOrderState.temporaryOrderStateId}
+        </if>
+        <if test="temporaryOrderState.temporaryOrderStateName!=null and temporaryOrderState.temporaryOrderStateName!=''">
+            AND temporary_order_state_name LIKE  CONCAT('%',#{temporaryOrderState.temporaryOrderStateName},'%')
+        </if>
+    </sql>
+
+    <select id="select" resultMap="temporaryOrderStateMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+
+    <select id="selectCount" resultType="int" parameterType="temporaryOrderState">
+
+    SELECT COUNT (1)FROM temporary_order_state WHERE status=0
+        <if test="temporaryOrderStateId!=null and temporaryOrderStateId>0">
+            AND temporary_order_state_id=#{temporaryOrderStateId}
+        </if>
+        <if test="temporaryOrderStateName!=null and temporaryOrderStateName!=''">
+            AND temporary_order_state_name LIKE  CONCAT('%',#{temporaryOrderStateName},'%')
+        </if>
+
+    </select>
+    <select id="selectById" parameterType="int" resultMap="temporaryOrderStateMap">
+        SELECT * FROM temporary_order_state WHERE status=0
+            AND temporary_order_state_id=#{temporaryOrderStateId}
+    </select>
+
+    <select id="selectAll"  resultMap="temporaryOrderStateMap">
+        SELECT * FROM temporary_order_state WHERE status=0
+    </select>
+
+</mapper>

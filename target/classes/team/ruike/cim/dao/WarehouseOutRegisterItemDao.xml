@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.WarehouseOutRegisterItemDao">
+    <resultMap id="warehouseOutRegisterItems" type="warehouseOutRegisterItem">
+        <result column="warehouse_out_register_item_id" property="warehouseOutRegisterItemId"/>
+        <result column="status" property="status"/>
+        <result column="materiel_number" property="materielNumber"/>
+        <association column="materiel_id" property="materiel"
+                     select="team.ruike.cim.dao.MaterielDao.selectById"/>
+        <association column="goods_shelve_id" property="goodsShelve"
+                     select="team.ruike.cim.dao.GoodsShelveDao.selectById"/>
+        <collection column="warehouse_out_register_id" property="warehouseOutRegister"
+                    select="team.ruike.cim.dao.WarehouseOutRegisterDao.selectById"/>
+    </resultMap>
+    <sql id="sql">
+        select * from warehouse_out_register_item WHERE status=0
+        <if test="warehouseOutRegisterItem.warehouseOutRegisterItemId!=null and warehouseOutRegisterItem.warehouseOutRegisterItemId>0">
+            AND warehouse_out_register_item_id=#{warehouseOutRegisterItem.warehouseOutRegisterItemId}
+        </if>
+        <if test="warehouseOutRegisterItem.materielNumber!=null and warehouseOutRegisterItem.materielNumber>0">
+            AND materiel_number=#{warehouseOutRegisterItem.materielNumber}
+        </if>
+        <if test="warehouseOutRegisterItem.warehouseOutRegister!=null and warehouseOutRegisterItem.warehouseOutRegister.warehouseOutRegisterId>0">
+            AND warehouse_out_register_id=#{warehouseOutRegisterItem.warehouseOutRegister.warehouseOutRegisterId}
+        </if>
+        <if test="warehouseOutRegisterItem.materiel!=null and warehouseOutRegisterItem.materiel.materielId>0">
+            AND materiel_id=#{warehouseOutRegisterItem.materiel.materielId}
+        </if>
+        <if test="warehouseOutRegisterItem.goodsShelve!=null and warehouseOutRegisterItem.goodsShelve.goodsShelveId!=null and warehouseOutRegisterItem.goodsShelve.goodsShelveId>0">
+            AND goods_shelve_id=#{warehouseOutRegisterItem.goodsShelve.goodsShelveId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="warehouseOutRegisterItem">
+        INSERT INTO warehouse_out_register_item VALUES
+            (DEFAULT, #{materiel.materielId}, #{goodsShelve.goodsShelveId}, #{materielNumber},
+             #{warehouseOutRegister.warehouseOutRegisterId}, 0)
+    </insert>
+    <update id="update" parameterType="warehouseOutRegisterItem">
+        UPDATE warehouse_out_register_item
+        SET status                    = #{status}, materiel_number = #{materielNumber},
+            materiel_id               = #{materiel.materielId},
+            warehouse_out_register_id = #{warehouseOutRegister.warehouseOutRegisterId},
+            goods_shelve_id           = #{goodsShelve.goodsShelveId}
+        WHERE warehouse_out_register_item_id = #{warehouseOutRegisterItemId}
+    </update>
+    <select id="select" resultMap="warehouseOutRegisterItems">
+        SELECT * from (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="warehouseOutRegisterItem">
+        select COUNT(1) from warehouse_out_register_item WHERE status=0
+        <if test="warehouseOutRegisterItemId!=null and warehouseOutRegisterItemId>0">
+            AND warehouse_out_register_item_id=#{warehouseOutRegisterItemId}
+        </if>
+        <if test="materielNumber!=null and materielNumber>0">
+            AND materiel_number=#{materielNumber}
+        </if>
+        <if test="warehouseOutRegister!=null and warehouseOutRegister.warehouseOutRegisterId>0">
+            AND warehouse_out_register_id=#{warehouseOutRegister.warehouseOutRegisterId}
+        </if>
+        <if test="materiel!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+        <if test="goodsShelve!=null and goodsShelve.goodsShelveId!=null and goodsShelve.goodsShelveId>0">
+            AND goods_shelve_id=#{goodsShelve.goodsShelveId}
+        </if>
+        </select>
+    <select id="selectBywarehouseOutRegisterId" parameterType="int" resultMap="warehouseOutRegisterItems">
+        SELECT *
+        FROM warehouse_out_register_item
+        WHERE `status` = 0 AND warehouse_out_register_id = #{warehouseOutRegisterId}
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="warehouseOutRegisterItems">
+        SELECT *
+        FROM warehouse_out_register_item
+        WHERE `status` = 0 AND warehouse_out_register_item_id =#{warehouseOutRegisterItemId}
+    </select>
+
+    <select id="selectByWarehouseId" resultMap="warehouseOutRegisterItems">
+        SELECT * from warehouse_out_register_item where goods_shelve_id in
+        (select goods_shelve_id from goods_shelve where warehouse_region_id IN
+        (SELECT warehouse_region_id FROM warehouse_region WHERE warehouse_id=#{warehouseOutRegisterItem.goodsShelve.warehouseRegion.warehouse.warehouseId}))
+        limit #{pageNo},#{pageSize}
+    </select>
+</mapper>

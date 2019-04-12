@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MenuStateDao">
+    <insert id="add" parameterType="menuState">
+        INSERT INTO menu_state VALUES (DEFAULT,#{menuStateName},0)
+    </insert>
+    <update id="update" parameterType="menuState">
+        UPDATE menu_state SET menu_state_name=#{menuStateName},status=#{status}
+        WHERE menu_state_id=#{menuStateId}
+    </update>
+    <resultMap id="menuStateMap" type="menuState">
+        <result column="menu_state_id" property="menuStateId"/>
+        <result column="menu_state_name" property="menuStateName"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <select id="select" resultMap="menuStateMap">
+        SELECT * FROM menu_state
+        WHERE status=0
+        <if test="menuState.menuStateId!=null and menuState.menuStateId>0">
+            AND menu_state_id=#{menuState.menuStateId}
+        </if>
+        <if test="menuState.menuStateName!=null and menuState.menuStateName!=''">
+            AND menu_state_name like CONCAT('%',#{menuState.menuStateName},'%')
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(1) FROM menu_state
+        WHERE status=0
+        <if test="menuState.menuStateId!=null and menuState.menuStateId>0">
+            AND menu_state_id=#{menuState.menuStateId}
+        </if>
+        <if test="menuState.menuStateName!=null and menuState.menuStateName!=''">
+            AND menu_state_name like CONCAT('%',#{menuState.menuStateName},'%')
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="menuStateMap">
+        SELECT * FROM menu_state WHERE status=0 AND menu_state_id=#{menuStateId}
+    </select>
+</mapper>

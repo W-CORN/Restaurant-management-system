@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductWarehouseRegisterDao">
+    <insert id="add" parameterType="productWarehouseRegister">
+        INSERT INTO product_warehouse_register VALUES (DEFAULT,
+        #{productionBatch},#{productWarehouseRegisterDate},
+        #{user.userId},0
+        )
+    </insert>
+    <update id="update" parameterType="productWarehouseRegister">
+        UPDATE product_warehouse_register
+         SET production_batch=#{productionBatch},
+         product_warehouse_register_date=#{productWarehouseRegisterDate},
+         user_id=#{user.userId},
+         status=#{status}
+         WHERE product_warehouse_register_id=#{productWarehouseRegisterId}
+    </update>
+    <resultMap id="productWarehouseRegisterMap" type="productWarehouseRegister">
+        <result column="product_warehouse_register_id" property="productWarehouseRegisterId"/>
+        <result column="production_batch" property="productionBatch"/>
+        <result column="product_warehouse_register_date" property="productWarehouseRegisterDate"/>
+        <result column="status" property="status"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="productWarehouseRegisterItemList" column="product_warehouse_register_id" select="team.ruike.cim.dao.ProductWarehouseRegisterItemDao.selectByProductWarehouseRegisterId"/>
+    </resultMap>
+    <select id="select" resultMap="productWarehouseRegisterMap">
+        SELECT * FROM product_warehouse_register
+        WHERE status=0
+        <if test="productWarehouseRegister.productWarehouseRegisterId!=null and productWarehouseRegister.productWarehouseRegisterId>0">
+            and product_warehouse_register_id=#{productWarehouseRegister.productWarehouseRegisterId}
+        </if>
+        <if test="productWarehouseRegister.production_batch!=null and productWarehouseRegister.production_batch!=''">
+            AND production_batch like CONCAT('%',#{productWarehouseRegister.production_batch},'%')
+        </if>
+        <if test="productWarehouseRegister.productWarehouseRegisterDate!=null">
+            AND product_warehouse_register_date=#{productWarehouseRegister.productWarehouseRegisterDate}
+        </if>
+        <if test="productWarehouseRegister.user!=null and productWarehouseRegister.user.userId!=null and productWarehouseRegister.user.userId>0">
+            AND user_id=#{productWarehouseRegister.user.userId}
+        </if>
+        limit(#{pageNo},#{pageSize})
+    </select>
+    <select id="selectCount" resultType="int">
+        SELECT count(1) FROM product_warehouse_register
+        WHERE status=0
+        <if test="productWarehouseRegister.productWarehouseRegisterId!=null and productWarehouseRegister.productWarehouseRegisterId>0">
+            and product_warehouse_register_id=#{productWarehouseRegister.productWarehouseRegisterId}
+        </if>
+        <if test="productWarehouseRegister.production_batch!=null and productWarehouseRegister.production_batch!=''">
+            AND production_batch like CONCAT('%',#{productWarehouseRegister.production_batch},'%')
+        </if>
+        <if test="productWarehouseRegister.productWarehouseRegisterDate!=null">
+            AND product_warehouse_register_date=#{productWarehouseRegister.productWarehouseRegisterDate}
+        </if>
+        <if test="productWarehouseRegister.user!=null and productWarehouseRegister.user.userId!=null and productWarehouseRegister.user.userId>0">
+            AND user_id=#{productWarehouseRegister.user.userId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productWarehouseRegisterMap">
+        SELECT * FROM product_warehouse_register
+        WHERE status=0 and product_warehouse_register_id=#{productWarehouseRegisterId}
+    </select>
+</mapper>

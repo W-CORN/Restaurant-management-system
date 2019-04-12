@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.WarehouseRegisterDao">
+    <resultMap id="warehouseRegisters" type="warehouseRegister">
+        <result property="warehouseRegisterId" column="warehouse_register_id"/>
+        <result property="warehouseRegisterDate" column="warehouse_register_date"/>
+        <result property="status" column="status"/>
+        <association property="everydayPurchasingPlan" column="everyday_purchasing_plan_id"
+                     select="team.ruike.cim.dao.EverydayPurchasingPlanDao.selectById"/>
+        <association property="user" column="user_id" select="team.ruike.cim.dao.UserDao.selectById"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM warehouse_register WHERE status=0
+        <if test="warehouseRegister.warehouseRegisterId!=null and warehouseRegister.warehouseRegisterId>0">
+            AND warehouse_register_id=#{warehouseRegister.warehouseRegisterId}
+        </if>
+        <if test="warehouseRegister.warehouseRegisterDate!=null">
+            AND warehouse_register_date=#{warehouseRegister.warehouseRegisterDate}
+        </if>
+        <if test="warehouseRegister.everydayPurchasingPlan!=null and warehouseRegister.everydayPurchasingPlan.everydayPurchasingPlanId>0">
+            AND everyday_purchasing_plan_id=#{warehouseRegister.everydayPurchasingPlan.everydayPurchasingPlanId}
+        </if>
+        <if test="warehouseRegister.user!=null and warehouseRegister.user.userId>0">
+            AND user_id=#{warehouseRegister.user.userId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="warehouseRegister" useGeneratedKeys="true" keyProperty="warehouseRegisterId">
+        INSERT INTO warehouse_register VALUES
+            (DEFAULT, #{everydayPurchasingPlan.everydayPurchasingPlanId}, #{warehouseRegisterDate}, #{user.userId}, 0)
+    </insert>
+    <update id="update" parameterType="warehouseRegister">
+        UPDATE warehouse_register
+        SET warehouse_register_date     = #{warehouseRegisterDate}, status = #{status},
+            everyday_purchasing_plan_id = #{everydayPurchasingPlan},
+            user_id                     = #{user.userid}
+        WHERE warehouse_register_id = #{warehouseRegisterId}
+    </update>
+    <select id="select" resultMap="warehouseRegisters">
+        select * from warehouse_register WHERE (
+        <include refid="sql"/>
+        )f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="warehouseRegister">
+        SELECT COUNT(1) FROM warehouse_register WHERE status=0
+        <if test="warehouseRegisterId!=null and warehouseRegisterId>0">
+            AND warehouse_register_id=#{warehouseRegisterId}
+        </if>
+        <if test="warehouseRegisterDate!=null">
+            AND warehouse_register_date=#{warehouseRegisterDate}
+        </if>
+        <if test="everydayPurchasingPlan!=null and everydayPurchasingPlan.everydayPurchasingPlanId>0">
+            AND everyday_purchasing_plan_id=#{everydayPurchasingPlan.everydayPurchasingPlanId}
+        </if>
+        <if test="user!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="warehouseRegisters">
+        SELECT * FROM warehouse_register WHERE status=0
+            AND warehouse_register_id=#{warehouseRegisterId}
+    </select>
+</mapper>

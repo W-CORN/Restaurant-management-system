@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.PurchaseStandardDao">
+    <insert id="add" parameterType="purchaseStandard">
+        INSERT INTO purchase_standard VALUES(default,#{materiel.materielId},#{standardAType},
+        #{standardAName},#{standardBType},#{standardBName},#{standardCType},#{standardCName},#{remarks},0)
+    </insert>
+    <update id="update" parameterType="purchaseStandard">
+        UPDATE purchase_standard SET materiel_id=#{materiel.materielId},
+            standard_a_type=#{standardAType},
+            standard_a_name=#{standardAName},
+            standard_b_type=#{standardBType},
+            standard_b_name=#{standardBName},
+            standard_c_name=#{standardCName},
+            standard_c_type=#{standardCType},
+            remarks=#{remarks},
+            status=#{status}
+             WHERE purchase_standard_id=#{purchaseStandardId}
+    </update>
+    <resultMap id="purchaseStandardMap" type="purchaseStandard">
+        <result column="purchase_standard_id" property="purchaseStandardId"/>
+        <result column="remarks" property="remarks"/>
+        <result column="standard_c_type" property="standardCType"/>
+        <result column="standard_c_name" property="standardCName"/>
+        <result column="standard_b_name" property="standardBName"/>
+        <result column="standard_b_type" property="standardBType"/>
+        <result column="standard_a_name" property="standardAName"/>
+        <result column="standard_a_type" property="standardAType"/>
+        <result column="status" property="status"/>
+        <association property="materiel" column="materiel_id" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+    </resultMap>
+    <select id="select" resultMap="purchaseStandardMap">
+        SELECT * FROM purchase_standard WHERE status=0
+        <if test="purchaseStandard.purchaseStandardId!=null and purchaseStandard.purchaseStandardId>0">
+            AND purchase_standard_id=#{purchaseStandard.purchaseStandardId}
+        </if>
+        <if test="purchaseStandard.standardCType!=null and purchaseStandard.standardCType>0">
+            AND standard_c_type=#{purchaseStandard.standardCType}
+        </if>
+        <if test="purchaseStandard.standardBType!=null and purchaseStandard.standardBType>0">
+            AND standard_b_type=#{purchaseStandard.standardBType}
+        </if>
+        <if test="purchaseStandard.standardAType!=null and purchaseStandard.standardAType>0">
+            AND standard_a_type=#{purchaseStandard.standardCType}
+        </if>
+        <if test="purchaseStandard.standardAName!=null and purchaseStandard.standardAName!=''">
+            AND standard_a_name LIKE like CONCAT('%',#{purchaseStandard.standardAName},'%')
+        </if>
+        <if test="purchaseStandard.standardBName!=null and purchaseStandard.standardBName!=''">
+            AND standard_b_name LIKE like CONCAT('%',#{purchaseStandard.standardBName},'%')
+        </if>
+        <if test="purchaseStandard.standardCName!=null and purchaseStandard.standardCName!=''">
+            AND standard_c_name LIKE like CONCAT('%',#{purchaseStandard.standardCName},'%')
+        </if>
+        <if test="purchaseStandard.materiel!=null and purchaseStandard.materiel.materielId!=null and purchaseStandard.materiel.materielId>0">
+            AND materiel_id=#{purchaseStandard.materiel.materielId}
+        </if>
+        LIMIT #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int">
+        SELECT count(1) FROM purchase_standard WHERE status=0
+        <if test="purchaseStandard.purchaseStandardId!=null and purchaseStandard.purchaseStandardId>0">
+            AND purchase_standard_id=#{purchaseStandard.purchaseStandardId}
+        </if>
+        <if test="purchaseStandard.standardCType!=null and purchaseStandard.standardCType>0">
+            AND standard_c_type=#{purchaseStandard.standardCType}
+        </if>
+        <if test="purchaseStandard.standardBType!=null and purchaseStandard.standardBType>0">
+            AND standard_b_type=#{purchaseStandard.standardBType}
+        </if>
+        <if test="purchaseStandard.standardAType!=null and purchaseStandard.standardAType>0">
+            AND standard_a_type=#{purchaseStandard.standardCType}
+        </if>
+        <if test="purchaseStandard.standardAName!=null and purchaseStandard.standardAName!=''">
+            AND standard_a_name LIKE like CONCAT('%',#{purchaseStandard.standardAName},'%')
+        </if>
+        <if test="purchaseStandard.standardBName!=null and purchaseStandard.standardBName!=''">
+            AND standard_b_name LIKE like CONCAT('%',#{purchaseStandard.standardBName},'%')
+        </if>
+        <if test="purchaseStandard.standardCName!=null and purchaseStandard.standardCName!=''">
+            AND standard_c_name LIKE like CONCAT('%',#{purchaseStandard.standardCName},'%')
+        </if>
+        <if test="purchaseStandard.materiel!=null and purchaseStandard.materiel.materielId!=null and purchaseStandard.materiel.materielId>0">
+            AND materiel_id=#{purchaseStandard.materiel.materielId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="purchaseStandardMap">
+        SELECT * FROM purchase_standard WHERE status=0 AND purchase_standard_id=#{purchaseStandardId}
+    </select>
+</mapper>

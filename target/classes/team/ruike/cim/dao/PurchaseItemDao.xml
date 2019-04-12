@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.PurchaseItemDao">
+    <resultMap id="purchaseItemMap" type="purchaseItem">
+        <result column="purchase_item_id" property="purchaseItemId"/>
+        <result column="materiel_number" property="materielNumber"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <result column="purchase_id" property="purchaseId"/>
+        <association property="materiel" column="materiel_id" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+        <association property="supplier" column="supplier_id" select="team.ruike.cim.dao.SupplierDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="purchaseItem">
+          INSERT INTO purchase_item VALUES (DEFAULT ,#{materiel.materielId},#{materielNumber},#{unitPrice},#{supplier.supplierId},
+          #{remarks},0,#{purchaseId})
+    </insert>
+    <update id="update" parameterType="purchaseItem">
+      UPDATE purchase_item SET
+          purchase_item_id=#{purchaseItemId},
+        materiel_id=#{materiel.materielId},
+        materiel_number=#{materielNumber},
+        unit_price=#{unitPrice},
+        supplier_id=#{supplier.supplierId},
+        remarks=#{remarks},
+        status=#{status},
+        purchase_id=#{purchaseId},
+    </update>
+    <sql id="sql">
+        SELECT * FROM purchase_item WHERE status=0
+        <if test="purchaseItem.purchaseItemId!=null and purchaseItem.purchaseItemId>0">
+            purchase_item_id=#{purchaseItem.purchaseItemId}
+        </if>
+        <if test="purchaseItem.materiel!=null and purchaseItem.materiel.materielId>0">
+            materiel_id=#{purchaseItem.materiel.materielId}
+        </if>
+        <if test="purchaseItem.materielNumber!=null and purchaseItem.materielNumber>0">
+            materiel_number=#{purchaseItem.materielNumber}
+        </if>
+        <if test="purchaseItem.unitPrice!=null and purchaseItem.unitPrice>0">
+            unit_price=#{purchaseItem.unitPrice}
+        </if>
+        <if test="purchaseItem.supplier!=null and purchaseItem.supplier.supplierId>0">
+            supplier_id=#{purchaseItem.supplier.supplierId}
+        </if>
+        <if test="purchaseItem.remarks!=null and purchaseItem.remarks!=''">
+            remarks=#{purchaseItem.remarks}
+        </if>
+        <if test="purchaseItem.purchaseId!=null and purchaseItem.purchaseId>0">
+            purchase_id=#{purchaseId}
+        </if>
+    </sql>
+    <select id="select" resultMap="purchaseItemMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="purchaseItem">
+      SELECT COUNT (1)FROM purchase_item WHERE status=0
+        <if test="purchaseItemId!=null and purchaseItemId>0">
+            purchase_item_id=#{purchaseItemId}
+        </if>
+        <if test="materiel!=null and materiel.materielId>0">
+            materiel_id=#{materiel.materielId}
+        </if>
+        <if test="materielNumber!=null and materielNumber>0">
+            materiel_number=#{materielNumber}
+        </if>
+        <if test="unitPrice!=null and unitPrice>0">
+            unit_price=#{unitPrice}
+        </if>
+        <if test="supplier!=null and supplier.supplierId>0">
+            supplier_id=#{supplier.supplierId}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            remarks=#{remarks}
+        </if>
+        <if test="purchaseId!=null and purchaseId>0">
+            purchase_id=#{purchaseId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="purchaseItemMap">
+        SELECT * FROM purchase_item WHERE status=0
+        <if test="purchaseItemId!=null and purchaseItemId>0">
+            purchase_item_id=#{purchaseItemId}
+        </if>
+    </select>
+
+    <select id="selectByPurchaseId" parameterType="int" resultMap="purchaseItemMap">
+        SELECT * FROM purchase_item WHERE status=0 AND purchase_id=#{purchaseId}
+    </select>
+
+</mapper>

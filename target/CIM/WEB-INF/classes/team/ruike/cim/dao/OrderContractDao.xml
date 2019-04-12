@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.OrderContractDao">
+    <insert id="add" parameterType="orderContract"  useGeneratedKeys="true" keyProperty="orderContractId">
+        INSERT INTO order_contract VALUES (DEFAULT,#{orderContractName},#{orderContractImage},
+        #{orderContractNo},#{orderContractDate},#{store.storeId},0)
+    </insert>
+
+    <update id="update" parameterType="orderContract">
+        UPDATE order_contract SET order_contract_name=#{orderContractName},
+        order_contract_image=#{orderContractImage},
+        order_contract_date=#{orderContractDate},
+        store_id=#{store.storeId}
+       WHERE order_contract_id=#{orderContractId}
+    </update>
+
+    <resultMap id="orderContractMap" type="orderContract">
+        <result column="order_contract_id" property="orderContractId"/>
+        <result column="order_contract_name" property="orderContractName"/>
+        <result column="order_contract_image" property="orderContractImage"/>
+        <result column="order_contract_no" property="orderContractNo"/>
+        <result column="order_contract_date" property="orderContractDate"/>
+        <result column="status" property="status"/>
+        <association property="store" column="store_id" select="team.ruike.cim.dao.StoreDao.selectById"/>
+        <association property="contractOrder" column="order_contract_id" select="team.ruike.cim.dao.ContractOrderDao.selectById"/>
+    </resultMap>
+
+    <select id="select" resultMap="orderContractMap">
+        SELECT * FROM order_contract WHERE status=0
+        <if test="orderContract.orderContractId!=null and orderContract.orderContractId>0">
+            AND order_contract_id=#{orderContract.orderContractId}
+        </if>
+        <if test="orderContract.orderContractName!=null and orderContract.orderContractName!=''">
+            AND order_contract_name LIKE CONCAT('%',#{orderContract.orderContractName},'%')
+        </if>
+        <if test="orderContract.orderContractImage!=null and orderContract.orderContractImage!=''">
+            AND order_contract_image=#{orderContract.orderContractImage}
+        </if>
+        <if test="orderContract.orderContractNo!=null and orderContract.orderContractNo!=''">
+            AND order_contract_no LIKE CONCAT('%', #{orderContract.orderContractNo},'%')
+        </if>
+        <if test="orderContract.orderContractDate!=null">
+            AND  order_contract_date=#{orderContract.orderContractDate}
+        </if>
+        <if test="orderContract.store!=null and orderContract.store.storeId!=null and orderContract.store.storeId>0">
+            AND store_id=#{orderContract.store.storeId}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectAllNoOrderInfoContract" resultMap="orderContractMap">
+        SELECT * FROM order_contract WHERE status=0 and order_contract_id not  in (
+            SELECT order_contract_id FROM contract_order
+        )
+    </select>
+
+    <select id="selectCount" resultType="int">
+        SELECT count(1) FROM order_contract WHERE status=0
+        <if test="orderContract.orderContractId!=null and orderContract.orderContractId>0">
+            AND order_contract_id=#{orderContract.orderContractId}
+        </if>
+        <if test="orderContract.orderContractName!=null and orderContract.orderContractName!=''">
+            AND order_contract_name LIKE CONCAT('%',#{orderContract.orderContractName},'%')
+        </if>
+        <if test="orderContract.orderContractImage!=null and orderContract.orderContractImage!=''">
+            AND order_contract_image=#{orderContract.orderContractImage}
+        </if>
+        <if test="orderContract.orderContractNo!=null and orderContract.orderContractNo!=''">
+            AND order_contract_no LIKE CONCAT('%',#{orderContract.orderContractNo},'%')
+        </if>
+        <if test="orderContract.orderContractDate!=null">
+            AND  order_contract_date=#{orderContract.orderContractDate}
+        </if>
+        <if test="orderContract.store!=null and orderContract.store.storeId!=null and orderContract.store.storeId>0">
+            AND store_id=#{orderContract.store.storeId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="orderContractMap">
+        SELECT * FROM order_contract WHERE status=0 AND order_contract_id=#{orderContractId}
+    </select>
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.EverydayPurchasingPlanTermDao">
+    <resultMap id="everydayPurchasingPlanTermMap" type="everydayPurchasingPlanTerm">
+        <result column="everyday_purchasing_plan_term_id" property="everydayPurchasingPlanTermId"/>
+        <result column="materiel_number" property="materielNumber"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="price_float" property="priceFloat"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <result column="everyday_purchasing_plan_id" property="everydayPurchasingPlanId"/>
+        <association property="materiel" column="materiel_id" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="everydayPurchasingPlanTerm">
+        INSERT INTO everyday_purchasing_plan_term VALUES (DEFAULT ,#{materiel.materielId},#{materielNumber},
+        #{unitPrice},#{priceFloat},#{remarks},0,#{everydayPurchasingPlanId});
+    </insert>
+    <update id="update" parameterType="everydayPurchasingPlanTerm">
+        UPDATE everyday_purchasing_plan_term SET
+        materiel_id=#{everydayPurchasingPlanTerm.materiel.materielId},
+        materiel_number=#{materielNumber},
+        unit_price=#{unitPrice},
+        price_float=#{priceFloat},
+        remarks=#{remarks},
+        status=#{status},
+        everyday_purchasing_plan_id=#{everydayPurchasingPlanId}
+        WHERE everyday_purchasing_plan_term_id=#{everydayPurchasingPlanTermId}
+    </update>
+    <sql id="sql">
+        SELECT * from everyday_purchasing_plan_term WHERE status=0
+            <if test="everydayPurchasingPlanTerm.everydayPurchasingPlanTermId!=null and everydayPurchasingPlanTerm.everydayPurchasingPlanTermId>0">
+                and everyday_purchasing_plan_term_id=#{everydayPurchasingPlanTerm.everydayPurchasingPlanTermId}
+            </if>
+            <if test="everydayPurchasingPlanTerm.materiel!=null and everydayPurchasingPlanTerm.materiel.materielId>0">
+                and materiel_id=#{everydayPurchasingPlanTerm.materiel.materielId}
+            </if>
+            <if test="everydayPurchasingPlanTerm.materielNumber!=null and everydayPurchasingPlanTerm.materielNumber>0">
+                and materiel_number#{everydayPurchasingPlanTerm.materielNumber}
+            </if>
+            <if test="everydayPurchasingPlanTerm.unitPrice!=null and everydayPurchasingPlanTerm.unitPrice>0">
+                and unit_price#{everydayPurchasingPlanTerm.unitPrice}
+            </if>
+            <if test="everydayPurchasingPlanTerm.priceFloat!=null and everydayPurchasingPlanTerm.priceFloat>0">
+                and price_float=#{everydayPurchasingPlanTerm.priceFloat}
+            </if>
+            <if test="everydayPurchasingPlanTerm.remarks!=null and everydayPurchasingPlanTerm.remarks=''">
+                and remarks=#{everydayPurchasingPlanTerm.remarks}
+            </if>
+            <if test="everydayPurchasingPlanTerm.everydayPurchasingPlanId!=null and everydayPurchasingPlanTerm.everydayPurchasingPlanId>0">
+                and everyday_purchasing_plan_id=#{everydayPurchasingPlanTerm.everydayPurchasingPlanId}
+            </if>
+    </sql>
+    <select id="select" resultMap="everydayPurchasingPlanTermMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="everydayPurchasingPlanTerm">
+        SELECT COUNT(1) from everyday_purchasing_plan_term WHERE status=0
+        <if test="everydayPurchasingPlanTermId!=null and everydayPurchasingPlanTermId>0">
+            and everyday_purchasing_plan_term_id=#{everydayPurchasingPlanTermId}
+        </if>
+        <if test="materiel!=null and materiel.materielId>0">
+            and materiel_id=#{materiel.materielId}
+        </if>
+        <if test="materielNumber!=null and materielNumber>0">
+            and materiel_number#{materielNumber}
+        </if>
+        <if test="unitPrice!=null and unitPrice>0">
+            and unit_price#{unitPrice}
+        </if>
+        <if test="priceFloat!=null and priceFloat>0">
+            and price_float=#{priceFloat}
+        </if>
+        <if test="remarks!=null and remarks=''">
+            and remarks=#{remarks}
+        </if>
+        <if test="everydayPurchasingPlanId!=null and everydayPurchasingPlanId>0">
+            and everyday_purchasing_plan_id=#{everydayPurchasingPlanId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="everydayPurchasingPlanTermMap">
+        SELECT * from everyday_purchasing_plan_term WHERE status=0 and everyday_purchasing_plan_term_id=#{everydayPurchasingPlanTermId}
+    </select>
+    <select id="selectByeverydayPurchasingPlanId" parameterType="int" resultMap="everydayPurchasingPlanTermMap">
+          select * from everyday_purchasing_plan_term where `status`=0 and everyday_purchasing_plan_id=#{everydayPurchasingPlanId}
+    </select>
+</mapper>

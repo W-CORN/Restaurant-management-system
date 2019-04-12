@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MenuTypeDao">
+    <insert id="add" parameterType="menuType">
+        INSERT INTO menu_type VALUES(DEFAULT,#{menuTypeName},#{menuTypeNo},0)
+    </insert>
+    <update id="update" parameterType="menuType">
+        UPDATE menu_type SET menu_type_name=#{menuTypeName},
+        menu_type_no=#{menuTypeNo},status=#{status}  WHERE menu_type_id=#{menuTypeId}
+    </update>
+    <resultMap id="menuTypeMap" type="menuType">
+        <result column="menu_type_id" property="menuTypeId"/>
+        <result column="menu_type_no" property="menuTypeNo"/>
+        <result column="menu_type_name" property="menuTypeName"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="menuTypeMap">
+        SELECT * FROM menu_type WHERE status=0
+    </select>
+
+    <select id="select" resultMap="menuTypeMap">
+        SELECT * FROM menu_type WHERE status=0
+        <if test="menuType.menuTypeId!=null and menuType.menuTypeId>0">
+            AND menu_type_id=#{menuType.menuTypeId}
+        </if>
+        <if test="menuType.menuTypeName!=null and menuType.menuTypeName!=''">
+            AND menu_type_name like CONCAT('%',#{menuType.menuTypeNo},'%')
+        </if>
+        <if test="menuType.menuTypeNo!=null and menuType.menuTypeNo!=''">
+            AND menu_type.menu_type_no like CONCAT('%',#{menuType.menuTypeNo},'%')
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int">
+        SELECT count(1) FROM menu_type WHERE status=0
+        <if test="menuType.menuTypeId!=null and menuType.menuTypeId>0">
+            AND menu_type_id=#{menuType.menuTypeId}
+        </if>
+        <if test="menuType.menuTypeName!=null and menuType.menuTypeName!=''">
+            AND menu_type_name like CONCAT('%',#{menuType.menuTypeNo},'%')
+        </if>
+        <if test="menuType.menuTypeNo!=null and menuType.menuTypeNo!=''">
+            AND menu_type.menu_type_no like CONCAT('%',#{menuType.menuTypeNo},'%')
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="menuTypeMap">
+        SELECT * FROM menu_type WHERE status=0  AND  menu_type_id=#{menuTypeId}
+    </select>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ContractOrderTermDao">
+    <resultMap id="contractOrderTermMap" type="contractOrderTerm">
+        <result column="contract_order_term_id" property="contractOrderTermId"/>
+        <result column="menu_number" property="menuNumber"/>
+        <result column="complete_number" property="completeNumber"/>
+        <result column="contract_order_term_state" property="contractOrderTermState"/>
+        <result column="product_batch" property="productBatch"/>
+        <result column="status" property="status"/>
+        <result column="contract_order_id" property="contractOrderId"/>
+        <association column="menu_id" property="menu" select="team.ruike.cim.dao.MenuDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * from contract_order_term where `status`=0
+        <if test="contractOrderTerm.contractOrderTermId!=null and contractOrderTerm.contractOrderTermId>0">
+            AND contract_order_term_id=#{contractOrderTerm.contractOrderTermId}
+        </if>
+        <if test="contractOrderTerm.menuNumber!=null and contractOrderTerm.menuNumber>0">
+            AND menu_number=#{contractOrderTerm.menuNumber}
+        </if>
+        <if test="contractOrderTerm.completeNumber!=null and contractOrderTerm.completeNumber>0">
+            AND complete_number=#{contractOrderTerm.completeNumber}
+        </if>
+        <if test="contractOrderTerm.contractOrderTermState!=null and contractOrderTerm.contractOrderTermState>0">
+            AND contract_order_term_state=#{contractOrderTerm.contractOrderTermState}
+        </if>
+        <if test="contractOrderTerm.productBatch!=null and contractOrderTerm.productBatch!=''">
+            AND product_batch=#{contractOrderTerm.productBatch}
+        </if>
+        <if test="contractOrderTerm.contractOrderId!=null and contractOrderTerm.contractOrderId>0">
+            AND contract_order_id=#{contractOrderTerm.contractOrderId}
+        </if>
+        <if test="contractOrderTerm.menu!=null and contractOrderTerm.menu.menuId!=null and contractOrderTerm.menu.menuId>0">
+            AND menu_id=#{contractOrderTerm.menu.menuId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * from contract_order_term where `status`=0
+        <if test="contractOrderTermId!=null and contractOrderTermId>0">
+            AND contract_order_term_id=#{contractOrderTermId}
+        </if>
+        <if test="menuNumber!=null and menuNumber>0">
+            AND menu_number=#{menuNumber}
+        </if>
+        <if test="completeNumber!=null and completeNumber>0">
+            AND complete_number=#{completeNumber}
+        </if>
+        <if test="contractOrderTermState!=null and contractOrderTermState>0">
+            AND contract_order_term_state=#{contractOrderTermState}
+        </if>
+        <if test="productBatch!=null and productBatch!=''">
+            AND product_batch=#{productBatch}
+        </if>
+        <if test="contractOrderId!=null and contractOrderId>0">
+            AND contract_order_id=#{contractOrderId}
+        </if>
+        <if test="menu!=null and menu.menuId!=null and menu.menuId>0">
+            AND menu_id=#{menu.menuId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="contractOrderTerm">
+        INSERT into contract_order_term VALUES(DEFAULT,#{menu.menuId},#{menuNumber},0,0,#{productBatch},#{contractOrderId},0);
+    </insert>
+
+    <update id="update" parameterType="contractOrderTerm">
+        UPDATE contract_order_term set menu_id=#{menu.menuId},
+        menu_number=#{menuNumber},
+        complete_number=#{completeNumber},
+        contract_order_term_state=#{contractOrderTermState},
+        product_batch=#{productBatch},
+        contract_order_id=#{contractOrderId},
+        status=#{status}
+        WHERE contract_order_term_id=#{contractOrderTermId}
+    </update>
+
+    <select id="select" resultMap="contractOrderTermMap">
+        SELECT * from (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="int" parameterType="contractOrderTerm">
+        SELECT COUNT(1) from (<include refid="sqlz"/>) f
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="contractOrderTermMap">
+        SELECT * FROM contract_order_term WHERE `status`=0 and contract_order_term_id=#{contractOrderTermId}
+    </select>
+   <select id="selectBYContractOrderId" resultMap="contractOrderTermMap">
+        SELECT * FROM  contract_order_term WHERE  `status` =0 AND  contract_order_id=#{contractOrderId}
+   </select>
+</mapper>

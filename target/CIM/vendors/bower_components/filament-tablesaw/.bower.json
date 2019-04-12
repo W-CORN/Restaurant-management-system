@@ -1,0 +1,27 @@
+{
+  "name": "filament-tablesaw",
+  "main": [
+    "dist/tablesaw.js",
+    "dist/tablesaw.css",
+    "dist/icons/**"
+  ],
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "jquery": ">=1.11.2",
+    "respond": ">=1.4.2"
+  },
+  "homepage": "https://github.com/filamentgroup/tablesaw",
+  "version": "2.0.3",
+  "_release": "2.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.3",
+    "commit": "1c7ccc4d34101ab07641d2165c5573ac0cf067b0"
+  },
+  "_source": "git://github.com/filamentgroup/tablesaw.git",
+  "_target": "^2.0.3",
+  "_originalSource": "filamentgroup/tablesaw",
+  "_direct": true
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.RoleJurisdictionDao">
+    <resultMap id="roleJurisdictionMap" type="roleJurisdiction">
+        <result property="roleJurisdictionId" column="role_jurisdiction_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="jurisdictionId" column="jurisdiction_id"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    <sql id="sql">
+        select * from role_jurisdiction WHERE status=0
+        <if test="roleJurisdiction.roleJurisdictionId!=null and roleJurisdiction.roleJurisdictionId>0">
+            AND role_jurisdiction_id=#{roleJurisdiction.roleJurisdictionId}
+        </if>
+        <if test="roleJurisdiction.roleId!=null and roleJurisdiction.roleId>0">
+            AND role_id=#{roleJurisdiction.roleId}
+        </if>
+        <if test="roleJurisdiction.jurisdictionId!=null and roleJurisdiction.jurisdictionId>0">
+            AND jurisdiction_id=#{roleJurisdiction.jurisdictionId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="roleJurisdiction">
+       INSERT INTO  role_jurisdiction VALUES (DEFAULT ,#{roleId},#{jurisdictionId},0)
+    </insert>
+    <update id="update" parameterType="roleJurisdiction">
+        UPDATE role_jurisdiction SET  role_id=#{roleId},jurisdiction_id=#{jurisdictionId},status=#{status}
+        WHERE  role_jurisdiction_id=#{roleJurisdictionId}
+    </update>
+    <select id="select" resultMap="roleJurisdictionMap">
+        select * from (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="roleJurisdiction">
+        select COUNT(1) from role_jurisdiction WHERE status=0
+        <if test="roleJurisdictionId!=null and roleJurisdictionId>0">
+            AND role_jurisdiction_id=#{roleJurisdictionId}
+        </if>
+        <if test="roleId!=null and roleId>0">
+            AND role_id=#{roleId}
+        </if>
+        <if test="jurisdictionId!=null and jurisdictionId>0">
+            AND jurisdiction_id=#{jurisdictionId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="roleJurisdictionMap">
+        select * from role_jurisdiction WHERE status=0
+        AND  role_jurisdiction_id=#{roleJurisdictionId}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM role_jurisdiction WHERE role_id=#{roleId}
+    </delete>
+</mapper>

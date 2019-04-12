@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.JurisdictionDao">
+    <resultMap id="jurisdictionMap" type="jurisdiction">
+        <result column="jurisdiction_id" property="jurisdictionId"/>
+       <result column="jurisdiction_name" property="jurisdictionName"/>
+        <result column="jurisdiction_url" property="jurisdictionUrl"/>
+        <result column="status" property="status"/>
+        <result column="icon" property="icon"/>
+    </resultMap>
+    <insert id="add" parameterType="jurisdiction">
+      INSERT INTO jurisdiction VALUES (DEFAULT ,#{jurisdictionName},#{jurisdictionUrl},0);
+    </insert>
+    <update id="update" parameterType="jurisdiction">
+        UPDATE jurisdiction SET
+        jurisdiction_name=#{jurisdictionName},
+        jurisdiction_url=#{jurisdictionUrl},
+        status=#{status}
+        WHERE jurisdiction_id=#{jurisdictionId}
+    </update>
+<sql id="sql">
+    SELECT * FROM jurisdiction WHERE status=0
+    <if test="jurisdiction.jurisdictionId!=null and jurisdiction.jurisdictionId >0">
+        jurisdiction_id=#{jurisdiction.jurisdictionId}
+    </if>
+    <if test="jurisdiction.jurisdictionName !=null and jurisdiction.jurisdictionName !=''">
+        jurisdiction_name LIKE  CONCAT('%',#{jurisdiction.jurisdictionName},'%')
+    </if>
+    <if test="jurisdiction.jurisdictionUrl !=null and jurisdiction.jurisdictionUrl !=''">
+        jurisdiction_url=#{jurisdiction.jurisdictionUrl}
+    </if>
+    <if test="jurisdiction.status !=null and jurisdiction.status >0">
+        status=#{jurisdiction.status}
+    </if>
+</sql>
+    <select id="select" resultMap="jurisdictionMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="jurisdiction">
+        SELECT COUNT(1)FROM jurisdiction WHERE status=0
+        <if test="jurisdictionId!=null and jurisdictionId >0">
+            jurisdiction_id=#{jurisdictionId}
+        </if>
+        <if test="jurisdictionName !=null and jurisdictionName !=''">
+            jurisdiction_name LIKE  CONCAT('%',#{jurisdictionName},'%')
+        </if>
+        <if test="jurisdictionUrl !=null and jurisdictionUrl !=''">
+            jurisdiction_url=#{jurisdictionUrl}
+        </if>
+        <if test="status !=null and status >0">
+            status=#{status}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="jurisdictionMap">
+            select * from jurisdiction WHERE jurisdiction_id=#{jurisdictionId}
+    </select>
+    <select id="selectByroleId" parameterType="int" resultMap="jurisdictionMap">
+           SELECT * FROM jurisdiction WHERE jurisdiction_id in (SELECT jurisdiction_id FROM role_jurisdiction WHERE role_id=#{roleId})
+    </select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.WorkingDao">
+    <resultMap id="workings" type="working">
+        <result column="working_id" property="workingId"/>
+        <result column="working_name" property="workingName"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM working WHERE status=0
+        <if test="working.workingId!=null and working.workingId>0">
+            AND working_id=#{working.workingId}
+        </if>
+        <if test="working.workingName!=null and working.workingName!=''">
+          AND  working_name LIKE CONCAT('%',#{working.workingName},'%')
+        </if>
+    </sql>
+    <insert id="add" parameterType="working">
+        INSERT INTO working VALUES (DEFAULT,#{workingName},0);
+    </insert>
+    <update id="update" parameterType="working">
+        UPDATE working SET  working_name=#{workingName},status=#{status} WHERE working_id=#{workingId}
+    </update>
+    <select id="select" resultMap="workings">
+      select * from (<include refid="sql"/> ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="working">
+        SELECT COUNT(1) FROM working WHERE status=0
+        <if test="workingId!=null and workingId>0">
+            AND working_id=#{workingId}
+        </if>
+        <if test="workingName!=null and workingName!=''">
+            AND  working_name LIKE CONCAT('%',#{workingName},'%')
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="workings">
+        SELECT * FROM working WHERE status=0
+            AND working_id=#{workingId}
+    </select>
+</mapper>

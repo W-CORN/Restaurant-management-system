@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductionLineDao">
+    <resultMap id="productionLineMap" type="productionLine">
+        <result column="production_line_id" property="productionLineId"/>
+        <result column="production_line_no" property="productionLineNo"/>
+        <result column="production_line_state" property="productionLineState"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM production_line WHERE `status`=0
+        <if test="productionLine.productionLineId!=null and productionLine.productionLineId>0">
+            AND production_line_id=#{productionLine.productionLineId}
+        </if>
+        <if test="productionLine.productionLineNo!=null and productionLine.productionLineNo>0">
+            AND production_line_no=#{productionLine.productionLineNo}
+        </if>
+        <if test="productionLine.productionLineState!=null and productionLine.productionLineState>0">
+            AND production_line_state=#{productionLine.productionLineState}
+        </if>
+        <if test="productionLine.remarks!=null and productionLine.remarks!=''">
+            AND remarks=#{productionLine.remarks}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM production_line WHERE `status`=0
+        <if test="productionLineId!=null and productionLineId>0">
+            AND production_line_id=#{productionLineId}
+        </if>
+        <if test="productionLineNo!=null and productionLineNo>0">
+            AND production_line_no=#{productionLineNo}
+        </if>
+        <if test="productionLineState!=null and productionLineState>0">
+            AND production_line_state=#{productionLineState}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+    </sql>
+    <insert id="add" parameterType="productionLine">
+            INSERT into production_line VALUES(DEFAULT,
+            #{productionLineNo},
+            #{productionLineState},
+            #{remarks},
+            0);
+    </insert>
+    <update id="update" parameterType="productionLine">
+            UPDATE production_line set production_line_no=#{productionLineNo},
+            production_line_state=#{productionLineState},
+            remarks=#{remarks},
+            `status`=#{status}
+            WHERE production_line_id=#{productionLineId}
+    </update>
+    <select id="select" resultMap="productionLineMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productionLine">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productionLineMap">
+        SELECT * FROM production_line WHERE `status`=0 and production_line_id=#{productionLineId}
+    </select>
+</mapper>

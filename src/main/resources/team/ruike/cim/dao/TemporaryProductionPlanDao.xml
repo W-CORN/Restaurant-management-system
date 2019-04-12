@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.TemporaryProductionPlanDao">
+    <resultMap id="temporaryProductionPlanMap" type="temporaryProductionPlan">
+        <result column="temporary_production_plan_id" property="temporaryProductionPlanId"/>
+        <result column="production_batch" property="productionBatch"/>
+        <result column="status" property="status"/>
+        <result column="date" property="date"/>
+        <association property="temporary_order_id" column="temporaryOrderId.temporaryOrderId" select="team.ruike.cim.dao.TemporaryOrderDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="temporaryProductionPlan">
+        INSERT INTO temporary_production_plan VALUES (DEFAULT ,#{temporaryOrderId.temporaryOrderId},#{production_batch},0,#{date})
+    </insert>
+    <update id="update" parameterType="temporaryProductionPlan">
+            UPDATE temporary_production_plan SET
+                temporary_production_plan_id=#{temporaryProductionPlanId},
+                temporary_order_id=#{temporaryOrderId.temporaryOrderId},
+                production_batch=#{productionBatch},
+                status=#{status},
+                `date`=#{date},
+    </update>
+    <sql id="sql">
+        SELECT * FROM temporary_production_plan WHERE status=0
+        <if test="temporaryProductionPlan.temporaryProductionPlanId!=null and temporaryProductionPlan.temporaryProductionPlanId>0">
+            temporary_production_plan_id=#{temporaryProductionPlan.temporaryProductionPlanId}
+        </if>
+        <if test="temporaryProductionPlan.temporaryOrderId!=null and temporaryProductionPlan.temporaryOrderId.temporaryOrderId>0">
+            temporary_order_id=#{temporaryProductionPlan.temporaryOrderId.temporaryOrderId}
+        </if>
+        <if test="temporaryProductionPlan.productionBatch!=null and temporaryProductionPlan.productionBatch=''">
+            production_batch=#{temporaryProductionPlan.productionBatch}
+        </if>
+        <if test="temporaryProductionPlan.date!=null">
+            date=#{temporaryProductionPlan.date}
+        </if>
+    </sql>
+    <select id="select" resultMap="temporaryProductionPlanMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="temporaryProductionPlan">
+
+      SELECT COUNT(1) FROM temporary_production_plan WHERE status=0
+        <if test="temporaryProductionPlanId!=null and temporaryProductionPlanId>0">
+            temporary_production_plan_id=#{temporaryProductionPlanId}
+        </if>
+        <if test="temporaryOrderId!=null and temporaryOrderId.temporaryOrderId>0">
+            temporary_order_id=#{temporaryOrderId.temporaryOrderId}
+        </if>
+        <if test="productionBatch!=null and productionBatch=''">
+            production_batch=#{productionBatch}
+        </if>
+        <if test="date!=null">
+            date=#{date}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="temporaryProductionPlanMap">
+        SELECT * FROM temporary_production_plan WHERE status=0
+        <if test="temporaryProductionPlanId!=null and temporaryProductionPlanId>0">
+            temporary_production_plan_id=#{temporaryProductionPlanId}
+        </if>
+    </select>
+</mapper>

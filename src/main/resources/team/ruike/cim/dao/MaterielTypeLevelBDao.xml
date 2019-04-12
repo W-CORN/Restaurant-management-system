@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.MaterielTypeLevelBDao">
+    <resultMap id="materielTypeLevelBs" type="materielTypeLevelB">
+        <result column="materiel_type_level_b_id" property="materielTypeLevelBId"/>
+        <result column="materiel_type_level_b_name" property="materielTypeLevelBName"/>
+        <association property="materielTypeLevelA" column="materiel_type_level_a_id"
+                     select="team.ruike.cim.dao.MaterielTypeLevelADao.selectById">
+        </association>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM materiel_type_level_b WHERE status=0
+        <if test="materielTypeLevelB.materielTypeLevelBId!=null and materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="materielTypeLevelB.materielTypeLevelBName!=null and materielTypeLevelB.materielTypeLevelBName!=''">
+            AND materiel_type_level_b_name like CONCAT('%',#{materielTypeLevelB.materielTypeLevelBName},'%')
+        </if>
+        <if test="materielTypeLevelB.materielTypeLevelA!=null and materielTypeLevelB.materielTypeLevelA.materielTypeLevelAId>0">
+            AND materiel_type_level_a_id=#{materielTypeLevelB.materielTypeLevelA.materielTypeLevelAId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="materielTypeLevelB">
+        INSERT INTO materiel_type_level_b
+        VALUES (DEFAULT , #{materielTypeLevelBName}, #{materielTypeLevelA.materielTypeLevelAId}, 0)
+    </insert>
+    <update id="update" parameterType="materielTypeLevelB">
+        UPDATE materiel_type_level_b
+        SET materiel_type_level_b_id = #{materielTypeLevelBName},
+            materiel_type_level_a_id = #{materielTypeLevelA.materielTypeLevelAId}
+        WHERE materiel_type_level_b_id = #{materielTypeLevelBId}
+    </update>
+    <select id="select" resultMap="materielTypeLevelBs">
+        SELECT * FROM (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="materielTypeLevelB">
+        SELECT COUNT(1) FROM materiel_type_level_b WHERE status=0
+        <if test="materielTypeLevelBId!=null and materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{materielTypeLevelBId}
+        </if>
+        <if test="materielTypeLevelBName!=null and materielTypeLevelBName!=''">
+            AND materiel_type_level_b_name like CONCAT('%',#{materielTypeLevelB.materielTypeLevelBName},'%')
+        </if>
+        <if test="materielTypeLevelA!=null and materielTypeLevelA.materielTypeLevelAId>0">
+            AND materiel_type_level_a_id=#{materielTypeLevelA.materielTypeLevelAId}
+        </if>
+    </select>
+    <select id="selectById" resultMap="materielTypeLevelBs">
+        SELECT * FROM materiel_type_level_b WHERE status=0 AND materiel_type_level_b_id=#{materielTypeLevelBId}
+    </select>
+    <select id="getMaterielTypeLevelBByDate" resultMap="materielTypeLevelBs">
+        SELECT * FROM materiel_type_level_b WHERE materiel_type_level_b_id in (SELECT materiel_type_level_b_id FROM materiel WHERE materiel_id in
+        (SELECT materiel_id FROM purchase_item WHERE purchase_id in
+        (SELECT purchase_id FROM purchase WHERE purchase_date=#{date}))) and materiel_type_level_a_id=#{materielTypeLevelAId}
+    </select>
+</mapper>

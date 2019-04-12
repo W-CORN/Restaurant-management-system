@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.StagePurchasingPlanDao">
+    <resultMap id="stagePurchasingPlanMap" type="stagePurchasingPlan">
+        <result column="stage_purchasing_plan_id" property="stagePurchasingPlanId"/>
+        <result column="stage_purchasing_plan_cycle" property="stagePurchasingPlanCycle"/>
+        <result column="stage_purchasing_plan_remarks" property="stagePurchasingPlanRemarks"/>
+        <result column="status" property="status"/>
+        <association column="user_id" property="user" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="stagePurchasingPlanTermList" column="stage_purchasing_plan_id" select="team.ruike.cim.dao.StagePurchasingPlanTermDao.selectBystagePurchasingPlanId"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM stage_purchasing_plan WHERE `status`=0
+        <if test="stagePurchasingPlan.stagePurchasingPlanId!=null and stagePurchasingPlan.stagePurchasingPlanId>0">
+            AND stage_purchasing_plan_id=#{stagePurchasingPlan.stagePurchasingPlanId}
+        </if>
+        <if test="stagePurchasingPlan.stagePurchasingPlanCycle!=null and stagePurchasingPlan.stagePurchasingPlanCycle>0">
+            AND stage_purchasing_plan_cycle=#{stagePurchasingPlan.stagePurchasingPlanCycle}
+        </if>
+        <if test="stagePurchasingPlan.user!=null and stagePurchasingPlan.user.userId!=null and stagePurchasingPlan.user.userId>0">
+            AND user_id=#{stagePurchasingPlan.user.userId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM stage_purchasing_plan WHERE `status`=0
+        <if test="stagePurchasingPlanId!=null and stagePurchasingPlanId>0">
+            AND stage_purchasing_plan_id=#{stagePurchasingPlanId}
+        </if>
+        <if test="stagePurchasingPlanCycle!=null and stagePurchasingPlanCycle>0">
+            AND stage_purchasing_plan_cycle=#{stagePurchasingPlanCycle}
+        </if>
+        <if test="user!=null and user.userId!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="stagePurchasingPlan">
+        <selectKey resultType="int" order="AFTER"  keyProperty="stagePurchasingPlanId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+            INSERT into stage_purchasing_plan VALUES(DEFAULT,
+            #{stagePurchasingPlanCycle},
+            #{stagePurchasingPlanRemarks},
+            #{user.userId},
+            0);
+    </insert>
+    <update id="update" parameterType="stagePurchasingPlan">
+            UPDATE stage_purchasing_plan set stage_purchasing_plan_cycle=#{stagePurchasingPlanCycle},
+            stage_purchasing_plan_remarks=#{stagePurchasingPlanRemarks},
+            user_id=#{user.userId},
+            `status`=#{status}
+            WHERE stage_purchasing_plan_id=#{stagePurchasingPlanId}
+    </update>
+    <select id="select" resultMap="stagePurchasingPlanMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="stagePurchasingPlan">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="stagePurchasingPlanMap">
+        SELECT *  FROM stage_purchasing_plan WHERE `status`=0 and  stage_purchasing_plan_id=#{stagePurchasingPlanId}
+    </select>
+</mapper>

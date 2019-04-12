@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.SupplierDao">
+    <resultMap id="supplierMap" type="supplier">
+        <result column="supplier_id" property="supplierId"/>
+        <result column="supplier_name" property="supplierName"/>
+        <result column="supplier_no" property="supplierNo"/>
+        <result column="supplier_image" property="supplierImage"/>
+        <result column="supplier_charter_image" property="supplierCharterImage"/>
+        <result column="supplier_address" property="supplierAddress"/>
+        <result column="supplier_phone" property="supplierPhone"/>
+        <result column="cooperation_start_date" property="cooperationStartDate"/>
+        <result column="status" property="status"/>
+        <result column="supplier_remarks" property="supplierRemarks"/>
+        <result column="supplier_state" property="supplierState"/>
+        <association property="materielTypeLevelB" column="materiel_type_level_b_id" select="team.ruike.cim.dao.MaterielTypeLevelBDao.selectById"/>
+    </resultMap>
+    <insert id="add" parameterType="supplier" useGeneratedKeys="true" keyProperty="supplierId">
+        INSERT  INTO supplier VALUES (DEFAULT,#{supplierName},
+        #{supplierNo},#{supplierImage},#{supplierCharterImage},
+        #{materielTypeLevelB.materielTypeLevelBId},#{supplierAddress},
+        #{supplierPhone},#{cooperationStartDate},0,#{supplierRemarks},#{supplierState})
+
+    </insert>
+    <update id="update" parameterType="supplier">
+          UPDATE supplier SET
+              supplier_name =#{supplierName},
+              supplier_no=#{supplierNo},
+              supplier_image=#{supplierImage},
+              supplier_charter_image =#{supplierCharterImage},
+              materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId},
+              supplier_address =#{supplierAddress},
+              supplier_phone=#{supplierPhone},
+              cooperation_start_date=#{cooperationStartDate},
+              supplier_remarks=#{supplierRemarks},
+              supplier_state=#{supplierState},
+              status=#{status}
+              WHERE supplier_id=#{supplierId}
+    </update>
+    <sql id="sql">
+        SELECT * FROM  supplier WHERE  status=0
+        <if test="supplier.supplierId!=null and supplier.supplierId>0">
+            AND supplier_id=#{supplier.supplierId}
+        </if>
+        <if test="supplier.supplierName!=null and supplier.supplierName!=''">
+            AND supplier_name LIKE  CONCAT('%',#{supplier.supplierName},'%')
+        </if>
+        <if test="supplier.supplierNo!=null and supplier.supplierNo!=''">
+            AND supplier_no=#{supplier.supplierNo}
+        </if>
+        <if test="supplier.supplierImage!=null and supplier.supplierImage!=''">
+            AND supplier_image=#{supplier.supplierImage}
+        </if>
+        <if test="supplier.supplierCharterImage!=null and supplier.supplierCharterImage!=''">
+            AND  supplier_charter_image =#{supplier.supplierCharterImage}
+        </if>
+        <if test="supplier.materielTypeLevelB!=null and supplier.materielTypeLevelB.materielTypeLevelBId!=null and supplier.materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{supplier.materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="supplier.supplierAddress!=null and supplier.supplierAddress!=''">
+            AND  supplier_address =#{supplier.supplierAddress}
+        </if>
+        <if test="supplier.supplierPhone!=null and supplier.supplierPhone!=''">
+            AND  supplier_phone=#{supplier.supplierPhone}
+        </if>
+        <if test="supplier.cooperationStartDate!=null">
+            AND cooperation_start_date=#{supplier.cooperationStartDate}
+        </if>
+        <if test="supplier.supplierRemarks!=null and supplier.supplierRemarks!=''">
+            AND supplier_remarks=#{supplier.supplierRemarks}
+        </if>
+        <if test="supplier.supplierState!=null and supplier.supplierState>0">
+            AND  supplier_state=#{supplier.supplierState}
+        </if>
+    </sql>
+    <select id="select" resultMap="supplierMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="supplier">
+    SELECT COUNT(1)FROM  supplier WHERE  status=0
+        <if test="supplierId!=null and supplierId>0">
+            AND supplier_id=#{supplierId}
+        </if>
+        <if test="supplierName!=null and supplierName!=''">
+           AND supplier_name LIKE  CONCAT('%',#{supplierName},'%')
+        </if>
+        <if test="supplierNo!=null and supplierNo!=''">
+          AND supplier_no=#{supplierNo}
+        </if>
+        <if test="supplierImage!=null and supplierImage!=''">
+            AND supplier_image=#{supplierImage}
+        </if>
+        <if test="supplierCharterImage!=null and supplierCharterImage!=''">
+            AND  supplier_charter_image =#{supplierCharterImage}
+        </if>
+        <if test="materielTypeLevelB!=null and materielTypeLevelB.materielTypeLevelBId!=null and materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="supplierAddress!=null and supplierAddress!=''">
+            AND  supplier_address =#{supplierAddress}
+        </if>
+        <if test="supplierPhone!=null and supplierPhone!=''">
+            AND  supplier_phone=#{supplierPhone}
+        </if>
+        <if test="cooperationStartDate!=null">
+            AND cooperation_start_date=#{cooperationStartDate}
+        </if>
+        <if test="supplierRemarks!=null and supplierRemarks!=''">
+            AND supplier_remarks=#{supplierRemarks}
+        </if>
+        <if test="supplierState!=null and supplierState>0">
+            AND  supplier_state=#{supplierState}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="supplierMap">
+        SELECT  * FROM  supplier WHERE   supplier_id=#{supplierId}
+    </select>
+</mapper>

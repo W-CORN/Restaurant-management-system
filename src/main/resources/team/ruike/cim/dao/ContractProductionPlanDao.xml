@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ContractProductionPlanDao">
+    <resultMap id="contractProductionPlanMap" type="contractProductionPlan">
+        <result column="contract_production_plan_id" property="contractProductionPlanId"/>
+        <result column="production_batch" property="productionBatch"/>
+        <result column="status" property="status"/>
+        <result column="date" property="date"/>
+        <association column="contract_order_id" property="contractOrder" select="team.ruike.cim.dao.ContractOrderDao.selectById"/>
+        <collection property="contractProductionPlanItems" column="contract_production_plan_id" select="team.ruike.cim.dao.ContractProductionPlanItemDao.selectBYContractProductionPlanId"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM contract_production_plan WHERE `status`=0
+        <if test="contractProductionPlan.contractProductionPlanId!=null and contractProductionPlan.contractProductionPlanId>0">
+            AND contract_production_plan_id=#{contractProductionPlan.contractProductionPlanId}
+        </if>
+        <if test="contractProductionPlan.productionBatch!=null and contractProductionPlan.productionBatch!=''">
+            AND  production_batch=#{contractProductionPlan.productionBatch}
+        </if>
+        <if test="contractProductionPlan.date!=null">
+            AND date=#{contractProductionPlan.date}
+        </if>
+        <if test="contractProductionPlan.contractOrder!=null and contractProductionPlan.contractOrder.contractOrderId!=null and contractProductionPlan.contractOrder.contractOrderId>0">
+            AND contract_order_id=#{contractProductionPlan.contractOrder.contractOrderId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM contract_production_plan WHERE `status`=0
+        <if test="contractProductionPlanId!=null and contractProductionPlanId>0">
+            AND contract_production_plan_id=#{contractProductionPlanId}
+        </if>
+        <if test="productionBatch!=null and productionBatch!=''">
+            AND  production_batch=#{productionBatch}
+        </if>
+        <if test="date!=null">
+            AND date=#{date}
+        </if>
+        <if test="contractOrder!=null and contractOrder.contractOrderId!=null and contractOrder.contractOrderId>0">
+            AND contract_order_id=#{contractOrder.contractOrderId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="contractProductionPlan">
+        <selectKey resultType="int" order="AFTER"  keyProperty="contractProductionPlanId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT into contract_production_plan VALUES(DEFAULT,
+        #{contractOrder.contractOrderId},
+        #{productionBatch},
+        #{status},
+        #{date});
+    </insert>
+
+    <update id="update" parameterType="contractProductionPlan">
+        UPDATE contract_production_plan set contract_order_id=#{contractOrder.contractOrderId},
+        production_batch=#{productionBatch},
+        status=#{status},
+        date=#{date}
+        WHERE contract_production_plan_id=#{contractProductionPlanId}
+    </update>
+
+    <select id="select" resultMap="contractProductionPlanMap">
+        SELECT * from (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="int" parameterType="contractProductionPlan">
+        SELECT COUNT(1) from (<include refid="sqlz"/>) f
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="contractProductionPlanMap">
+        SELECT * FROM contract_production_plan WHERE `status`=0 and  contract_production_plan_id=#{contractProductionPlanId}
+    </select>
+
+</mapper>

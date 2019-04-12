@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.GoodsShelveDao">
+    <resultMap id="goodsShelveMap" type="goodsShelve">
+        <result column="goods_shelve_id" property="goodsShelveId"/>
+        <result column="goods_shelve_no" property="goodsShelveNo"/>
+        <result column="materiel_number" property="materielNumber"/>
+        <result column="materiel_shelf_life_end_date" property="materielShelfLifeEndDate"/>
+        <result column="status" property="status"/>
+        <association property="materiel" column="materiel_id" select="team.ruike.cim.dao.MaterielDao.selectById"/>
+        <association property="warehouseRegion" select="team.ruike.cim.dao.WarehouseRegionDao.selectById"
+                     column="warehouse_region_id"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM goods_shelve WHERE status=0
+
+        <if test="goodsShelve.goodsShelveId!=null and goodsShelve.goodsShelveId>0">
+            AND goods_shelve_id=#{goodsShelve.goodsShelveId}
+        </if>
+        <if test="goodsShelve.goodsShelveNo!=null and goodsShelve.goodsShelveNo!=''">
+            AND goods_shelve_no=#{goodsShelve.goodsShelveNo}
+        </if>
+        <if test="goodsShelve.materiel!=null and goodsShelve.materiel.materielId>0">
+            AND materiel_id=#{goodsShelve.materiel.materielId}
+        </if>
+        <if test="goodsShelve.materielNumber!=null and goodsShelve.materielNumber>0">
+            AND materiel_number+#{goodsShelve.materielNumber}
+        </if>
+        <if test="goodsShelve.materielShelfLifeEndDate!=null">
+            AND materiel_shelf_life_end_date=#{goodsShelve.materielShelfLifeEndDate}
+        </if>
+        <if test="goodsShelve.materiel!=null and goodsShelve.materiel.materielId>0">
+            AND materiel_id=#{goodsShelve.materiel.materielId}
+        </if>
+        <if test="goodsShelve.warehouseRegion!=null and goodsShelve.warehouseRegion.warehouseRegionId>0">
+            AND warehouse_region_id=#{goodsShelve.warehouseRegion.warehouseRegionId}
+        </if>
+
+    </sql>
+    <insert id="add" parameterType="goodsShelve" useGeneratedKeys="true" keyProperty="goodsShelveId">
+        INSERT INTO goods_shelve VALUES (DEFAULT, #{goodsShelveNo}, #{materiel.materielId}, #{materielNumber},
+                                         #{materielShelfLifeEndDate}, 0, #{warehouseRegion.warehouseRegionId})
+    </insert>
+    <update id="update" parameterType="goodsShelve">
+        UPDATE goods_shelve
+        SET
+            goods_shelve_id              = #{goodsShelveId},
+            goods_shelve_no              = #{goodsShelveNo},
+            materiel_id                  = #{materiel.materielId},
+            materiel_number              = #{materielNumber},
+            materiel_shelf_life_end_date = #{materielShelfLifeEndDate},
+            status                       = #{status},
+            warehouse_region_id          = #{warehouseRegion.warehouseRegionId}
+        WHERE goods_shelve_id = #{goodsShelveId}
+    </update>
+    <select id="select" resultMap="goodsShelveMap">
+        select * from (<include refid="sql"/>) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="goodsShelve">
+        SELECT COUNT(1) FROM goods_shelve WHERE status=0
+        <if test="goodsShelveId!=null and goodsShelveId>0">
+            AND goods_shelve_id=#{goodsShelveId}
+        </if>
+        <if test="goodsShelveNo!=null and goodsShelveNo!=''">
+            AND goods_shelve_no=#{goodsShelveNo}
+        </if>
+        <if test="materiel!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+        <if test="materielNumber!=null and materielNumber>0">
+            AND materiel_number+#{materielNumber}
+        </if>
+        <if test="materielShelfLifeEndDate!=null">
+            AND materiel_shelf_life_end_date=#{materielShelfLifeEndDate}
+        </if>
+        <if test="materiel!=null and materiel.materielId>0">
+            AND materiel_id=#{materiel.materielId}
+        </if>
+        <if test="warehouseRegion!=null and warehouseRegion.warehouseRegionId>0">
+            AND warehouse_region_id=#{warehouseRegion.warehouseRegionId}
+        </if>
+
+    </select>
+    <select id="selectById" parameterType="int" resultMap="goodsShelveMap">
+        SELECT *
+        FROM goods_shelve
+        WHERE status = 0
+              AND goods_shelve_id = #{goodsShelve.goodsShelveId}
+    </select>
+    <select id="selectByWarehouseRegionId" parameterType="int" resultMap="goodsShelveMap">
+        SELECT *
+        FROM goods_shelve
+        WHERE materiel_number IS NULL
+              AND warehouse_region_id = #{warehouseRegionId}
+    </select>
+    <select id="selectgods" resultMap="goodsShelveMap">
+        SELECT *
+        FROM goods_shelve
+        WHERE materiel_number >0 AND materiel_id=#{materiel.materielId} AND warehouse_region_id = #{warehouseRegion.warehouseRegionId}
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+{
+  "name": "Hound",
+  "version": "1.0.0",
+  "description": "admin template",
+  "main": "index.js",
+  "author": "hencework",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-jscs": "^3.0.1",
+    "grunt-open": "^0.2.3",
+    "jshint-stylish": "^2.2.0"
+  }
+}

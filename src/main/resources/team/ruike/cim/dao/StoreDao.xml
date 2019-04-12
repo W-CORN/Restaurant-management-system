@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.StoreDao">
+    <resultMap id="storeMap" type="store">
+        <result column="store_id" property="storeId"/>
+        <result column="store_name" property="storeName"/>
+        <result column="store_type" property="storeType"/>
+        <result column="store_address" property="storeAddress"/>
+        <result column="store_phone" property="storePhone"/>
+        <result column="store_order_number" property="storeOrderNumber"/>
+        <result column="store_no" property="storeNo"/>
+        <result column="password" property="password"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <insert id="add" parameterType="store"  useGeneratedKeys="true" keyProperty="storeId">
+        INSERT INTO store VALUES (DEFAULT,#{storeName},#{storeType},#{storeAddress},#{storePhone},0,#{storeNo},'123456',0)
+    </insert>
+
+    <select id="selectAll" resultMap="storeMap">
+        SELECT * FROM store WHERE status=0
+    </select>
+    
+    <update id="update" parameterType="store">
+        UPDATE store SET
+            store_name=#{storeName},
+            store_type=#{storeType},
+            store_address=#{storeAddress},
+            store_phone=#{storePhone}
+            WHERE store_id=#{storeId} and status=0
+    </update>
+    
+    <update id="hiddenById">
+        update store set `status`=1 WHERE store_id=#{storeId}
+    </update>
+    
+  <sql id="sql">
+      SELECT * FROM store WHERE status=0
+      <if test="store.storeId!=null and store.storeId>0">
+          AND store_id=#{store.storeId}
+      </if>
+      <if test="store.storeName!=null and store.storeName!=''">
+          AND  store_name LIKE CONCAT('%',#{store.storeName},'%')
+      </if>
+      <if test="store.storeType!=null and store.storeType>0">
+          AND  store_type=#{store.storeType}
+      </if>
+      <if test="store.storeAddress!=null and store.storeAddress!=''">
+          AND  store_address=#{store.storeAddress}
+      </if>
+      <if test="store.storePhone!=null and store.storePhone!=''">
+          AND store_phone=#{store.storePhone}
+      </if>
+      <if test="store.storeOrderNumber!=null and store.storeOrderNumber>0">
+          AND store_order_number=#{store.storeOrderNumber}
+      </if>
+      <if test="store.storeNo!=null and store.storeNo>0">
+          AND store_no=#{store.storeNo}
+      </if>
+      <if test="store.password!=null and store.password!=''">
+          AND password=#{store.password}
+      </if>
+  </sql>
+    <select id="select" resultMap="storeMap">
+        select * from (<include refid="sql"/>) f
+        limit #{begin},#{pagesize}
+    </select>
+
+    <select id="selectCount" resultType="int" parameterType="store">
+        SELECT COUNT(1)FROM store WHERE status=0
+        <if test="storeId!=null and storeId>0">
+           AND store_id=#{storeId}
+        </if>
+        <if test="storeName!=null and storeName!=''">
+            AND  store_name LIKE CONCAT('%',#{storeName},'%')
+        </if>
+        <if test="storeType!=null and storeType>0">
+            AND  store_type=#{storeType}
+        </if>
+        <if test="storeAddress!=null and storeAddress!=''">
+            AND  store_address=#{storeAddress}
+        </if>
+        <if test="storePhone!=null and storePhone!=''">
+            AND  store_phone=#{storePhone}
+        </if>
+        <if test="storeOrderNumber!=null and storeOrderNumber>0">
+            AND  store_order_number=#{storeOrderNumber}
+        </if>
+        <if test="storeNo!=null and storeNo>0">
+            AND  store_no=#{storeNo}
+        </if>
+        <if test="password!=null and password!=''">
+            AND  password=#{password}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="storeMap">
+          select * from store WHERE  status=0
+           and store_id=#{storeId}
+    </select>
+</mapper>

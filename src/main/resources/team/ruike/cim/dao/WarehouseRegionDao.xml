@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.WarehouseRegionDao">
+    <resultMap id="warehouseRegions" type="warehouseRegion">
+        <result property="warehouseRegionId" column="warehouse_region_id"/>
+        <result property="warehouseRegionNo" column="warehouse_region_no"/>
+        <result property="remarks" column="remarks"/>
+        <result property="status" column="status"/>
+        <association property="materielTypeLevelB" column="materiel_type_level_b_id"
+                     select="team.ruike.cim.dao.MaterielTypeLevelBDao.selectById"/>
+        <association property="warehouse" column="warehouse_id" select="team.ruike.cim.dao.WarehouseDao.selectById"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM warehouse_region WHERE status=0
+        <if test="warehouseRegion.warehouseRegionId!=null and warehouseRegion.warehouseRegionId>0">
+            AND warehouse_region_id=#{warehouseRegion.warehouseRegionId}
+        </if>
+        <if test="warehouseRegion.warehouseRegionNo!=null and warehouseRegion.warehouseRegionNo!=''">
+            AND warehouse_region_no=#{warehouseRegion.warehouseRegionNo}
+        </if>
+        <if test="warehouseRegion.remarks!=null and warehouseRegion.remarks!=''">
+            AND remarks=#{warehouseRegion.remarks}
+        </if>
+        <if test="warehouseRegion.materielTypeLevelB!=null and warehouseRegion.materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{warehouseRegion.materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="warehouseRegion.warehouse!=null and warehouseRegion.warehouse.warehouseId>0">
+            AND warehouse_id=#{warehouseRegion.warehouse.warehouseId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="warehouseRegion" useGeneratedKeys="true" keyProperty="warehouseRegionId">
+      INSERT INTO  warehouse_region VALUES (DEFAULT,#{warehouseRegionNo},#{materielTypeLevelB.materielTypeLevelBId},#{remarks},0,#{warehouse.warehouseId})
+    </insert>
+    <update id="update" parameterType="warehouseRegion">
+        UPDATE warehouse_region SET warehouse_region_no=#{warehouseRegionNo},remarks=#{remarks},
+        status=#{status},materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId},warehouse_id=#{warehouse.warehouseId}
+        WHERE  warehouse_region_id=#{warehouseRegionId}
+    </update>
+    <select id="select" resultMap="warehouseRegions">
+        SELECT * from (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="warehouseRegion">
+        SELECT COUNT(1) FROM warehouse_region WHERE status=0
+        <if test="warehouseRegionId!=null and warehouseRegionId>0">
+            AND warehouse_region_id=#{warehouseRegionId}
+        </if>
+        <if test="warehouseRegionNo!=null and warehouseRegionNo!=''">
+            AND warehouse_region_no=#{warehouseRegionNo}
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+        <if test="materielTypeLevelB!=null and materielTypeLevelB.materielTypeLevelBId>0">
+            AND materiel_type_level_b_id=#{materielTypeLevelB.materielTypeLevelBId}
+        </if>
+        <if test="warehouse!=null and warehouse.warehouseId>0">
+            AND warehouse_id=#{warehouse.warehouseId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="warehouseRegions">
+        SELECT * FROM warehouse_region WHERE status=0
+            AND warehouse_region_id=#{warehouseRegionId}
+    </select>
+    <select id="selectBywarehouseId" parameterType="int" resultMap="warehouseRegions">
+        SELECT * FROM Warehouse_Region WHERE `status`=0 and warehouse_id=#{warehouseId}
+    </select>
+</mapper>

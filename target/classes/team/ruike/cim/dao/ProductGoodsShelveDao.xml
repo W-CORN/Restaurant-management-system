@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.ProductGoodsShelveDao">
+    <resultMap id="productGoodsShelveMap" type="productGoodsShelve">
+        <result column="product_goods_shelve_id" property="productGoodsShelveId"/>
+        <result column="product_goods_shelve_no" property="productGoodsShelveNo"/>
+        <result column="menu_number" property="menuNumber"/>
+        <result column="materiel_shelf_life_end_date" property="materielShelfLifeEndDate"/>
+        <result column="status" property="status"/>
+        <association column="product_warehouse_region_id" property="productWarehouseRegion" select="team.ruike.cim.dao.ProductWarehouseRegionDao.selectById"/>
+        <association column="menu_id" property="menu" select="team.ruike.cim.dao.MenuDao.selectById"/>
+    </resultMap>
+    <sql id="sqlh">
+        SELECT * FROM product_goods_shelve WHERE `status`=0
+        <if test="productGoodsShelve.productGoodsShelveId!=null and productGoodsShelve.productGoodsShelveId>0">
+            AND product_goods_shelve_id=#{productGoodsShelve.productGoodsShelveId}
+        </if>
+        <if test="productGoodsShelve.productGoodsShelveNo!=null and productGoodsShelve.productGoodsShelveNo!=''">
+            AND product_goods_shelve_no=#{productGoodsShelve.productGoodsShelveNo}
+        </if>
+        <if test="productGoodsShelve.menu!=null and productGoodsShelve.menu.menuId!=null and productGoodsShelve.menu.menuId>0">
+            AND menu_id=#{productGoodsShelve.menu.menuId}
+        </if>
+        <if test="productGoodsShelve.menuNumber!=null and productGoodsShelve.menuNumber>0">
+            AND menu_number=#{productGoodsShelve.menuNumber}
+        </if>
+        <if test="productGoodsShelve.materielShelfLifeEndDate!=null">
+            AND materiel_shelf_life_end_date=#{productGoodsShelve.materielShelfLifeEndDate}
+        </if>
+        <if test="productGoodsShelve.productWarehouseRegion!=null and productGoodsShelve.productWarehouseRegion.productWarehouseRegionId!=null and productGoodsShelve.productWarehouseRegion.productWarehouseRegionId>0">
+            AND product_warehouse_region_id=#{productGoodsShelve.productWarehouseRegion.productWarehouseRegionId}
+        </if>
+    </sql>
+    <sql id="sqlz">
+        SELECT * FROM product_goods_shelve WHERE `status`=0
+        <if test="productGoodsShelveId!=null and productGoodsShelveId>0">
+            AND product_goods_shelve_id=#{productGoodsShelveId}
+        </if>
+        <if test="productGoodsShelveNo!=null and productGoodsShelveNo!=''">
+            AND product_goods_shelve_no=#{productGoodsShelveNo}
+        </if>
+        <if test="menu!=null and menu.menuId!=null and menu.menuId>0">
+            AND menu_id=#{menu.menuId}
+        </if>
+        <if test="menuNumber!=null and menuNumber>0">
+            AND menu_number=#{menuNumber}
+        </if>
+        <if test="materielShelfLifeEndDate!=null">
+            AND materiel_shelf_life_end_date=#{materielShelfLifeEndDate}
+        </if>
+        <if test="productWarehouseRegion!=null and productWarehouseRegion.productWarehouseRegionId!=null and productWarehouseRegion.productWarehouseRegionId>0">
+            AND product_warehouse_region_id=#{productWarehouseRegion.productWarehouseRegionId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="productGoodsShelve" useGeneratedKeys="true" keyProperty="productGoodsShelveId">
+        INSERT into product_goods_shelve VALUES(DEFAULT,
+        #{productGoodsShelveNo},
+        #{menu.menuId},
+        #{menuNumber},
+        #{materielShelfLifeEndDate},
+        0,
+        #{productWarehouseRegion.productWarehouseRegionId})
+    </insert>
+    <update id="update" parameterType="productGoodsShelve">
+        UPDATE product_goods_shelve set product_goods_shelve_no=#{productGoodsShelveNo},
+        menu_id=#{menu.menuId},
+        menu_number=#{menuNumber},
+        materiel_shelf_life_end_date=#{materielShelfLifeEndDate},
+        `status`=#{status},
+        product_warehouse_region_id=#{productWarehouseRegion.productWarehouseRegionId}
+        WHERE product_goods_shelve_id=#{productGoodsShelveId}
+    </update>
+    <select id="select" resultMap="productGoodsShelveMap">
+        SELECT * FROM (<include refid="sqlh"/>) f limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="productGoodsShelve">
+        SELECT COUNT(1) FROM (<include refid="sqlz"/>) f
+    </select>
+    <select id="selectById" parameterType="int" resultMap="productGoodsShelveMap">
+          SELECT * FROM product_goods_shelve WHERE `status`=0 and product_goods_shelve_id=#{productGoodsShelveId}
+    </select>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.ruike.cim.dao.WarehouseDao">
+    <resultMap id="warehouses" type="warehouse">
+        <result column="warehouse_id" property="warehouseId"/>
+        <result column="warehouse_name" property="warehouseName"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+        <association column="user_id" property="user" select="team.ruike.cim.dao.UserDao.selectById"/>
+        <collection property="warehouseRegionList" column="warehouse_id" select="team.ruike.cim.dao.WarehouseRegionDao.selectBywarehouseId"/>
+    </resultMap>
+    <sql id="sql">
+        SELECT * FROM warehouse WHERE status=0
+        <if test="warehouse.warehouseId!=null and warehouse.warehouseId>0">
+            AND warehouse_id=#{warehouse.warehouseId}
+        </if>
+        <if test="warehouse.warehouseName!=null and warehouse.warehouseName!=''">
+            AND warehouse_name like CONCAT('%',#{warehouse.warehouseName},'%')
+        </if>
+        <if test="warehouse.remarks!=null and warehouse.remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+        <if test="warehouse.user!=null and warehouse.user.userId>0">
+            AND user_id=#{warehouse.user.userId}
+        </if>
+    </sql>
+    <insert id="add" parameterType="warehouse" useGeneratedKeys="true" keyProperty="warehouseId">
+        INSERT INTO  warehouse VALUES (DEFAULT,#{warehouseName},#{remarks},0,#{user.userId})
+    </insert>
+    <update id="update" parameterType="warehouse">
+        UPDATE warehouse SET  warehouse_name=#{warehouseName},remarks=#{remarks},
+        user_id=#{user.userId}
+    </update>
+    <select id="select" resultMap="warehouses">
+        SELECT * from (
+        <include refid="sql"/>
+        ) f
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectCount" resultType="int" parameterType="warehouse">
+        SELECT COUNT(1) FROM warehouse WHERE status=0
+        <if test="warehouseId!=null and warehouseId>0">
+            AND warehouse_id=#{warehouse.warehouseId}
+        </if>
+        <if test="warehouseName!=null and warehouseName!=''">
+            AND warehouse_name like CONCAT('%',#{warehouseName},'%')
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            AND remarks=#{remarks}
+        </if>
+        <if test="user!=null and user.userId>0">
+            AND user_id=#{user.userId}
+        </if>
+    </select>
+    <select id="selectById" parameterType="int" resultMap="warehouses">
+        SELECT  * FROM warehouse WHERE status= 0 AND  warehouse_id=#{warehouse.warehouseId}
+    </select>
+</mapper>
